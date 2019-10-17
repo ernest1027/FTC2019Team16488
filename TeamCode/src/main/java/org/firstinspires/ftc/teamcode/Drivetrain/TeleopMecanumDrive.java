@@ -8,14 +8,12 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 import team16488.*;
 @Disabled
-public class test extends OpMode {
+public class TeleopMecanumDrive extends OpMode {
     DcMotor FrontLeftMotor;
     DcMotor FrontRightMotor;
     DcMotor RearRightMotor;
     DcMotor RearLeftMotor;
-    Servo RightPullerServo;
-    Servo LeftPullerServo;
-    CRServo armJoint1;
+
     DriveTrain driveTrain = new DriveTrain();
 
     double y = -gamepad1.right_stick_y;
@@ -31,12 +29,6 @@ public class test extends OpMode {
         RearRightMotor = hardwareMap.dcMotor.get("m2");
         RearLeftMotor = hardwareMap.dcMotor.get("m1");
 
-        /**
-         * define servos
-         */
-        RightPullerServo = hardwareMap.servo.get("s1");
-        LeftPullerServo = hardwareMap.servo.get("s2");
-        armJoint1 = hardwareMap.crservo.get("arm1");
 
         /**
          * print out status
@@ -52,7 +44,7 @@ public class test extends OpMode {
     }
 
     public void printStatus(){
-        telemetry.addData("Game pad 1 stick status:","-------------------------");
+        telemetry.addData("Game pad 1 stick status:","--------------------------------------------------------------------------------");
         telemetry.addData("Left stick x", gamepad1.left_stick_x);
         telemetry.addData("Right stick y", gamepad1.right_stick_y);
         telemetry.addData("Right stick x", gamepad1.right_stick_x);
