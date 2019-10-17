@@ -12,8 +12,9 @@ Date: 10/3/2019
 Version: 2.0.0
 ----------------------------------------------------------------------------------------------------
 */
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.Drivetrain;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.CRServo;
@@ -21,7 +22,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
-@TeleOp
+@Disabled
 public class MecanumDrive extends OpMode {
 
     DcMotor FrontLeftMotor;
@@ -30,7 +31,7 @@ public class MecanumDrive extends OpMode {
     DcMotor RearLeftMotor;
     Servo RightPullerServo;
     Servo LeftPullerServo;
-    CRServo armservo1;
+    CRServo armJoint1;
     public String Drivemode = "mode1";
 
     /**
@@ -84,10 +85,11 @@ public class MecanumDrive extends OpMode {
 
         /**
          * define servos
-         */
+
         RightPullerServo = hardwareMap.servo.get("s1");
         LeftPullerServo = hardwareMap.servo.get("s2");
-        armservo1 = hardwareMap.crservo.get("arm1");
+        armJoint1 = hardwareMap.crservo.get("arm1");
+        */
 
         /**
          * print out status
@@ -164,6 +166,7 @@ public class MecanumDrive extends OpMode {
          }
      }*/
 
+     /**
      public void setpullerServos(){
          if(gamepad1.right_bumper == true)
          {
@@ -172,13 +175,13 @@ public class MecanumDrive extends OpMode {
          }
 
          /** set servos positon to 0.5 if button a is presed
-          */
+
          if(gamepad1.right_trigger > 0){
              RightPullerServo.setPosition(-0.5);
              LeftPullerServo.setPosition(1.0);
          }
      }
-
+    */
     /**
      * Initates drive mode
      */
@@ -216,10 +219,7 @@ public class MecanumDrive extends OpMode {
 
     }
 
-    public void subsystems(){
 
-
-    }
     /**
      * runs repetedly after person hits play
      */
@@ -235,7 +235,6 @@ public class MecanumDrive extends OpMode {
         {
             arcadeDriveAndStrafe();
         }
-        setpullerServos();
 
     }
 
