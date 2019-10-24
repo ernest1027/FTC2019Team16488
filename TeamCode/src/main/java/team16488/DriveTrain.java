@@ -21,7 +21,6 @@ public class DriveTrain extends OpMode {
     public void mecanumDrive(double x, double y, double rotationValue, DcMotor FrontLeftMotor, DcMotor FrontRightMotor, DcMotor RearRightMotor, DcMotor RearLeftMotor){
 
 
-
         if(gamepad1.left_trigger>0)
         {
             driveModes.diagonalStrafe(x,y,rotationValue,FrontLeftMotor,FrontRightMotor,RearRightMotor,RearLeftMotor);

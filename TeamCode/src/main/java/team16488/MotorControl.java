@@ -1,8 +1,9 @@
 package team16488;
 
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-public class MotorControl {
+public class MotorControl extends OpMode {
 
     public void setLeftSidePower(double power, DcMotor FrontLeftMotor, DcMotor RearLeftMotor) {
         FrontLeftMotor.setPower(power);
@@ -23,5 +24,8 @@ public class MotorControl {
         FrontLeftMotor.setPower(power);
         RearRightMotor.setPower(power);
     }
+
+    public void init(){}
+    public void loop(){}
 
 }

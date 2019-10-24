@@ -1,7 +1,9 @@
 package team16488;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
+@Disabled
 public class DriveDirection {
     MotorControl motorControl = new MotorControl();
 /**
