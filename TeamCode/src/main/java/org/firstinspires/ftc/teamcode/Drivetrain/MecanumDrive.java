@@ -210,12 +210,17 @@ public class MecanumDrive extends OpMode {
          telemetry.addData("Drive Mode",Drivemode);
      }
 
-    public void init(){
 
+    public void initalize(){
         mapHardware();
 
         telemetry.addData("Robot Status", "Initalized");
         telemetry.addData("Drive Mode", Drivemode);
+    }
+
+    public void init(){
+
+        mapHardware();
 
     }
 

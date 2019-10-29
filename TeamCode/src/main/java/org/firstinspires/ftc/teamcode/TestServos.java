@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import org.firstinspires.ftc.teamcode.Drivetrain.TeleopMecanumDrive;
 import org.firstinspires.ftc.teamcode.subsytems.PullerServos;
 import org.firstinspires.ftc.teamcode.subsytems.TestPullerServos;
+// author Parham baghbanbashi email: parhambagh@gmail.com
 
 @TeleOp
 public class TestServos extends OpMode {
