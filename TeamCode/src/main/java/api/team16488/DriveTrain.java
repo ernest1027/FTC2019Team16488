@@ -1,10 +1,10 @@
-package team16488;
+package api.team16488;
 
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.util.Range;
-import team16488.MotorControl;
+
+import api.team16488.*;
 
 @Disabled
 public class DriveTrain extends OpMode {

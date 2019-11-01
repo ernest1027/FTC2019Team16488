@@ -1,8 +1,10 @@
-package team16488;
+package api.team16488;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
+@Disabled
 public class MotorControl extends OpMode {
 
     public void setLeftSidePower(double power, DcMotor FrontLeftMotor, DcMotor RearLeftMotor) {
