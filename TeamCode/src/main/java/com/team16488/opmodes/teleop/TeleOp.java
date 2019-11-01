@@ -13,7 +13,8 @@ public class TeleOp extends OpMode {
     }
 
 
-    public void start(){}
+    public void start(){
+    }
 
 
     public void loop(){
@@ -32,14 +33,13 @@ public class TeleOp extends OpMode {
         if(gamepad1.left_bumper == true){
             robot.clawHeadMovement.setOpen(true);
         }
-        if(gamepad1.left_trigger != 0){
+        else if(gamepad1.left_trigger != 0){
+            robot.clawHeadMovement.setOpen(false);
+        }
+        else{
             robot.clawHeadMovement.setOpen(false);
         }
 
     }
 
-    @Override
-    public void stop() {
-        robot.clawHeadMovement.setOpen(true);
-    }
 }
