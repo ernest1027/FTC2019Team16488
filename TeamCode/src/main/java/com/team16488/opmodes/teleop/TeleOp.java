@@ -18,10 +18,10 @@ public class TeleOp extends OpMode {
 
     @Override
     public void loop(){
-        /*
-        robot.drive.setVelocity(-gamepad1.left_stick_x, -gamepad1.left_stick_y,
-                -gamepad1.right_stick_x);
 
+        robot.drive.setVelocity(-gamepad1.left_stick_x, gamepad1.left_stick_y,
+                -gamepad1.right_stick_x);
+/*
         if(gamepad1.right_bumper == true){
             robot.pullerServos.setOpen(true);
         }

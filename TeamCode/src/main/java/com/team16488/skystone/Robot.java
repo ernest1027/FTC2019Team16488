@@ -65,14 +65,14 @@ public class Robot {
         this.telemetry = telemetry;
 
         subsystems = new ArrayList<>();
-        /*
+
         try{
             drive = new MecanumDrive(opMode.hardwareMap);
             subsystems.add(drive);
         } catch (IllegalArgumentException e){
 
         }
-
+        /*
         try{
             pullerServos = new PullerServos(opMode.hardwareMap);
             subsystems.add(pullerServos);
@@ -80,7 +80,7 @@ public class Robot {
 
         }
 
-         */
+
 
         try{
             clawHeadMovement = new ClawHeadMovement(opMode.hardwareMap);
@@ -88,7 +88,7 @@ public class Robot {
         }catch(IllegalArgumentException e){
 
         }
-
+        */
 
         subsystemUpdateExecutor = ThreadPool.newSingleThreadExecutor("subsystem update");
 

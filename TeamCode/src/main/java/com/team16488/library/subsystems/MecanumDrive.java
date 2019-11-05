@@ -24,10 +24,13 @@ public class MecanumDrive extends Subsystem {
 
 
     public  MecanumDrive(HardwareMap map){
-        FrontLeftMotor = map.dcMotor.get("m4");
-        FrontRightMotor = map.dcMotor.get("m3");
-        RearRightMotor = map.dcMotor.get("m2");
-        RearLeftMotor = map.dcMotor.get("m1");
+        FrontLeftMotor = map.dcMotor.get("FL");
+        FrontRightMotor = map.dcMotor.get("FR");
+        RearRightMotor = map.dcMotor.get("BR");
+        RearLeftMotor = map.dcMotor.get("BL");
+        FrontLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+        RearLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+
     }
 
     @Override
