@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 public class ClawHeadMovement extends Subsystem {
     Servo LeftHead, RightHead;
-    private boolean open = true;
+    private boolean open = false;
 
     public ClawHeadMovement(HardwareMap map){
         LeftHead = map.servo.get("s1");
@@ -15,7 +15,7 @@ public class ClawHeadMovement extends Subsystem {
 
     @Override
     public void update() {
-        if(open == true)
+        if(open == false)
         {
             RightHead.setPosition(1.0);
             LeftHead.setPosition(-0.5);
@@ -23,7 +23,7 @@ public class ClawHeadMovement extends Subsystem {
 
         /** set servos positon to 0.5 if button a is presed
          */
-        if(open == false){
+        if(open == true){
             RightHead.setPosition(-0.5);
             LeftHead.setPosition(1.0);
         }

@@ -99,7 +99,7 @@ public class Robot {
             started = true;
         }
     }
-    private void stop(){
+    public void stop(){
         if(subsystemUpdateExecutor != null){
             subsystemUpdateExecutor.shutdownNow();
             subsystemUpdateExecutor = null;

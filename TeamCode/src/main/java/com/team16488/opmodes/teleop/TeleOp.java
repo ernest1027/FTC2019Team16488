@@ -12,11 +12,11 @@ public class TeleOp extends OpMode {
         robot.start();
     }
 
-
+    @Override
     public void start(){
     }
 
-
+    @Override
     public void loop(){
         /*
         robot.drive.setVelocity(-gamepad1.left_stick_x, -gamepad1.left_stick_y,
@@ -33,13 +33,15 @@ public class TeleOp extends OpMode {
         if(gamepad1.left_bumper == true){
             robot.clawHeadMovement.setOpen(true);
         }
-        else if(gamepad1.left_trigger != 0){
-            robot.clawHeadMovement.setOpen(false);
-        }
-        else{
+        if(gamepad1.left_trigger != 0){
             robot.clawHeadMovement.setOpen(false);
         }
 
+    }
+
+    @Override
+    public void stop(){
+        robot.stop();
     }
 
 }
