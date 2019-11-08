@@ -2,6 +2,8 @@ package com.team16488.skystone;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.team16488.library.subsystems.ClawHeadMovement;
+import com.team16488.library.subsystems.Intake;
+import com.team16488.library.subsystems.LiftMovement;
 import com.team16488.library.subsystems.MecanumDrive;
 import com.team16488.library.subsystems.PullerServos;
 import com.team16488.library.subsystems.Subsystem;
@@ -22,6 +24,10 @@ public class Robot {
     public PullerServos pullerServos;
 
     public ClawHeadMovement clawHeadMovement;
+
+    public Intake intake;
+
+    public LiftMovement liftMovement;
 
     private List<Subsystem> subsystems;
 
@@ -65,21 +71,21 @@ public class Robot {
         this.telemetry = telemetry;
 
         subsystems = new ArrayList<>();
-
+    /*
         try{
             drive = new MecanumDrive(opMode.hardwareMap);
             subsystems.add(drive);
         } catch (IllegalArgumentException e){
 
         }
-        /*
+
         try{
             pullerServos = new PullerServos(opMode.hardwareMap);
             subsystems.add(pullerServos);
         }catch (IllegalArgumentException e){
 
         }
-
+*/
 
 
         try{
@@ -88,17 +94,35 @@ public class Robot {
         }catch(IllegalArgumentException e){
 
         }
-        */
+
+    /*
+        try{
+            intake = new Intake(opMode.hardwareMap);
+            subsystems.add(intake);
+        }catch(IllegalArgumentException e){}
+
+
+        try{
+            liftMovement = new LiftMovement(opMode.hardwareMap);
+            subsystems.add(liftMovement);
+        }catch(IllegalArgumentException e){}
+*/
+
+
 
         subsystemUpdateExecutor = ThreadPool.newSingleThreadExecutor("subsystem update");
 
     }
+
+
     public void start(){
         if(!started){
             subsystemUpdateExecutor.submit(subsystemUpdateRunnable);
             started = true;
         }
     }
+
+
     public void stop(){
         if(subsystemUpdateExecutor != null){
             subsystemUpdateExecutor.shutdownNow();

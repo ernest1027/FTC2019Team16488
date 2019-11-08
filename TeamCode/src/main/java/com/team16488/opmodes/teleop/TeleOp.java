@@ -18,10 +18,8 @@ public class TeleOp extends OpMode {
 
     @Override
     public void loop(){
+/*        robot.drive.setVelocity(-gamepad1.left_stick_x, gamepad1.left_stick_y, -gamepad1.right_stick_x);
 
-        robot.drive.setVelocity(-gamepad1.left_stick_x, gamepad1.left_stick_y,
-                -gamepad1.right_stick_x);
-/*
         if(gamepad1.right_bumper == true){
             robot.pullerServos.setOpen(true);
         }
@@ -29,13 +27,25 @@ public class TeleOp extends OpMode {
             robot.pullerServos.setOpen(false);
         }
 
-         */
-        if(gamepad1.left_bumper == true){
-            robot.clawHeadMovement.setOpen(true);
+        if(gamepad2.y){
+            robot.intake.setOn(true);
         }
-        if(gamepad1.left_trigger != 0){
+        else if(gamepad2.a){
+            robot.intake.setOn(false);
+        }
+ */
+
+
+
+
+        //swich gampad 1 to gamepad2
+        if(gamepad1.dpad_right ){
             robot.clawHeadMovement.setOpen(false);
         }
+        if(gamepad1.dpad_left){
+            robot.clawHeadMovement.setOpen(true);
+        }
+
 
     }
 
