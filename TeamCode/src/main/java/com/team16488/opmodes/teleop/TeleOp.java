@@ -8,6 +8,8 @@ public class TeleOp extends OpMode {
     private Robot robot;
     double slowmode = 0.8;
     boolean intakeon = false;
+
+    boolean clawOpen;
     public void init(){
         robot = new Robot(this, telemetry);
         robot.start();
@@ -47,20 +49,40 @@ public class TeleOp extends OpMode {
             robot.lift.setGoingUp(false);
         }
 
-        robot.clawHead.setHorazontalRoationDegrees(-gamepad2.right_stick_x);
-        robot.clawHead.setVirticalRotation(-gamepad2.right_stick_y);
+
+        if(gamepad2.dpad_up){
+            robot.clawHead.setVirticalRotation(1.00);
+        }
+        if(gamepad2.dpad_down){
+            robot.clawHead.setVirticalRotation(-1.00);
+        }
+        if(gamepad2.dpad_left){
+            robot.clawHead.setHorazontalRoationDegrees(1.00);
+        }
+
+        if(gamepad2.dpad_right){
+            robot.clawHead.setHorazontalRoationDegrees(-1.00);
+        }
 
         robot.arm.setPower(-gamepad2.right_stick_y);
 
 
 
         //swich gampad 1 to gamepad2
-        if(gamepad1.dpad_right ){
-            robot.clawHead.setOpen(false);
+        if(gamepad2.a ){
+            clawOpen = true;
         }
-        if(gamepad1.dpad_left){
+        if(gamepad2.b){
+            clawOpen = false;
+        }
+        if(clawOpen){
             robot.clawHead.setOpen(true);
         }
+        if(!clawOpen){
+            robot.clawHead.setOpen(false);
+        }
+
+
 
 
     }
