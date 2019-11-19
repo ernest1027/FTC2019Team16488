@@ -9,14 +9,14 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
 public class ClawHead extends Subsystem {
-    Servo claw, virticalRotation, horazontalRotation;
+    Servo claw, verticalRotation, horazontalRotation;
     private boolean open = false;
     private boolean sideOpen = false;
-    private double virticalRotationDegres, horazontalRoationDegrees;
+    private double verticalRotationPosition, horizontalRotationPosition;
 
     public ClawHead(HardwareMap map){
         claw = map.servo.get("ch1");
-        virticalRotation = map.servo.get("VR");
+        verticalRotation = map.servo.get("VR");
         horazontalRotation = map.servo.get("HR");
     }
 
@@ -28,15 +28,14 @@ public class ClawHead extends Subsystem {
 
         }
 
-        /** set servos positon to 0.5 if button a is presed
-         */
+
         if(open == true){
             claw.setPosition(-1.0);
 
         }
 
-        virticalRotation.setPosition(virticalRotationDegres);
-        horazontalRotation.setPosition(horazontalRoationDegrees);
+        verticalRotation.setPosition(verticalRotationPosition);
+        horazontalRotation.setPosition(horizontalRotationPosition);
 
 
 
@@ -47,11 +46,11 @@ public class ClawHead extends Subsystem {
 
     }
 
-    public void setVirticalRotation(double degrees){
-        this.virticalRotationDegres = degrees;
+    public void setverticalRotation(double pos){
+        this.verticalRotationPosition = pos;
     }
 
-    public void setHorazontalRoationDegrees(double horazontalRoationDegrees) {
-        this.horazontalRoationDegrees = horazontalRoationDegrees;
+    public void sethorizontalRotationPosition(double horizontalRotationPosition) {
+        this.horizontalRotationPosition = horizontalRotationPosition;
     }
 }

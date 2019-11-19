@@ -7,33 +7,37 @@ public class Lift extends Subsystem {
     private boolean goingUp = false;
     private double power = 1.0;
 
-    CRServo leftSideArm1, rightSideArm1, leftSideArm2, rightSideArm2;
+    CRServo leftSideArmTop, rightSideArmTop, leftSideArmBot, rightSideArmBot;
 
 
     public Lift(HardwareMap map){
-        leftSideArm1 = map.crservo.get("lsa1");
-        rightSideArm1 = map.crservo.get("rsa1");
-        leftSideArm2 = map.crservo.get("lsa2");
-        rightSideArm2 = map.crservo.get("lsa2");
+        leftSideArmTop = map.crservo.get("lst");
+        rightSideArmTop = map.crservo.get("rst");
+        leftSideArmBot = map.crservo.get("lsb");
+        rightSideArmBot = map.crservo.get("lsb");
     }
 
 
     @Override
     public void update() {
         if(goingUp){
-            leftSideArm1.setPower(power);
-            rightSideArm1.setPower(power);
-            leftSideArm2.setPower(power);
-            rightSideArm2.setPower(power);
+            leftSideArmTop.setPower(power);
+            rightSideArmTop.setPower(-power);
+            leftSideArmBot.setPower(-power);
+            rightSideArmBot.setPower(power);
         }
 
         if(!goingUp){
-            leftSideArm1.setPower(-power);
-            rightSideArm1.setPower(-power);
-            leftSideArm2.setPower(-power);
-            rightSideArm2.setPower(-power);
+            leftSideArmTop.setPower(power);
+            rightSideArmTop.setPower(-power);
+            leftSideArmBot.setPower(-power);
+            rightSideArmBot.setPower(power);
 
         }
+    }
+    public void setPower(double power)
+    {
+        this.power = power;
     }
 
     public void setGoingUp(boolean goingUp) {
