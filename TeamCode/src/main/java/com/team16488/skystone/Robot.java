@@ -1,11 +1,11 @@
 package com.team16488.skystone;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.team16488.library.subsystems.ClawHeadMovement;
+import com.team16488.library.subsystems.Arm;
+import com.team16488.library.subsystems.ClawHead;
 import com.team16488.library.subsystems.Intake;
-import com.team16488.library.subsystems.LiftMovement;
+import com.team16488.library.subsystems.Lift;
 import com.team16488.library.subsystems.MecanumDrive;
-import com.team16488.library.subsystems.PullerServos;
 import com.team16488.library.subsystems.Subsystem;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
@@ -21,13 +21,13 @@ public class Robot {
 
     public MecanumDrive drive;
 
-    public PullerServos pullerServos;
+    public Arm arm;
 
-    public ClawHeadMovement clawHeadMovement;
+    public ClawHead clawHead;
 
     public Intake intake;
 
-    public LiftMovement liftMovement;
+    public Lift lift;
 
     private List<Subsystem> subsystems;
 
@@ -71,7 +71,7 @@ public class Robot {
         this.telemetry = telemetry;
 
         subsystems = new ArrayList<>();
-    /*
+
         try{
             drive = new MecanumDrive(opMode.hardwareMap);
             subsystems.add(drive);
@@ -80,22 +80,21 @@ public class Robot {
         }
 
         try{
-            pullerServos = new PullerServos(opMode.hardwareMap);
-            subsystems.add(pullerServos);
-        }catch (IllegalArgumentException e){
-
-        }
-*/
-
-
-        try{
-            clawHeadMovement = new ClawHeadMovement(opMode.hardwareMap);
-            subsystems.add(clawHeadMovement);
+            arm = new Arm(opMode.hardwareMap);
+            subsystems.add(arm);
         }catch(IllegalArgumentException e){
 
         }
 
-    /*
+
+
+        try{
+            clawHead = new ClawHead(opMode.hardwareMap);
+            subsystems.add(clawHead);
+        }catch(IllegalArgumentException e){
+
+        }
+
         try{
             intake = new Intake(opMode.hardwareMap);
             subsystems.add(intake);
@@ -103,10 +102,10 @@ public class Robot {
 
 
         try{
-            liftMovement = new LiftMovement(opMode.hardwareMap);
-            subsystems.add(liftMovement);
+            lift = new Lift(opMode.hardwareMap);
+            subsystems.add(lift);
         }catch(IllegalArgumentException e){}
-*/
+
 
 
 

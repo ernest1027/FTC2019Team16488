@@ -59,9 +59,8 @@ public class MecanumDrive extends Subsystem {
         this.RearLeftpower = v3;
         this.RearRightpower = v4;
 
-
-
     }
+
 
 
 }
