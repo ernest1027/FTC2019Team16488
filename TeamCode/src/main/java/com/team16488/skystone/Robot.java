@@ -6,6 +6,7 @@ import com.team16488.library.subsystems.ClawHead;
 import com.team16488.library.subsystems.Intake;
 import com.team16488.library.subsystems.Lift;
 import com.team16488.library.subsystems.MecanumDrive;
+import com.team16488.library.subsystems.Puller;
 import com.team16488.library.subsystems.Subsystem;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
@@ -24,6 +25,8 @@ public class Robot {
     public Arm arm;
 
     public ClawHead clawHead;
+
+    public Puller puller;
 
     public Intake intake;
 
@@ -105,6 +108,12 @@ public class Robot {
             lift = new Lift(opMode.hardwareMap);
             subsystems.add(lift);
         }catch(IllegalArgumentException e){}
+
+        try{
+            puller = new Puller(opMode.hardwareMap);
+            subsystems.add(puller);
+        }catch(IllegalArgumentException e){}
+
 
 
 

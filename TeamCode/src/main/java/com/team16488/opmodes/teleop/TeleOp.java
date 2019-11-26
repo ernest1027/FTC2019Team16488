@@ -48,7 +48,12 @@ public class TeleOp extends OpMode {
 
 
         }
-
+        if(gamepad1.right_trigger != 0){
+            robot.puller.setDown(true);
+        }
+        if(gamepad1.right_bumper){
+            robot.puller.setDown(false);
+        }
 
 
 /*
