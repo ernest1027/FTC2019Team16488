@@ -8,7 +8,8 @@ public class TeleOp extends OpMode {
     private Robot robot;
     double slowmode = 0.8;
     boolean intakeon = false;
-
+    double vpower = 0.0;
+    double hpower = 0.0;
 
     boolean clawOpen;
     public void init(){
@@ -22,14 +23,16 @@ public class TeleOp extends OpMode {
 
     @Override
     public void loop(){
-        robot.drive.setVelocity(-gamepad1.left_stick_x, gamepad1.left_stick_y, -gamepad1.right_stick_x);
+
+/*
+        robot.drive.setVelocity(-gamepad1.left_stick_x, -gamepad1.left_stick_y, -gamepad1.right_stick_x);
 
         if(gamepad1.left_stick_x == 0 && gamepad1.left_stick_y == 0 && gamepad1.right_stick_x == 0 ){
             robot.drive.setVelocity(-gamepad2.left_stick_x*slowmode, gamepad2.left_stick_y*slowmode, -gamepad2.right_stick_x*slowmode);
         }
 
-
-        if(!intakeon){
+*/
+      if(!intakeon){
             if(gamepad2.y){
                 robot.intake.setOn(true);
             }
@@ -52,25 +55,30 @@ public class TeleOp extends OpMode {
             robot.lift.setGoingUp(false);
         }
 
-
+/*
         if(gamepad2.dpad_up){
-            robot.clawHead.setverticalRotation(1.00);
+            vpower += 0.1;
         }
         if(gamepad2.dpad_down){
-            robot.clawHead.setverticalRotation(-1.00);
+            vpower -= 0.1;
         }
         if(gamepad2.dpad_left){
-            robot.clawHead.sethorizontalRotationPosition(1.00);
+            hpower += 0.1;
         }
 
         if(gamepad2.dpad_right){
-            robot.clawHead.sethorizontalRotationPosition(-1);
+            hpower -= 0.1;
         }
 
-        robot.arm.setPower(-gamepad2.right_stick_y);
+        robot.clawHead.setverticalRotation(vpower);
+        robot.clawHead.sethorizontalRotationPosition(hpower);
 
+        // robot.arm.setPower(-gamepad2.right_stick_y);
 
+        telemetry.addData("vpower",vpower);
+        telemetry.addData("hpower", hpower);
 
+*/
         //swich gampad 1 to gamepad2
         if(gamepad2.a ){
             clawOpen = true;
@@ -86,6 +94,7 @@ public class TeleOp extends OpMode {
         }
 
 
+        //robot.arm.setPower(-gamepad2.right_stick_y);
 
 
     }

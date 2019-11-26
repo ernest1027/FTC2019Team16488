@@ -14,7 +14,7 @@ public class Lift extends Subsystem {
         leftSideArmTop = map.crservo.get("lst");
         rightSideArmTop = map.crservo.get("rst");
         leftSideArmBot = map.crservo.get("lsb");
-        rightSideArmBot = map.crservo.get("lsb");
+        rightSideArmBot = map.crservo.get("rsb");
     }
 
 
