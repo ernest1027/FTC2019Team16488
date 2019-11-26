@@ -3,7 +3,7 @@ package com.team16488.opmodes.teleop;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.team16488.skystone.Robot;
 
-@com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "TestTeleopForNewStructure", group = "teleop")
+@com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "Teleop main", group = "teleop")
 public class TeleOp extends OpMode {
     private Robot robot;
     double slowmode = 0.8;
@@ -32,22 +32,26 @@ public class TeleOp extends OpMode {
         }
 
 */
-      if(!intakeon){
-            if(gamepad2.y){
-                robot.intake.setOn(true);
-            }
-        }
-        else if(intakeon){
-            if(gamepad2.y){
-                robot.intake.setOn(false);
-            }
+
+        if(gamepad1.y){
+            robot.intake.setOn(true);
         }
 
 
+        if(gamepad1.a){
+            robot.intake.setOn(false);
+        }
+
+
+        if(gamepad1.x) {
+           robot.intake.setReverse(true);
+
+
+        }
 
 
 
-
+/*
         if(gamepad2.left_bumper){
             robot.lift.setGoingUp(true);
         }
@@ -55,7 +59,7 @@ public class TeleOp extends OpMode {
             robot.lift.setGoingUp(false);
         }
 
-/*
+
         if(gamepad2.dpad_up){
             vpower += 0.1;
         }
@@ -78,7 +82,7 @@ public class TeleOp extends OpMode {
         telemetry.addData("vpower",vpower);
         telemetry.addData("hpower", hpower);
 
-*/
+
         //swich gampad 1 to gamepad2
         if(gamepad2.a ){
             clawOpen = true;
@@ -95,7 +99,7 @@ public class TeleOp extends OpMode {
 
 
         //robot.arm.setPower(-gamepad2.right_stick_y);
-
+*/
 
     }
 
