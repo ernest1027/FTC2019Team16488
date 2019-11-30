@@ -1,5 +1,8 @@
 package com.team16488.opmodes.teleop;
-
+/**
+ * Deloped by Parham Baghbanbashi and Ernest Wong
+ * parhambagh@gmail.com
+ */
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.team16488.skystone.Robot;
 

@@ -46,10 +46,18 @@ public class ClawHead extends Subsystem {
 
     }
 
+    /**
+     * Changes the postion of the vertical servo on the head apparatus
+     * @param pos
+     */
     public void setverticalRotation(double pos){
         this.verticalRotationPosition = pos;
     }
 
+    /**
+     * Changes the position of the horizontal servo on the head apparatus
+     * @param horizontalRotationPosition
+     */
     public void sethorizontalRotationPosition(double horizontalRotationPosition) {
         this.horizontalRotationPosition = horizontalRotationPosition;
     }

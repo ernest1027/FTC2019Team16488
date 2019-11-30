@@ -1,5 +1,8 @@
 package com.team16488.skystone;
-
+/**
+ * Deloped by Parham Baghbanbashi and Ernest Wong
+ * parhambagh@gmail.com
+ */
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.team16488.library.subsystems.Arm;
 import com.team16488.library.subsystems.ClawHead;
@@ -112,7 +115,9 @@ public class Robot {
         try{
             puller = new Puller(opMode.hardwareMap);
             subsystems.add(puller);
-        }catch(IllegalArgumentException e){}
+        }catch(IllegalArgumentException e){
+
+        }
 
 
 

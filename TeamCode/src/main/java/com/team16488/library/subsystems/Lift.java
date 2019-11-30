@@ -1,4 +1,8 @@
 package com.team16488.library.subsystems;
+/**
+ * Deloped by Parham Baghbanbashi and Ernest Wong
+ * parhambagh@gmail.com
+ */
 
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -35,11 +39,20 @@ public class Lift extends Subsystem {
 
         }
     }
+
+    /**
+     * Sets the speed of the lift
+     * @param power
+     */
     public void setPower(double power)
     {
         this.power = power;
     }
 
+    /**
+     * Sets the direction of the lift(UP or DOWN)
+     * @param goingUp
+     */
     public void setGoingUp(boolean goingUp) {
         this.goingUp = goingUp;
     }

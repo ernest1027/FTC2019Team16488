@@ -45,6 +45,12 @@ public class MecanumDrive extends Subsystem {
         RearRightMotor.setPower(RearRightpower);
     }
 
+    /**
+     * sets the velocity of the mecanum wheels
+     * @param leftstickx
+     * @param leftsticky
+     * @param rightstickx
+     */
     public void setVelocity(double leftstickx, double leftsticky, double rightstickx){
         double r = Math.hypot(leftstickx, leftsticky);
         double robotAngle = Math.atan2(leftsticky, leftstickx) - Math.PI / 4;

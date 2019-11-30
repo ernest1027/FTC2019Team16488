@@ -25,7 +25,7 @@ public class Intake extends Subsystem {
             intake.setPower(1.00);
         }
 
-        else if (reverse == true) {
+        if (reverse) {
             intake.setPower(-1.0);
         }
 
@@ -36,11 +36,18 @@ public class Intake extends Subsystem {
 
     }
 
-
+    /**
+     * Sets the intake position to reverse
+     * @param reverse
+     */
     public void setReverse(boolean reverse) {
         this.reverse = reverse;
     }
 
+    /**
+     * Sets the intake as on or off
+     * @param on
+     */
     public void setOn(boolean on){
         this.isOn = on;
     }
