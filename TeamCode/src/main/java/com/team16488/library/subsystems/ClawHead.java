@@ -20,6 +20,9 @@ public class ClawHead extends Subsystem {
         horazontalRotation = map.servo.get("HR");
     }
 
+    /**
+     * this updates the postions of the servos based on the "setServo" methods
+     */
     @Override
     public void update() {
         if(open == false)

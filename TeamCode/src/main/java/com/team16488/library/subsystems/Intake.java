@@ -19,6 +19,10 @@ public class Intake extends Subsystem {
         intake = map.crservo.get("i");
     }
 
+    /**
+     * this function checks if the boolean on is
+     * true then it will set the intake power accordingly
+     */
     @Override
     public void update() {
         if(isOn){
@@ -30,7 +34,7 @@ public class Intake extends Subsystem {
         }
 
         else {
-            intake.setPower(0.5);
+            intake.setPower(0);
         }
 
 

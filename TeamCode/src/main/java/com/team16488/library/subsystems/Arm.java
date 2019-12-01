@@ -18,6 +18,9 @@ public class Arm extends Subsystem {
 
     }
 
+    /**
+     * this function updates the power of the arm motors based on the "setPower" method
+     */
     @Override
     public void update() {
         armJoint2.setPower(power);

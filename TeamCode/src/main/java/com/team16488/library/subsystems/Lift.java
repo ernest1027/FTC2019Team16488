@@ -21,7 +21,10 @@ public class Lift extends Subsystem {
         rightSideArmBot = map.crservo.get("rsb");
     }
 
-
+    /**
+     * This function is what changes the powers of the crservos when the setpower function changes the
+     * variable power.
+     */
     @Override
     public void update() {
         if(goingUp){

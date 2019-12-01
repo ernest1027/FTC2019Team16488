@@ -14,7 +14,9 @@ public class Puller extends Subsystem {
         Left = map.servo.get("LP");
         Right = map.servo.get("RP");
     }
-
+    /**
+     * this function is what moves the servos and updates the positions of said servos
+     */
     @Override
     public void update() {
         if(down == false)

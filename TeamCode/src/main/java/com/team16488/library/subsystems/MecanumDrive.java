@@ -37,6 +37,9 @@ public class MecanumDrive extends Subsystem {
 
     }
 
+    /**
+     * This function changes the postions of the motors
+     */
     @Override
     public void update() {
         FrontLeftMotor.setPower(FrontLeftpower);

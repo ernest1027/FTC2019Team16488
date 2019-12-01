@@ -13,6 +13,8 @@ public class TeleOp extends OpMode {
     boolean intakeon = false;
     double vpower = 0.0;
     double hpower = 0.0;
+    boolean isOn = false;
+    boolean reverse = false;
 
     boolean clawOpen;
     public void init(){
@@ -37,23 +39,33 @@ public class TeleOp extends OpMode {
 */
 
         if(gamepad1.y){
+            reverse = false;
+            isOn = true;
+        }
+        if(isOn){
             robot.intake.setOn(true);
         }
 
-
         if(gamepad1.a){
+            isOn = false;
+        }
+
+        if(!isOn){
             robot.intake.setOn(false);
         }
 
-
         if(gamepad1.x) {
-           robot.intake.setReverse(true);
-
-
+            reverse = true;
         }
+
+        if(reverse){
+            robot.intake.setReverse(true);
+        }
+
         if(gamepad1.right_trigger != 0){
             robot.puller.setDown(true);
         }
+
         if(gamepad1.right_bumper){
             robot.puller.setDown(false);
         }
