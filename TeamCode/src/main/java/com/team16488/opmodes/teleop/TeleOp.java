@@ -5,9 +5,8 @@ package com.team16488.opmodes.teleop;
  */
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.team16488.opmodes.Control.DriverControl;
-import com.team16488.opmodes.Control.SubsystemControl;
 import com.team16488.skystone.Robot;
+
 
 @com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "Teleop main", group = "teleop")
 public class TeleOp extends OpMode {
@@ -17,15 +16,17 @@ public class TeleOp extends OpMode {
     double hpower = 0.0;
     boolean isOn = false;
     boolean reverse = false;
-    public DriverControl driverPad;
-    public SubsystemControl subsetemControl;
+    boolean up = false;
+
 
 
     boolean clawOpen;
 
+
     public void init() {
         robot = new Robot(this, telemetry);
         robot.start();
+
     }
 
     @Override
@@ -34,12 +35,8 @@ public class TeleOp extends OpMode {
 
     @Override
     public void loop() {
-        driverPad.driverPad();
-        subsetemControl.subsetemControl();
 
 
-
-/*
         robot.drive.setVelocity(-gamepad1.left_stick_x, -gamepad1.left_stick_y, -gamepad1.right_stick_x);
 
         if(gamepad1.left_stick_x == 0 && gamepad1.left_stick_y == 0 && gamepad1.right_stick_x == 0 ){
@@ -89,7 +86,7 @@ public class TeleOp extends OpMode {
             robot.lift.setGoingUp(false);
         }
 
-
+/*
         if(gamepad2.dpad_up){
             vpower += 0.1;
         }

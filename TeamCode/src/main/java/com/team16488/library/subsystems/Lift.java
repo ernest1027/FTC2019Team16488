@@ -11,14 +11,13 @@ public class Lift extends Subsystem {
     private boolean goingUp = false;
     private double power = 1.0;
 
-    CRServo leftSideArmTop, rightSideArmTop, leftSideArmBot, rightSideArmBot;
+    CRServo LiftTop, LiftBottom;
 
 
     public Lift(HardwareMap map){
-        leftSideArmTop = map.crservo.get("lst");
-        rightSideArmTop = map.crservo.get("rst");
-        leftSideArmBot = map.crservo.get("lsb");
-        rightSideArmBot = map.crservo.get("rsb");
+        LiftTop = map.crservo.get("LTOP");
+        LiftBottom = map.crservo.get("LBOTTOM");
+
     }
 
     /**
@@ -28,17 +27,14 @@ public class Lift extends Subsystem {
     @Override
     public void update() {
         if(goingUp){
-            leftSideArmTop.setPower(power);
-            rightSideArmTop.setPower(-power);
-            leftSideArmBot.setPower(-power);
-            rightSideArmBot.setPower(power);
+            LiftTop.setPower(power);
+            LiftBottom.setPower(-power);
+
         }
 
         if(!goingUp){
-            leftSideArmTop.setPower(power);
-            rightSideArmTop.setPower(-power);
-            leftSideArmBot.setPower(-power);
-            rightSideArmBot.setPower(power);
+            LiftTop.setPower(-power);
+            LiftBottom.setPower(power);
 
         }
     }
