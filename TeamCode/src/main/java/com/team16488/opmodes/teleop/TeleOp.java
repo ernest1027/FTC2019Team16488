@@ -5,8 +5,8 @@ package com.team16488.opmodes.teleop;
  */
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.team16488.opmodes.joysticks.DriverControl;
-import com.team16488.opmodes.joysticks.SubsystemControl;
+import com.team16488.opmodes.Control.DriverControl;
+import com.team16488.opmodes.Control.SubsystemControl;
 import com.team16488.skystone.Robot;
 
 @com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "Teleop main", group = "teleop")

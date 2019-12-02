@@ -1,4 +1,4 @@
-package com.team16488.opmodes.joysticks;
+package com.team16488.opmodes.Control;
 
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
