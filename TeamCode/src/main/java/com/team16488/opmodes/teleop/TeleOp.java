@@ -3,31 +3,41 @@ package com.team16488.opmodes.teleop;
  * Deloped by Parham Baghbanbashi and Ernest Wong
  * parhambagh@gmail.com
  */
+
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.team16488.opmodes.joysticks.DriverControl;
+import com.team16488.opmodes.joysticks.SubsystemControl;
 import com.team16488.skystone.Robot;
 
 @com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "Teleop main", group = "teleop")
 public class TeleOp extends OpMode {
     private Robot robot;
     double slowmode = 0.8;
-    boolean intakeon = false;
     double vpower = 0.0;
     double hpower = 0.0;
     boolean isOn = false;
     boolean reverse = false;
+    public DriverControl driverPad;
+    public SubsystemControl subsetemControl;
+
 
     boolean clawOpen;
-    public void init(){
+
+    public void init() {
         robot = new Robot(this, telemetry);
         robot.start();
     }
 
     @Override
-    public void start(){
+    public void start() {
     }
 
     @Override
-    public void loop(){
+    public void loop() {
+        driverPad.driverPad();
+        subsetemControl.subsetemControl();
+
+
 
 /*
         robot.drive.setVelocity(-gamepad1.left_stick_x, -gamepad1.left_stick_y, -gamepad1.right_stick_x);
@@ -36,7 +46,7 @@ public class TeleOp extends OpMode {
             robot.drive.setVelocity(-gamepad2.left_stick_x*slowmode, gamepad2.left_stick_y*slowmode, -gamepad2.right_stick_x*slowmode);
         }
 
-*/
+
 
         if(gamepad1.y){
             reverse = false;
@@ -71,7 +81,7 @@ public class TeleOp extends OpMode {
         }
 
 
-/*
+
         if(gamepad2.left_bumper){
             robot.lift.setGoingUp(true);
         }
@@ -124,7 +134,7 @@ public class TeleOp extends OpMode {
     }
 
     @Override
-    public void stop(){
+    public void stop() {
         robot.stop();
     }
 
