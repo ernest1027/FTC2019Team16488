@@ -1,19 +1,12 @@
 package com.team16488.library.subsystems;
-/**
+/*
  * Deloped by Parham Baghbanbashi and Ernest Wong
  * parhambagh@gmail.com
  */
 
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.hardware.PIDCoefficients;
-
-import org.firstinspires.ftc.robotcore.external.Telemetry;
-
-import java.util.Arrays;
-import java.util.Collections;
 
 public class MecanumDrive extends Subsystem {
     DcMotor FrontLeftMotor;
@@ -27,7 +20,7 @@ public class MecanumDrive extends Subsystem {
     private double RearLeftpower;
 
 
-    public  MecanumDrive(HardwareMap map){
+    public MecanumDrive(HardwareMap map) {
         FrontLeftMotor = map.dcMotor.get("FL");
         FrontRightMotor = map.dcMotor.get("FR");
         RearRightMotor = map.dcMotor.get("BR");
@@ -50,11 +43,12 @@ public class MecanumDrive extends Subsystem {
 
     /**
      * sets the velocity of the mecanum wheels
+     *
      * @param leftstickx
      * @param leftsticky
      * @param rightstickx
      */
-    public void setVelocity(double leftstickx, double leftsticky, double rightstickx){
+    public void setVelocity(double leftstickx, double leftsticky, double rightstickx) {
         double r = Math.hypot(leftstickx, leftsticky);
         double robotAngle = Math.atan2(leftsticky, leftstickx) - Math.PI / 4;
         double rightX = rightstickx;
@@ -69,7 +63,6 @@ public class MecanumDrive extends Subsystem {
         this.RearRightpower = v4;
 
     }
-
 
 
 }

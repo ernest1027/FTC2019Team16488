@@ -1,5 +1,5 @@
 package com.team16488.library.subsystems;
-/**
+/*
  * Deloped by Parham Baghbanbashi and Ernest Wong
  * parhambagh@gmail.com
  */
@@ -14,7 +14,7 @@ public class Lift extends Subsystem {
     CRServo LiftTop, LiftBottom;
 
 
-    public Lift(HardwareMap map){
+    public Lift(HardwareMap map) {
         LiftTop = map.crservo.get("LTOP");
         LiftBottom = map.crservo.get("LBOTTOM");
 
@@ -26,13 +26,13 @@ public class Lift extends Subsystem {
      */
     @Override
     public void update() {
-        if(goingUp){
+        if (goingUp) {
             LiftTop.setPower(power);
             LiftBottom.setPower(-power);
 
         }
 
-        if(!goingUp){
+        if (!goingUp) {
             LiftTop.setPower(-power);
             LiftBottom.setPower(power);
 
@@ -41,15 +41,16 @@ public class Lift extends Subsystem {
 
     /**
      * Sets the speed of the lift
+     *
      * @param power
      */
-    public void setPower(double power)
-    {
+    public void setPower(double power) {
         this.power = power;
     }
 
     /**
      * Sets the direction of the lift(UP or DOWN)
+     *
      * @param goingUp
      */
     public void setGoingUp(boolean goingUp) {

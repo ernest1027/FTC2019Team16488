@@ -1,26 +1,27 @@
-package com.team16488.opmodes.teleop;
-/**
- * Deloped by Parham Baghbanbashi and Ernest Wong
- * parhambagh@gmail.com
+/* Developed by Parham Baghbanbashi
+   parhambagh@gmail.com
  */
 
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.team16488.opmodes.DriverControl;
-import com.team16488.skystone.Robot;
+package com.team16488.opmodes.teleop;
 
+
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.team16488.control.DriverControl;
+import com.team16488.control.SubsystemControl;
+import com.team16488.skystone.Robot;
 
 
 @com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "Teleop main", group = "teleop")
 public class TeleOp extends OpMode {
-    private Robot robot;
+    public Robot robot;
+    public DriverControl driverControl;
+    public SubsystemControl subsystemControl;
     double slowmode = 0.8;
     double vpower = 0.0;
     double hpower = 0.0;
     boolean isOn = false;
     boolean reverse = false;
     boolean up = false;
-    private DriverControl driverControl;
-
 
 
     boolean clawOpen;
@@ -28,8 +29,10 @@ public class TeleOp extends OpMode {
 
     public void init() {
         robot = new Robot(this, telemetry);
-        robot.start();
+        subsystemControl = new SubsystemControl(this, telemetry);
         driverControl = new DriverControl(this, telemetry);
+        robot.start();
+
 
     }
 
@@ -41,6 +44,7 @@ public class TeleOp extends OpMode {
     @Override
     public void loop() {
         driverControl.driverPad(gamepad1, gamepad2, telemetry);
+        subsystemControl.subsystemDriver(gamepad2, telemetry);
 /*
         robot.drive.setVelocity(-gamepad1.left_stick_x, -gamepad1.left_stick_y, -gamepad1.right_stick_x);
 

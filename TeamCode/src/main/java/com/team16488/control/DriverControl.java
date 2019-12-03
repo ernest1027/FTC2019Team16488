@@ -1,4 +1,8 @@
-package com.team16488.opmodes;
+/* Developed by Parham Baghbanbashi
+   parhambagh@gmail.com
+ */
+
+package com.team16488.control;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.Gamepad;

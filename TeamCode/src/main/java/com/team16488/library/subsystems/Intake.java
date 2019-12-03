@@ -1,8 +1,9 @@
 package com.team16488.library.subsystems;
-/**
+/*
  * Deloped by Parham Baghbanbashi and Ernest Wong
  * parhambagh@gmail.com
  */
+
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
@@ -15,7 +16,7 @@ public class Intake extends Subsystem {
 
     CRServo intake;
 
-    public Intake(HardwareMap map){
+    public Intake(HardwareMap map) {
 
         intake = map.crservo.get("i");
     }
@@ -26,7 +27,7 @@ public class Intake extends Subsystem {
      */
     @Override
     public void update() {
-        if(isOn){
+        if (isOn) {
             intake.setPower(1.0);
         } else if (reverse) {
             intake.setPower(-1.0);
@@ -39,6 +40,7 @@ public class Intake extends Subsystem {
 
     /**
      * Sets the intake position to reverse
+     *
      * @param reverse
      */
     public void setReverse(boolean reverse) {
@@ -47,12 +49,12 @@ public class Intake extends Subsystem {
 
     /**
      * Sets the intake as on or off
+     *
      * @param on
      */
-    public void setOn(boolean on){
+    public void setOn(boolean on) {
         this.isOn = on;
     }
-
 
 
 }
