@@ -15,9 +15,9 @@ public class DriverControl {
     double slowmode = 0.8;
     double vpower = 0.0;
     double hpower = 0.0;
-    boolean isOn = false;
     boolean reverse = false;
     boolean up = false;
+    boolean On = false;
 
     public DriverControl(OpMode opMode, Telemetry telemetry) {
         robot = new Robot(opMode, telemetry);
@@ -33,20 +33,19 @@ public class DriverControl {
 
 
         if (gamepad1.y) {
-            isOn = true;
-
+            On = true;
         }
-        if (isOn) {
+        if (On) {
             robot.intake.setOn(true);
             telemetry.addData("state", "Intake on");
         }
 
         if (gamepad1.a) {
-            isOn = false;
+            On = false;
             reverse = false;
         }
 
-        if (!isOn) {
+        if (!On) {
             robot.intake.setOn(false);
             telemetry.addData("state", "Intake off");
         }

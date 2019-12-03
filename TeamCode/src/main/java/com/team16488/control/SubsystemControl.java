@@ -30,7 +30,7 @@ public class SubsystemControl {
         }
         robot.lift.setGoingUp(up);
 
-
+/*
         if (gamepad2.dpad_up) {
             vPower += 0.1;
         }
@@ -70,7 +70,7 @@ public class SubsystemControl {
 
 
         robot.arm.setPower(-gamepad2.right_stick_y);
-
+*/
     }
 
 

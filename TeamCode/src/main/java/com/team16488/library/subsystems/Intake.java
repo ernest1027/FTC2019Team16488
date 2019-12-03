@@ -10,7 +10,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class Intake extends Subsystem {
     private double speed = 1.00;
-    private boolean isOn;
+    private boolean isOn = false;
     private boolean fast = true;
     private boolean reverse = false;
 
@@ -18,7 +18,7 @@ public class Intake extends Subsystem {
 
     public Intake(HardwareMap map) {
 
-        intake = map.crservo.get("i");
+        intake = map.crservo.get("Intake");
     }
 
     /**
