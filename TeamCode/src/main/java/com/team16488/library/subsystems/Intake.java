@@ -6,13 +6,14 @@ package com.team16488.library.subsystems;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
+
 public class Intake extends Subsystem {
     private double speed = 1.00;
     private boolean isOn;
     private boolean fast = true;
     private boolean reverse = false;
 
-    CRServo  intake;
+    CRServo intake;
 
     public Intake(HardwareMap map){
 
@@ -26,15 +27,11 @@ public class Intake extends Subsystem {
     @Override
     public void update() {
         if(isOn){
-            intake.setPower(1.00);
-        }
-
-        if (reverse) {
+            intake.setPower(1.0);
+        } else if (reverse) {
             intake.setPower(-1.0);
-        }
-
-        else {
-            intake.setPower(0);
+        } else {
+            intake.setPower(0.0);
         }
 
 

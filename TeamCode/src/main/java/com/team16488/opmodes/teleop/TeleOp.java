@@ -46,19 +46,22 @@ public class TeleOp extends OpMode {
 
 
         if(gamepad1.y){
-            reverse = false;
             isOn = true;
+
         }
         if(isOn){
             robot.intake.setOn(true);
+            telemetry.addData("state", "Intake on");
         }
 
         if(gamepad1.a){
             isOn = false;
+            reverse = false;
         }
 
         if(!isOn){
             robot.intake.setOn(false);
+            telemetry.addData("state", "Intake off");
         }
 
         if(gamepad1.x) {
@@ -67,6 +70,7 @@ public class TeleOp extends OpMode {
 
         if(reverse){
             robot.intake.setReverse(true);
+            telemetry.addData("state", "Intake reverse");
         }
 
         if(gamepad1.right_trigger != 0){

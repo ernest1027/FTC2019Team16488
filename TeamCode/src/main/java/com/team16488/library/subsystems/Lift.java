@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class Lift extends Subsystem {
     private boolean goingUp = false;
-    private double power = 1.0;
+    private double power = 0.99;
 
     CRServo LiftTop, LiftBottom;
 
