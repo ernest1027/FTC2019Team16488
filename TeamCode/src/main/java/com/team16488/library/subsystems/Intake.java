@@ -46,9 +46,9 @@ public class Intake extends Subsystem {
     @Override
     public void update() {
         if (isOn) {
-            intake.setPower(0.45);
+            intake.setPower(0.5);
         } else if (reverse) {
-            intake.setPower(-0.55);
+            intake.setPower(-0.5);
         } else {
             intake.setPower(0.0);
         }

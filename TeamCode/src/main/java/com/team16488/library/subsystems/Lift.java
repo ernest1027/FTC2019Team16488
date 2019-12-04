@@ -15,7 +15,7 @@ public class Lift extends Subsystem {
     /**
      * Sets the speed of the Double Reverse 4 Bar
      */
-    private double power = 0.99;
+    private double power = 0.5;
 
     /**
      * The servo groups that will be Controlled

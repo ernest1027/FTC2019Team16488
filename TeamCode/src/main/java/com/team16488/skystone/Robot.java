@@ -16,27 +16,44 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 
+/**
+ * This class is what does all of the
+ * requred threading for the vairous subsystems to
+ * run in parrallel
+ * <p>
+ * In this class we call all our subsystems and
+ * give each subsystem's update method a thread that runs via the runnable
+ * this will be then submitted in the executor service.
+ * </p>
+ */
 public class Robot {
-
-    private ExecutorService subsystemUpdateExecutor;
-    private boolean started;
-
+    /** MecanumDrive object*/
     public MecanumDrive drive;
-
+    /** Arm subsystem object*/
     public Arm arm;
-
+    /** ArmHead subsystem object*/
     public ArmHead armHead;
-
+    /** Puller subsystem object*/
     public Puller puller;
-
+    /** Intake subsystem object */
     public Intake intake;
-
+    /** Lift subsystem object*/
     public Lift lift;
-
+    /** The executor service that is responsible for the submitting of tasks (subsystem.update()) */
+    private ExecutorService subsystemUpdateExecutor;
+    /**
+     * Starts the robot/ Checks if robot is started
+     */
+    private boolean started;
+    /**
+     * List of all the classes that extend the Subsystem Class(MecanumDrive, Arm, etc)*
+     *
+     * @see Subsystem
+     */
     private List<Subsystem> subsystems;
-
+    /** telemtry for the OpMode*/
     private Telemetry telemetry;
-
+    /** Runnable responsible for creating threads for each subsystem in the list of subsystems(any class that extends Subsystem)*/
     private Runnable subsystemUpdateRunnable = () -> {
 
         while (!Thread.currentThread().isInterrupted()) {
@@ -71,6 +88,15 @@ public class Robot {
 
     };
 
+    /**
+     * The Class constructor, This is what calls all our subsystems and allows us to access them and their methods inside our
+     * ChassisControl and SubsystemControl classes
+     *
+     * Also adds a new single thread executor.
+     *
+     * @param opMode The OpMode that the Class is used in.
+     * @param telemetry The telemetry of the OpMode the Class is used in
+     */
     public Robot(OpMode opMode, Telemetry telemetry){
         this.telemetry = telemetry;
 
@@ -89,7 +115,6 @@ public class Robot {
         }catch(IllegalArgumentException e){
 
         }
-
 
 
         try{
@@ -118,14 +143,13 @@ public class Robot {
         }
 
 
-
-
-
         subsystemUpdateExecutor = ThreadPool.newSingleThreadExecutor("subsystem update");
 
     }
 
-
+    /**
+     * This Method Starts the Robot
+     */
     public void start(){
         if(!started){
             subsystemUpdateExecutor.submit(subsystemUpdateRunnable);
@@ -133,20 +157,15 @@ public class Robot {
         }
     }
 
-
+    /**
+     * This Method Stops the Robot
+     */
     public void stop(){
         if(subsystemUpdateExecutor != null){
             subsystemUpdateExecutor.shutdownNow();
             subsystemUpdateExecutor = null;
         }
     }
-
-
-
-
-
-
-
 
 
 }
