@@ -1,7 +1,3 @@
-/* Developed by Parham Baghbanbashi
-   parhambagh@gmail.com
- */
-
 package com.team16488.control;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
@@ -10,16 +6,12 @@ import com.team16488.skystone.Robot;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
-public class DriverControl {
-    public Robot robot;
-    double slowmode = 0.8;
-    double vpower = 0.0;
-    double hpower = 0.0;
-    boolean reverse = false;
-    boolean up = false;
-    boolean On = false;
+public class ChassisControl {
+    private Robot robot;
+    private boolean reverse = false;
+    private boolean On = false;
 
-    public DriverControl(OpMode opMode, Telemetry telemetry) {
+    public ChassisControl(OpMode opMode, Telemetry telemetry) {
         robot = new Robot(opMode, telemetry);
     }
 
@@ -28,6 +20,7 @@ public class DriverControl {
         robot.drive.setVelocity(-gamepad1.left_stick_x, -gamepad1.left_stick_y, -gamepad1.right_stick_x);
 
         if (gamepad1.left_stick_x == 0 && gamepad1.left_stick_y == 0 && gamepad1.right_stick_x == 0) {
+            double slowmode = 0.2;
             robot.drive.setVelocity(-gamepad2.left_stick_x * slowmode, gamepad2.left_stick_y * slowmode, -gamepad2.right_stick_x * slowmode);
         }
 

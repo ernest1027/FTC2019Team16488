@@ -10,7 +10,7 @@ import com.team16488.skystone.Robot;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 public class SubsystemControl {
-    public Robot robot;
+    private Robot robot;
     private double vPower;
     private double hPower;
     private boolean up = false;
@@ -45,8 +45,8 @@ public class SubsystemControl {
             hPower -= 0.1;
         }
 
-        robot.clawHead.setverticalRotation(vPower);
-        robot.clawHead.sethorizontalRotationPosition(hPower);
+        robot.armHead.setverticalRotation(vPower);
+        robot.armHead.sethorizontalRotationPosition(hPower);
 
         // robot.arm.setPower(-gamepad2.right_stick_y);
 
@@ -62,10 +62,10 @@ public class SubsystemControl {
             clawOpen = false;
         }
         if (clawOpen) {
-            robot.clawHead.setOpen(true);
+            robot.armHead.setOpen(true);
         }
         if (!clawOpen) {
-            robot.clawHead.setOpen(false);
+            robot.armHead.setOpen(false);
         }
 
 

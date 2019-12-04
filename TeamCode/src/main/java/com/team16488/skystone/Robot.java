@@ -1,11 +1,9 @@
 package com.team16488.skystone;
-/**
- * Deloped by Parham Baghbanbashi and Ernest Wong
- * parhambagh@gmail.com
- */
+
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.util.ThreadPool;
 import com.team16488.library.subsystems.Arm;
-import com.team16488.library.subsystems.ClawHead;
+import com.team16488.library.subsystems.ArmHead;
 import com.team16488.library.subsystems.Intake;
 import com.team16488.library.subsystems.Lift;
 import com.team16488.library.subsystems.MecanumDrive;
@@ -17,9 +15,9 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
-import com.qualcomm.robotcore.util.ThreadPool;
 
 public class Robot {
+
     private ExecutorService subsystemUpdateExecutor;
     private boolean started;
 
@@ -27,7 +25,7 @@ public class Robot {
 
     public Arm arm;
 
-    public ClawHead clawHead;
+    public ArmHead armHead;
 
     public Puller puller;
 
@@ -95,8 +93,8 @@ public class Robot {
 
 
         try{
-            clawHead = new ClawHead(opMode.hardwareMap);
-            subsystems.add(clawHead);
+            armHead = new ArmHead(opMode.hardwareMap);
+            subsystems.add(armHead);
         }catch(IllegalArgumentException e){
 
         }

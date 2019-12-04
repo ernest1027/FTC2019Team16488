@@ -1,19 +1,32 @@
 package com.team16488.library.subsystems;
-/*
- * Deloped by Parham Baghbanbashi and Ernest Wong
- * parhambagh@gmail.com
- */
+
 
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
+/**
+ * This class controls the Double Reverse 4 bar
+ */
 public class Lift extends Subsystem {
+    /**
+     * Sets the direction of the double reverse 4 bar
+     */
     private boolean goingUp = false;
+    /**
+     * Sets the speed of the Double Reverse 4 Bar
+     */
     private double power = 0.99;
 
-    CRServo LiftTop, LiftBottom;
+    /**
+     * The servo groups that will be Controlled
+     */
+    private CRServo LiftTop, LiftBottom;
 
-
+    /**
+     * This is the constructor for the subsystem
+     *
+     * @param map This is the hardware map of the actual OpMode for the Lift Class
+     */
     public Lift(HardwareMap map) {
         LiftTop = map.crservo.get("LTOP");
         LiftBottom = map.crservo.get("LBOTTOM");
@@ -42,7 +55,7 @@ public class Lift extends Subsystem {
     /**
      * Sets the speed of the lift
      *
-     * @param power
+     * @param power sets the speed of the servos
      */
     public void setPower(double power) {
         this.power = power;
@@ -51,9 +64,10 @@ public class Lift extends Subsystem {
     /**
      * Sets the direction of the lift(UP or DOWN)
      *
-     * @param goingUp
+     * @param goingUp sets the direction of the Lift
      */
     public void setGoingUp(boolean goingUp) {
         this.goingUp = goingUp;
     }
+
 }
