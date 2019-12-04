@@ -15,6 +15,7 @@ import com.team16488.skystone.Robot;
  *
  * @author Parham Baghbanbashi: parhambagh@gmail.com
  * @author Ernest Wong
+ * github: https://github.com/StrRamsRobotics/SkyStone/tree/Parham-Baghbanbashi
  */
 @com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "Teleop main", group = "teleop")
 public class TeleOp extends OpMode {

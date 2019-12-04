@@ -10,6 +10,7 @@ import com.qualcomm.robotcore.hardware.Servo;
  *
  * @author Parham Baghbanbashi: parhambagh@gmail.com
  * @author Ernest Wong
+ * github: https://github.com/StrRamsRobotics/SkyStone/tree/Parham-Baghbanbashi
  */
 public class Puller extends Subsystem {
     /**

@@ -11,6 +11,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
  * Its job is to map each subsystem to gamepad2
  *
  * @author Parham Baghbanbashi
+ * github: https://github.com/StrRamsRobotics/SkyStone/tree/Parham-Baghbanbashi
  */
 public class SubsystemControl {
     /**

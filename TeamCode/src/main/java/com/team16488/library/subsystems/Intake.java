@@ -7,7 +7,8 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 /**
  * This class controls the intake of the robot.
  * the intake is responsible for the acquiring of
- * the skyblocks
+ * the skyblocks.
+ * github: https://github.com/StrRamsRobotics/SkyStone/tree/Parham-Baghbanbashi
  */
 public class Intake extends Subsystem {
 

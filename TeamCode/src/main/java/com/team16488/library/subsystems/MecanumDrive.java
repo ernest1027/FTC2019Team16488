@@ -11,6 +11,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
  *
  * @author Parham Baghbanbashi: parhambagh@gmail.com
  * @author Ernest Wong
+ * github: https://github.com/StrRamsRobotics/SkyStone/tree/Parham-Baghbanbashi
  */
 public class MecanumDrive extends Subsystem {
     /**

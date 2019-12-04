@@ -6,6 +6,10 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 /**
  * This class controls the Double Reverse 4 bar
+ *
+ * @author Parham Baghbanbashi
+ * @author Eernest Wong
+ * github: https://github.com/StrRamsRobotics/SkyStone/tree/Parham-Baghbanbashi
  */
 public class Lift extends Subsystem {
     /**

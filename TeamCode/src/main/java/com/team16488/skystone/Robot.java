@@ -25,6 +25,9 @@ import java.util.concurrent.ExecutorService;
  * give each subsystem's update method a thread that runs via the runnable
  * this will be then submitted in the executor service.
  * </p>
+ *
+ * @author Parham Baghbanbashi
+ * github: https://github.com/StrRamsRobotics/SkyStone/tree/Parham-Baghbanbashi
  */
 public class Robot {
     /** MecanumDrive object*/
