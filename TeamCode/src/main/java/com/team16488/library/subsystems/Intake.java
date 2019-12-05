@@ -8,14 +8,16 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
  * This class controls the intake of the robot.
  * the intake is responsible for the acquiring of
  * the skyblocks.
- * github: https://github.com/StrRamsRobotics/SkyStone/tree/Parham-Baghbanbashi
+ * <p>github: https://github.com/StrRamsRobotics/SkyStone/tree/Parham-Baghbanbashi</p>
+ * @author Parham Baghbanbashi
+ * @author Ernest Wong
  */
 public class Intake extends Subsystem {
 
     /**
      * Servo group of the intake
      */
-    CRServo intake;
+    private CRServo intake;
     /**
      * Sets the state of the intake. ON. OFF
      */
@@ -42,14 +44,17 @@ public class Intake extends Subsystem {
     /**
      * This Method updates the servos based on the private variables
      *
-     * @see Subsystem
+     * <p>See: {@link Subsystem}</p>
      */
     @Override
     public void update() {
         if (isOn) {
-            intake.setPower(0.5);
-        } else if (reverse) {
-            intake.setPower(-0.5);
+
+            if (reverse) {
+                intake.setPower(-0.5);
+            } else {
+                intake.setPower(0.5);
+            }
         } else {
             intake.setPower(0.0);
         }

@@ -3,6 +3,7 @@ package com.team16488.library.subsystems;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
+
 /**
  * This class controls the movement of the claw that
  * grips the skystone
@@ -16,7 +17,8 @@ import com.qualcomm.robotcore.hardware.Servo;
  *
  * @author Parham Baghbanbashi: parhambagh@gmail.com
  * @author Ernest Wong
- * github: https://github.com/StrRamsRobotics/SkyStone/tree/Parham-Baghbanbashi
+ *
+ * <p>github: https://github.com/StrRamsRobotics/SkyStone/tree/Parham-Baghbanbashi</p>
  */
 public class ArmHead extends Subsystem {
     /**
@@ -31,7 +33,11 @@ public class ArmHead extends Subsystem {
      * This is the servo that controls the horizontal rotation of the Arm Head
      */
     private Servo horizontalRotation;
+    /**
+     * Sets the position of the claw(Open or Closed
+     */
     private boolean open = false;
+    /** Position of the Vertical rotation servo and horizontal rotation servo*/
     private double verticalRotationPosition, horizontalRotationPosition;
 
     /**
@@ -52,7 +58,7 @@ public class ArmHead extends Subsystem {
     /**
      * This Method updates the Arm Head Servos based on the private variable
      *
-     * @see Subsystem
+     * <p>See: {@link Subsystem}</p>
      */
     @Override
     public void update() {
@@ -77,7 +83,7 @@ public class ArmHead extends Subsystem {
     /**
      * This method Updates the claws position: Open or Closed
      *
-     * @param open
+     * @param open Sets the claw position to open(if true)
      */
     public void setOpen(boolean open) {
         this.open = open;

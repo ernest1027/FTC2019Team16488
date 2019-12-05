@@ -15,26 +15,26 @@ import com.team16488.skystone.Robot;
  *
  * @author Parham Baghbanbashi: parhambagh@gmail.com
  * @author Ernest Wong
- * github: https://github.com/StrRamsRobotics/SkyStone/tree/Parham-Baghbanbashi
+ * <p>github: https://github.com/StrRamsRobotics/SkyStone/tree/Parham-Baghbanbashi</p>
  */
 @com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "Teleop main", group = "teleop")
 public class TeleOp extends OpMode {
     /**
      * Robot object
      *
-     * @see Robot
+     * <p>See: {@link com.team16488.skystone.Robot}</p>
      */
     private Robot robot;
     /**
      * ChassisControl object
      *
-     * @see ChassisControl
+     * <p>See: {@link ChassisControl}</p>
      */
     private ChassisControl chassisControl;
     /**
      * Subsystem control object
      *
-     * @see SubsystemControl
+     * <p>See: {@link SubsystemControl}</p>
      */
     private SubsystemControl subsystemControl;
 
@@ -46,8 +46,8 @@ public class TeleOp extends OpMode {
      */
     public void init() {
         robot = new Robot(this, telemetry);
-        subsystemControl = new SubsystemControl(this, telemetry);
-        chassisControl = new ChassisControl(this, telemetry);
+        subsystemControl = new SubsystemControl(this, telemetry, gamepad2);
+        chassisControl = new ChassisControl(this, telemetry, gamepad1, gamepad2);
     }
 
     /**
@@ -55,7 +55,7 @@ public class TeleOp extends OpMode {
      * <p>
      * This also runs robot.start
      *
-     * @see Robot
+     * <p>See: {@link Robot}</p>
      */
     @Override
     public void start() {
@@ -67,20 +67,20 @@ public class TeleOp extends OpMode {
      * <p>
      * This method runs the Chassis control class and subsystem control class
      *
-     * @see ChassisControl
-     * @see SubsystemControl
+     * <p>See: {@link ChassisControl}</p>
+     * <p>See: {@link SubsystemControl}</p>
      */
     @Override
     public void loop() {
-        chassisControl.driverPad(gamepad1, gamepad2, telemetry);
-        subsystemControl.subsystemDriver(gamepad2, telemetry);
+        chassisControl.driverPad(telemetry);
+        subsystemControl.subsystemDriver(telemetry);
     }
 
     /**
      * This method Runs once the Driver hits stop
      *
      * Stops the robot
-     * @see Robot
+     * <p>See: {@link Robot}</p>
      */
     @Override
     public void stop() {

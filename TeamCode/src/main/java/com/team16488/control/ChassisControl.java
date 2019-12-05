@@ -12,9 +12,13 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
  * into movement using the robot class which uses the
  * various subsystem classes.
  *
+ *
  * @author Parham Baghbanbashi
- * @see Robot
- * github: https://github.com/StrRamsRobotics/SkyStone/tree/Parham-Baghbanbashi
+ * <p>See: {@link com.team16488.skystone.Robot}</p>
+ * <p>
+ *    github: https://github.com/StrRamsRobotics/SkyStone/tree/Parham-Baghbanbashi
+ * </p>
+ *
  */
 public class ChassisControl {
     /**
@@ -26,34 +30,36 @@ public class ChassisControl {
     /** this turns the intake on */
     private boolean On = false;
 
+    private Gamepad chassisControl, subsystemChassisControl;
+
     /**
      * This is the constructor for a chassis control this allows the opmode to run the code in the class
      * @param opMode The opmode that this class is being used in
      * @param telemetry The telemtry that the class usess
      */
-    public ChassisControl(OpMode opMode, Telemetry telemetry) {
+    public ChassisControl(OpMode opMode, Telemetry telemetry, Gamepad gamepad1, Gamepad gamepad2) {
         robot = new Robot(opMode, telemetry);
+        chassisControl = gamepad1;
+        subsystemChassisControl = gamepad2;
     }
 
     /**
      * This is the method that handles the control of the chassis via driver inputs
      *
-     * @param gamepad1 gamepad1 inputs (Chassis Driver)
-     * @param gamepad2 gamepad2 inputs (Subsystem Driver control)
      * @param telemetry the telemetry for the class.
      */
-    public void driverPad(Gamepad gamepad1, Gamepad gamepad2, Telemetry telemetry) {
+    public void driverPad(Telemetry telemetry) {
 
 
-        robot.drive.setVelocity(-gamepad1.left_stick_x, -gamepad1.left_stick_y, -gamepad1.right_stick_x);
+        robot.drive.setVelocity(-chassisControl.left_stick_x, -chassisControl.left_stick_y, -chassisControl.right_stick_x);
 
-        if (gamepad1.left_stick_x == 0 && gamepad1.left_stick_y == 0 && gamepad1.right_stick_x == 0) {
+        if (chassisControl.left_stick_x == 0 && chassisControl.left_stick_y == 0 && chassisControl.right_stick_x == 0) {
             double slowmode = 0.2;
-            robot.drive.setVelocity(-gamepad2.left_stick_x * slowmode, gamepad2.left_stick_y * slowmode, -gamepad2.right_stick_x * slowmode);
+            robot.drive.setVelocity(-subsystemChassisControl.left_stick_x * slowmode, subsystemChassisControl.left_stick_y * slowmode, -subsystemChassisControl.right_stick_x * slowmode);
         }
 
 
-        if (gamepad1.y) {
+        if (chassisControl.y) {
             On = true;
         }
         if (On) {
@@ -61,7 +67,7 @@ public class ChassisControl {
             telemetry.addData("state", "Intake on");
         }
 
-        if (gamepad1.a) {
+        if (chassisControl.a) {
             On = false;
             reverse = false;
         }
@@ -71,7 +77,7 @@ public class ChassisControl {
             telemetry.addData("state", "Intake off");
         }
 
-        if (gamepad1.x) {
+        if (chassisControl.x) {
             reverse = true;
         }
 
@@ -80,11 +86,11 @@ public class ChassisControl {
             telemetry.addData("state", "Intake reverse");
         }
 
-        if (gamepad1.right_trigger != 0) {
+        if (chassisControl.right_trigger != 0) {
             robot.puller.setDown(true);
         }
 
-        if (gamepad1.right_bumper) {
+        if (chassisControl.right_bumper) {
             robot.puller.setDown(false);
         }
 

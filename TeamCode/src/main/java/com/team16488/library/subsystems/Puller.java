@@ -10,7 +10,7 @@ import com.qualcomm.robotcore.hardware.Servo;
  *
  * @author Parham Baghbanbashi: parhambagh@gmail.com
  * @author Ernest Wong
- * github: https://github.com/StrRamsRobotics/SkyStone/tree/Parham-Baghbanbashi
+ * <p>github: https://github.com/StrRamsRobotics/SkyStone/tree/Parham-Baghbanbashi</p>
  */
 public class Puller extends Subsystem {
     /**
@@ -36,7 +36,7 @@ public class Puller extends Subsystem {
      * This method is what updates the position of the servos
      * based on the down variable
      *
-     * @see Subsystem
+     * <p>See: {@link Subsystem}</p>
      */
     @Override
     public void update() {

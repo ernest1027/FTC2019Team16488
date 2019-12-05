@@ -27,7 +27,7 @@ import java.util.concurrent.ExecutorService;
  * </p>
  *
  * @author Parham Baghbanbashi
- * github: https://github.com/StrRamsRobotics/SkyStone/tree/Parham-Baghbanbashi
+ * <p>github: https://github.com/StrRamsRobotics/SkyStone/tree/Parham-Baghbanbashi</p>
  */
 public class Robot {
     /** MecanumDrive object*/
@@ -51,7 +51,7 @@ public class Robot {
     /**
      * List of all the classes that extend the Subsystem Class(MecanumDrive, Arm, etc)*
      *
-     * @see Subsystem
+     * <p>See: {@link Subsystem}</p>
      */
     private List<Subsystem> subsystems;
     /** telemtry for the OpMode*/

@@ -11,7 +11,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
  *
  * @author Parham Baghbanbashi: parhambagh@gmail.com
  * @author Ernest Wong
- * github: https://github.com/StrRamsRobotics/SkyStone/tree/Parham-Baghbanbashi
+ * <p>github: https://github.com/StrRamsRobotics/SkyStone/tree/Parham-Baghbanbashi</p>
  */
 public class MecanumDrive extends Subsystem {
     /**
@@ -69,7 +69,7 @@ public class MecanumDrive extends Subsystem {
      * This function sets the vairous speeds according to the
      * power variables
      *
-     * @see Subsystem
+     * <p>See: {@link Subsystem}</p>
      */
     @Override
     public void update() {

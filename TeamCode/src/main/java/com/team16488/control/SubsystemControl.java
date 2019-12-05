@@ -11,7 +11,11 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
  * Its job is to map each subsystem to gamepad2
  *
  * @author Parham Baghbanbashi
- * github: https://github.com/StrRamsRobotics/SkyStone/tree/Parham-Baghbanbashi
+ * <p>See: {@link com.team16488.skystone.Robot}</p>
+ * <p>
+ *     github: https://github.com/StrRamsRobotics/SkyStone/tree/Parham-Baghbanbashi
+ * </p>
+ *
  */
 public class SubsystemControl {
     /**
@@ -43,32 +47,46 @@ public class SubsystemControl {
      */
     private boolean clawOpen = true;
 
+    private boolean liftOn;
+
+    private Gamepad subsystemDriver;
+
     /**
      * Constructs the subsystemControl class in the main OpMode
      *
      * @param opMode    The OpMode the class is being used in
      * @param telemetry The telemetry of the OpMode the class is being used in
      */
-    public SubsystemControl(OpMode opMode, Telemetry telemetry) {
+    public SubsystemControl(OpMode opMode, Telemetry telemetry, Gamepad gamepad2) {
         robot = new Robot(opMode, telemetry);
+        subsystemDriver = gamepad2;
     }
 
     /**
      * This is the method that updates the Subsystems based on driver input
      *
-     * @param gamepad2 Subsystem Driver Controller
      * @param telemetry OpMode telemetry
      */
-    public void subsystemDriver(Gamepad gamepad2, Telemetry telemetry) {
+    public void subsystemDriver(Telemetry telemetry) {
 
-        if (gamepad2.left_bumper) {
-            up = true;
+        if (subsystemDriver.start) {
+            this.liftOn = true;
         }
-        if (gamepad2.right_bumper) {
-            up = false;
+        if (subsystemDriver.back) {
+            robot.lift.setPower(0);
         }
+        if (liftOn) {
+            if (subsystemDriver.left_bumper) {
+                up = true;
+            }
+            if (subsystemDriver.right_bumper) {
+                up = false;
+
+            }
+        }
+
         robot.lift.setGoingUp(up);
-
+/*
 
         if (gamepad2.dpad_up) {
             vPower += 0.1;
@@ -108,7 +126,7 @@ public class SubsystemControl {
 
 
         robot.arm.setPower(-gamepad2.right_stick_y);
-
+*/
     }
 
 

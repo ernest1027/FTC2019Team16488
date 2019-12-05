@@ -9,13 +9,13 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
  *
  * @author Parham Baghbanbashi
  * @author Eernest Wong
- * github: https://github.com/StrRamsRobotics/SkyStone/tree/Parham-Baghbanbashi
+ * <p>github: https://github.com/StrRamsRobotics/SkyStone/tree/Parham-Baghbanbashi</p>
  */
 public class Lift extends Subsystem {
     /**
      * Sets the direction of the double reverse 4 bar
      */
-    private boolean goingUp = false;
+    private boolean goingUp;
     /**
      * Sets the speed of the Double Reverse 4 Bar
      */
@@ -40,6 +40,8 @@ public class Lift extends Subsystem {
     /**
      * This function is what changes the powers of the crservos when the setpower function changes the
      * variable power.
+     *
+     * <p>See: {@link Subsystem}</p>
      */
     @Override
     public void update() {
@@ -48,11 +50,13 @@ public class Lift extends Subsystem {
             LiftBottom.setPower(-power);
 
         }
-
         if (!goingUp) {
             LiftTop.setPower(-power);
             LiftBottom.setPower(power);
 
+        } else {
+            LiftTop.setPower(0);
+            LiftBottom.setPower(0);
         }
     }
 
