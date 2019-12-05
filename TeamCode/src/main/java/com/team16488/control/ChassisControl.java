@@ -37,10 +37,10 @@ public class ChassisControl {
      * @param opMode The opmode that this class is being used in
      * @param telemetry The telemtry that the class usess
      */
-    public ChassisControl(OpMode opMode, Telemetry telemetry, Gamepad gamepad1, Gamepad gamepad2) {
+    public ChassisControl(OpMode opMode, Telemetry telemetry) {
         robot = new Robot(opMode, telemetry);
-        chassisControl = gamepad1;
-        subsystemChassisControl = gamepad2;
+        chassisControl = opMode.gamepad1;
+        subsystemChassisControl = opMode.gamepad2;
     }
 
     /**
@@ -94,6 +94,11 @@ public class ChassisControl {
             robot.puller.setDown(false);
         }
 
+        telemetry.addData("Subsystem Status", "ON");
+        telemetry.addData("----------------------------------------------", " ");
+        telemetry.addData("Gamepad1 start", chassisControl.start);
+        telemetry.addData("Gamepad1 right bumper", chassisControl.right_bumper);
+        telemetry.addData("Gamepad1 left bumper", chassisControl.left_bumper);
 
     }
 }

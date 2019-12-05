@@ -47,7 +47,7 @@ public class SubsystemControl {
      */
     private boolean clawOpen = true;
 
-    private boolean liftOn;
+    private boolean liftOn = false;
 
     private Gamepad subsystemDriver;
 
@@ -55,11 +55,11 @@ public class SubsystemControl {
      * Constructs the subsystemControl class in the main OpMode
      *
      * @param opMode    The OpMode the class is being used in
-     * @param telemetry The telemetry of the OpMode the class is being used in
+     * @param telemetry The telemetry of the OpMode the class is being used
      */
-    public SubsystemControl(OpMode opMode, Telemetry telemetry, Gamepad gamepad2) {
+    public SubsystemControl(OpMode opMode, Telemetry telemetry) {
         robot = new Robot(opMode, telemetry);
-        subsystemDriver = gamepad2;
+        subsystemDriver = opMode.gamepad2;
     }
 
     /**
@@ -69,18 +69,21 @@ public class SubsystemControl {
      */
     public void subsystemDriver(Telemetry telemetry) {
 
-        if (subsystemDriver.start) {
+        if (subsystemDriver.y) {
             this.liftOn = true;
         }
-        if (subsystemDriver.back) {
-            robot.lift.setPower(0);
+        if (subsystemDriver.a) {
+            this.liftOn = false;
         }
+        robot.lift.setOn(liftOn);
         if (liftOn) {
             if (subsystemDriver.left_bumper) {
                 up = true;
+                robot.lift.setPower(0.5);
             }
             if (subsystemDriver.right_bumper) {
                 up = false;
+                robot.lift.setPower(-0.5);
 
             }
         }
@@ -88,17 +91,17 @@ public class SubsystemControl {
         robot.lift.setGoingUp(up);
 /*
 
-        if (gamepad2.dpad_up) {
+        if (subsystemDriver.dpad_up) {
             vPower += 0.1;
         }
-        if (gamepad2.dpad_down) {
+        if (subsystemDriver.dpad_down) {
             vPower -= 0.1;
         }
-        if (gamepad2.dpad_left) {
+        if (subsystemDriver.dpad_left) {
             hPower += 0.1;
         }
 
-        if (gamepad2.dpad_right) {
+        if (subsystemDriver.dpad_right) {
             hPower -= 0.1;
         }
 
@@ -111,10 +114,10 @@ public class SubsystemControl {
 
 
         //swich gampad 1 to gamepad2
-        if (gamepad2.a) {
+        if (subsystemDriver.a) {
             clawOpen = true;
         }
-        if (gamepad2.b) {
+        if (subsystemDriver.b) {
             clawOpen = false;
         }
         if (clawOpen) {
@@ -125,8 +128,17 @@ public class SubsystemControl {
         }
 
 
-        robot.arm.setPower(-gamepad2.right_stick_y);
+        robot.arm.setPower(-subsystemDriver.right_stick_y);
 */
+        telemetry.addData("Subsystem Status", "ON");
+        telemetry.addData("------------------------------", "----------------");
+        telemetry.addData("Gamepad2 start", subsystemDriver.start);
+        telemetry.addData("Gamepad2 right bumper", subsystemDriver.right_bumper);
+        telemetry.addData("Gamepad 2 left bumper", subsystemDriver.left_bumper);
+        telemetry.addData("Lift State", robot.lift.On);
+        telemetry.addData("Lift Direction", robot.lift.goingUp);
+        telemetry.addData("Lift power acctual", robot.lift.LiftTop.getPower());
+        telemetry.addData("Lift power set", robot.lift.power);
     }
 
 

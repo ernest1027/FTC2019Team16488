@@ -46,8 +46,8 @@ public class TeleOp extends OpMode {
      */
     public void init() {
         robot = new Robot(this, telemetry);
-        subsystemControl = new SubsystemControl(this, telemetry, gamepad2);
-        chassisControl = new ChassisControl(this, telemetry, gamepad1, gamepad2);
+        subsystemControl = new SubsystemControl(this, telemetry);
+        chassisControl = new ChassisControl(this, telemetry);
     }
 
     /**
@@ -86,5 +86,6 @@ public class TeleOp extends OpMode {
     public void stop() {
         robot.stop();
     }
+
 
 }

@@ -15,16 +15,19 @@ public class Lift extends Subsystem {
     /**
      * Sets the direction of the double reverse 4 bar
      */
-    private boolean goingUp;
+    public boolean goingUp;
     /**
      * Sets the speed of the Double Reverse 4 Bar
      */
-    private double power = 0.5;
+    public double power = 0.49;
 
     /**
      * The servo groups that will be Controlled
      */
-    private CRServo LiftTop, LiftBottom;
+    public CRServo LiftTop, LiftBottom;
+
+    public boolean On = false;
+
 
     /**
      * This is the constructor for the subsystem
@@ -45,16 +48,19 @@ public class Lift extends Subsystem {
      */
     @Override
     public void update() {
-        if (goingUp) {
-            LiftTop.setPower(power);
-            LiftBottom.setPower(-power);
+        if (On) {
+            if (goingUp) {
+                LiftTop.setPower(power);
+                LiftBottom.setPower(-power);
 
+            }
+            if (!goingUp) {
+                LiftTop.setPower(-power);
+                LiftBottom.setPower(power);
+
+            }
         }
-        if (!goingUp) {
-            LiftTop.setPower(-power);
-            LiftBottom.setPower(power);
-
-        } else {
+        if (!On) {
             LiftTop.setPower(0);
             LiftBottom.setPower(0);
         }
@@ -76,6 +82,15 @@ public class Lift extends Subsystem {
      */
     public void setGoingUp(boolean goingUp) {
         this.goingUp = goingUp;
+    }
+
+    /**
+     * This turns the lif on
+     *
+     * @param on state ON or OFF
+     */
+    public void setOn(boolean on) {
+        this.On = on;
     }
 
 }
