@@ -55,10 +55,11 @@ public class SubsystemControl {
      * Constructs the subsystemControl class in the main OpMode
      *
      * @param opMode    The OpMode the class is being used in
-     * @param telemetry The telemetry of the OpMode the class is being used
+     * @param oprobot   The robot object in the acctual OpMode that it
+     *                  is being used in.
      */
-    public SubsystemControl(OpMode opMode, Telemetry telemetry) {
-        robot = new Robot(opMode, telemetry);
+    public SubsystemControl(OpMode opMode, Robot oprobot) {
+        robot = oprobot;
         subsystemDriver = opMode.gamepad2;
     }
 
@@ -79,11 +80,11 @@ public class SubsystemControl {
         if (liftOn) {
             if (subsystemDriver.left_bumper) {
                 up = true;
-                robot.lift.setPower(0.5);
+                telemetry.addData("going up", up);
             }
             if (subsystemDriver.right_bumper) {
                 up = false;
-                robot.lift.setPower(-0.5);
+                telemetry.addData("goiinig up", up);
 
             }
         }
@@ -113,7 +114,6 @@ public class SubsystemControl {
         telemetry.addData("hpower", hPower);
 
 
-        //swich gampad 1 to gamepad2
         if (subsystemDriver.a) {
             clawOpen = true;
         }
@@ -130,6 +130,7 @@ public class SubsystemControl {
 
         robot.arm.setPower(-subsystemDriver.right_stick_y);
 */
+
         telemetry.addData("Subsystem Status", "ON");
         telemetry.addData("------------------------------", "----------------");
         telemetry.addData("Gamepad2 start", subsystemDriver.start);

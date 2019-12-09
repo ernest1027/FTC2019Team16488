@@ -32,13 +32,15 @@ public class ChassisControl {
 
     private Gamepad chassisControl, subsystemChassisControl;
 
+
     /**
      * This is the constructor for a chassis control this allows the opmode to run the code in the class
      * @param opMode The opmode that this class is being used in
-     * @param telemetry The telemtry that the class usess
+     * @param oprobot   The robot object in the acctual OpMode that it
+     *                  is being used in.
      */
-    public ChassisControl(OpMode opMode, Telemetry telemetry) {
-        robot = new Robot(opMode, telemetry);
+    public ChassisControl(OpMode opMode, Robot oprobot) {
+        robot = oprobot;
         chassisControl = opMode.gamepad1;
         subsystemChassisControl = opMode.gamepad2;
     }
@@ -54,7 +56,7 @@ public class ChassisControl {
         robot.drive.setVelocity(-chassisControl.left_stick_x, -chassisControl.left_stick_y, -chassisControl.right_stick_x);
 
         if (chassisControl.left_stick_x == 0 && chassisControl.left_stick_y == 0 && chassisControl.right_stick_x == 0) {
-            double slowmode = 0.2;
+            double slowmode = 0.05;
             robot.drive.setVelocity(-subsystemChassisControl.left_stick_x * slowmode, subsystemChassisControl.left_stick_y * slowmode, -subsystemChassisControl.right_stick_x * slowmode);
         }
 
