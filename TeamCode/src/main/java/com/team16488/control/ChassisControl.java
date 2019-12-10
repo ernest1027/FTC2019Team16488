@@ -95,12 +95,16 @@ public class ChassisControl {
         if (chassisControl.right_bumper) {
             robot.puller.setDown(false);
         }
+        if (chassisControl.start) {
+            robot.alternateIntake.setDown(true);
+        }
 
         telemetry.addData("Subsystem Status", "ON");
         telemetry.addData("----------------------------------------------", " ");
         telemetry.addData("Gamepad1 start", chassisControl.start);
         telemetry.addData("Gamepad1 right bumper", chassisControl.right_bumper);
         telemetry.addData("Gamepad1 left bumper", chassisControl.left_bumper);
+        telemetry.addData("Alternate intake state", robot.alternateIntake.blockDetection.getState());
 
     }
 }

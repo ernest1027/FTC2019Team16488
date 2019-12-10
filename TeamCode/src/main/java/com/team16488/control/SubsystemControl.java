@@ -78,11 +78,11 @@ public class SubsystemControl {
         }
         robot.lift.setOn(liftOn);
         if (liftOn) {
-            if (subsystemDriver.left_bumper) {
+            if (subsystemDriver.dpad_up) {
                 up = true;
                 telemetry.addData("going up", up);
             }
-            if (subsystemDriver.right_bumper) {
+            if (subsystemDriver.dpad_down) {
                 up = false;
                 telemetry.addData("goiinig up", up);
 

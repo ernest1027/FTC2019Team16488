@@ -2,6 +2,7 @@ package com.team16488.skystone;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.util.ThreadPool;
+import com.team16488.library.subsystems.AlternateIntake;
 import com.team16488.library.subsystems.Arm;
 import com.team16488.library.subsystems.ArmHead;
 import com.team16488.library.subsystems.Intake;
@@ -42,6 +43,9 @@ public class Robot {
     public Intake intake;
     /** Lift subsystem object*/
     public Lift lift;
+
+    public AlternateIntake alternateIntake;
+
     /** The executor service that is responsible for the submitting of tasks (subsystem.update()) */
     private ExecutorService subsystemUpdateExecutor;
     /**
@@ -144,7 +148,11 @@ public class Robot {
         }catch(IllegalArgumentException e){
 
         }
-
+        try {
+            alternateIntake = new AlternateIntake(opMode.hardwareMap);
+            subsystems.add(alternateIntake);
+        } catch (IllegalArgumentException e) {
+        }
 
         subsystemUpdateExecutor = ThreadPool.newSingleThreadExecutor("subsystem update");
 
