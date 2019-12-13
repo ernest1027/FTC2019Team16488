@@ -57,42 +57,44 @@ public class ChassisControl {
 
         if (chassisControl.right_stick_x == 0 && chassisControl.left_stick_y == 0 && chassisControl.left_stick_x == 0) {
             double slowmode = 0.5;
-            robot.drive.setVelocity(-subsystemChassisControl.left_stick_x * slowmode, subsystemChassisControl.right_stick_y * slowmode, -subsystemChassisControl.right_stick_x * slowmode);
+            robot.drive.setVelocity(-subsystemChassisControl.left_stick_x * slowmode, -subsystemChassisControl.right_stick_y * slowmode, -subsystemChassisControl.right_stick_x * slowmode);
         }
 
+        if (chassisControl.right_trigger != 0) {
+            On = false;
 
+        }
         if (chassisControl.right_bumper) {
             On = true;
+
+        }
+        if (chassisControl.x) {
+            reverse = true;
+        }
+        if (chassisControl.a) {
+            reverse = false;
         }
         if (On) {
             robot.intake.setOn(true);
             telemetry.addData("state", "Intake on");
         }
-
-        if (chassisControl.right_trigger != 0) {
-            On = false;
-            reverse = false;
-        }
-
         if (!On) {
             robot.intake.setOn(false);
             telemetry.addData("state", "Intake off");
         }
 
-        if (chassisControl.x) {
-            reverse = true;
-        }
+
 
         if (reverse) {
             robot.intake.setReverse(true);
             telemetry.addData("state", "Intake reverse");
         }
 
-        if (chassisControl.right_trigger != 0) {
+        if (chassisControl.left_trigger != 0) {
             robot.puller.setDown(true);
         }
 
-        if (chassisControl.right_bumper) {
+        if (chassisControl.left_bumper) {
             robot.puller.setDown(false);
         }
         if (chassisControl.b) {

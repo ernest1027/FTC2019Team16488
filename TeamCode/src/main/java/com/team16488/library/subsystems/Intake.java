@@ -51,12 +51,12 @@ public class Intake extends Subsystem {
         if (isOn) {
 
             if (reverse) {
-                intake.setPower(-0.5);
+                intake.setPower(-0.85);
             } else {
-                intake.setPower(0.5);
+                intake.setPower(0.85);
             }
         } else {
-            intake.setPower(0.5);
+            intake.setPower(0.0);
         }
 
 

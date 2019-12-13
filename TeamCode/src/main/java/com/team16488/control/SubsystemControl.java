@@ -80,15 +80,15 @@ public class SubsystemControl {
             robot.lift.setPower(0.1);
         }
 
-        if (subsystemDriver.right_bumper) {
+        if (subsystemDriver.left_bumper) {
             robot.lift.setPower(0.85);
         }
 
-        if (subsystemDriver.right_trigger != 0) {
+        if (subsystemDriver.left_trigger != 0) {
             robot.lift.setPower(-0.85);
         }
 
-        if (subsystemDriver.left_trigger != 0) {
+        if (subsystemDriver.right_trigger != 0) {
             shift = true;
         }
         if (shift) {
@@ -106,7 +106,7 @@ public class SubsystemControl {
             }
         }
 
-        if (subsystemDriver.left_bumper) {
+        if (subsystemDriver.right_bumper) {
             clawOpen = true;
         }
         if (clawOpen) {

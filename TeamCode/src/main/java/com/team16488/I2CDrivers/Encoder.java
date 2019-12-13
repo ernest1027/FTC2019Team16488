@@ -9,6 +9,7 @@ import com.qualcomm.robotcore.hardware.configuration.annotations.I2cDeviceType;
 @I2cDeviceType
 @DeviceProperties(name = "Leo And Simons Scetchy Encoders", description = "The Encoders for the DR4b", xmlTag = "LS16488")
 public class Encoder extends I2cDeviceSynchDevice<I2cDeviceSynch> {
+
     public Encoder(I2cDeviceSynch deviceClient) {
         super(deviceClient, true);
 
@@ -31,4 +32,5 @@ public class Encoder extends I2cDeviceSynchDevice<I2cDeviceSynch> {
     public String getDeviceName() {
         return "Leo and Simons Encoders";
     }
+
 }
