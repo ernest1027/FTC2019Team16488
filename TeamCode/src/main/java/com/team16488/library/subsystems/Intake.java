@@ -1,7 +1,7 @@
 package com.team16488.library.subsystems;
 
 
-import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 /**
@@ -17,7 +17,7 @@ public class Intake extends Subsystem {
     /**
      * Servo group of the intake
      */
-    private DcMotor intake;
+    private CRServo intake;
     /**
      * Sets the state of the intake. ON. OFF
      */
@@ -38,7 +38,7 @@ public class Intake extends Subsystem {
      */
     public Intake(HardwareMap map) {
 
-        intake = map.dcMotor.get("Intake");
+        intake = map.crservo.get("Intake");
     }
 
     /**
@@ -51,12 +51,12 @@ public class Intake extends Subsystem {
         if (isOn) {
 
             if (reverse) {
-                intake.setPower(-1.0);
+                intake.setPower(-0.5);
             } else {
-                intake.setPower(1.0);
+                intake.setPower(0.5);
             }
         } else {
-            intake.setPower(1.0);
+            intake.setPower(0.5);
         }
 
 

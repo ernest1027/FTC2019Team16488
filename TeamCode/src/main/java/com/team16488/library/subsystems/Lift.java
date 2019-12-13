@@ -19,7 +19,7 @@ public class Lift extends Subsystem {
     /**
      * Sets the speed of the Double Reverse 4 Bar
      */
-    public double power = 0.5;
+    public double power = 0.85;
 
     /**
      * The servo groups that will be Controlled
@@ -27,6 +27,7 @@ public class Lift extends Subsystem {
     public CRServo LiftTop, LiftBottom;
 
     public boolean On = false;
+
 
 
     /**
@@ -49,21 +50,14 @@ public class Lift extends Subsystem {
     @Override
     public void update() {
         if (On) {
-            if (goingUp) {
-                LiftTop.setPower(power);
-                LiftBottom.setPower(-power);
-
-            }
-            if (!goingUp) {
-                LiftTop.setPower(-power);
-                LiftBottom.setPower(power);
-
-            }
+            LiftTop.setPower(power);
+            LiftBottom.setPower(-power);
         }
         if (!On) {
             LiftTop.setPower(0);
             LiftBottom.setPower(0);
         }
+
     }
 
     /**

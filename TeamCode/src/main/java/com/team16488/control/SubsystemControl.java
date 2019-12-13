@@ -47,7 +47,11 @@ public class SubsystemControl {
      */
     private boolean clawOpen = true;
 
-    private boolean liftOn = false;
+    private boolean liftOn = true;
+
+    private boolean lock = true;
+
+    private boolean shift;
 
     private Gamepad subsystemDriver;
 
@@ -70,28 +74,59 @@ public class SubsystemControl {
      */
     public void subsystemDriver(Telemetry telemetry) {
 
+        robot.lift.setOn(liftOn);
+
+        if (lock) {
+            robot.lift.setPower(0.1);
+        }
+
+        if (subsystemDriver.right_bumper) {
+            robot.lift.setPower(0.85);
+        }
+
+        if (subsystemDriver.right_trigger != 0) {
+            robot.lift.setPower(-0.85);
+        }
+
+        if (subsystemDriver.left_trigger != 0) {
+            shift = true;
+        }
+        if (shift) {
+            if (subsystemDriver.dpad_down) {
+                // here is the macro code
+            }
+            if (subsystemDriver.dpad_up) {
+                //here is the macro code
+            }
+            if (subsystemDriver.dpad_right) {
+                //here is the macro code
+            }
+            if (subsystemDriver.dpad_left) {
+                //here is the macro code
+            }
+        }
+
+        if (subsystemDriver.left_bumper) {
+            clawOpen = true;
+        }
+        if (clawOpen) {
+            robot.armHead.setOpen(true);
+        }
+        if (!clawOpen) {
+            robot.armHead.setOpen(false);
+        }
+
+        if (subsystemDriver.x) {
+            robot.arm.setPower(1.0);
+        }
         if (subsystemDriver.y) {
-            this.liftOn = true;
+            robot.arm.setPower(-1.0);
         }
         if (subsystemDriver.a) {
-            this.liftOn = false;
-        }
-        robot.lift.setOn(liftOn);
-        if (liftOn) {
-            if (subsystemDriver.dpad_up) {
-                up = true;
-                telemetry.addData("going up", up);
-            }
-            if (subsystemDriver.dpad_down) {
-                up = false;
-                telemetry.addData("goiinig up", up);
-
-            }
+            // reset pos using encoders
         }
 
-        robot.lift.setGoingUp(up);
 /*
-
         if (subsystemDriver.dpad_up) {
             vPower += 0.1;
         }
@@ -110,11 +145,7 @@ public class SubsystemControl {
         robot.armHead.sethorizontalRotationPosition(hPower);
 
 
-        telemetry.addData("vpower", vPower);
-        telemetry.addData("hpower", hPower);
-
-
-        if (subsystemDriver.a) {
+        if (subsystemDriver.x) {
             clawOpen = true;
         }
         if (subsystemDriver.b) {
@@ -140,6 +171,8 @@ public class SubsystemControl {
         telemetry.addData("Lift Direction", robot.lift.goingUp);
         telemetry.addData("Lift power acctual", robot.lift.LiftTop.getPower());
         telemetry.addData("Lift power set", robot.lift.power);
+        telemetry.addData("vpower", vPower);
+        telemetry.addData("hpower", hPower);
     }
 
 

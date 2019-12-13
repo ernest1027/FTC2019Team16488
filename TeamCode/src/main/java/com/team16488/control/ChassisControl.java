@@ -32,6 +32,8 @@ public class ChassisControl {
 
     private Gamepad chassisControl, subsystemChassisControl;
 
+    private boolean crainmode;
+
 
     /**
      * This is the constructor for a chassis control this allows the opmode to run the code in the class
@@ -51,17 +53,15 @@ public class ChassisControl {
      * @param telemetry the telemetry for the class.
      */
     public void driverPad(Telemetry telemetry) {
+        robot.drive.setVelocity(chassisControl.left_stick_x, -chassisControl.left_stick_y, chassisControl.right_stick_x);
 
-
-        robot.drive.setVelocity(-chassisControl.left_stick_x, -chassisControl.left_stick_y, -chassisControl.right_stick_x);
-
-        if (chassisControl.left_stick_x == 0 && chassisControl.left_stick_y == 0 && chassisControl.right_stick_x == 0) {
-            double slowmode = 0.05;
-            robot.drive.setVelocity(-subsystemChassisControl.left_stick_x * slowmode, subsystemChassisControl.left_stick_y * slowmode, -subsystemChassisControl.right_stick_x * slowmode);
+        if (chassisControl.right_stick_x == 0 && chassisControl.left_stick_y == 0 && chassisControl.left_stick_x == 0) {
+            double slowmode = 0.5;
+            robot.drive.setVelocity(-subsystemChassisControl.left_stick_x * slowmode, subsystemChassisControl.right_stick_y * slowmode, -subsystemChassisControl.right_stick_x * slowmode);
         }
 
 
-        if (chassisControl.y) {
+        if (chassisControl.right_bumper) {
             On = true;
         }
         if (On) {
@@ -69,7 +69,7 @@ public class ChassisControl {
             telemetry.addData("state", "Intake on");
         }
 
-        if (chassisControl.a) {
+        if (chassisControl.right_trigger != 0) {
             On = false;
             reverse = false;
         }
@@ -95,8 +95,19 @@ public class ChassisControl {
         if (chassisControl.right_bumper) {
             robot.puller.setDown(false);
         }
-        if (chassisControl.start) {
+        if (chassisControl.b) {
             robot.alternateIntake.setDown(true);
+        }
+        if (chassisControl.y) {
+            robot.alternateIntake.setDown(false);
+        }
+        if (robot.alternateIntake.state) {
+            telemetry.addData("Alternate intake state", "No Block");
+
+        }
+        if (!robot.alternateIntake.state) {
+            telemetry.addData("Alternate intake state", "You Have Block");
+
         }
 
         telemetry.addData("Subsystem Status", "ON");
@@ -104,7 +115,7 @@ public class ChassisControl {
         telemetry.addData("Gamepad1 start", chassisControl.start);
         telemetry.addData("Gamepad1 right bumper", chassisControl.right_bumper);
         telemetry.addData("Gamepad1 left bumper", chassisControl.left_bumper);
-        telemetry.addData("Alternate intake state", robot.alternateIntake.blockDetection.getState());
+
 
     }
 }
