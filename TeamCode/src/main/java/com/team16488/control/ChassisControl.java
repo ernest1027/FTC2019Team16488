@@ -62,6 +62,7 @@ public class ChassisControl {
 
         if (chassisControl.right_trigger != 0) {
             On = false;
+            reverse = false;
 
         }
         if (chassisControl.right_bumper) {
@@ -83,12 +84,7 @@ public class ChassisControl {
             telemetry.addData("state", "Intake off");
         }
 
-
-
-        if (reverse) {
-            robot.intake.setReverse(true);
-            telemetry.addData("state", "Intake reverse");
-        }
+        robot.intake.setReverse(reverse);
 
         if (chassisControl.left_trigger != 0) {
             robot.puller.setDown(true);
@@ -113,6 +109,9 @@ public class ChassisControl {
         if (!robot.alternateIntake.state) {
             telemetry.addData("Alternate intake state", "You Have Block");
 
+        }
+        if (chassisControl.back) {
+            robot.alternateIntake.setPos(-0.5);
         }
 
         telemetry.addData("Subsystem Status", "ON");

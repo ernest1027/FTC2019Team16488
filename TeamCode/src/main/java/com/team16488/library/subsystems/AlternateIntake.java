@@ -10,6 +10,7 @@ public class AlternateIntake extends Subsystem {
     public boolean ON = false;
     Servo alternateIntake;
     private boolean down;
+    private double pos;
 
     public AlternateIntake(HardwareMap map) {
         blockDetection = map.digitalChannel.get("Block");
@@ -22,9 +23,9 @@ public class AlternateIntake extends Subsystem {
     public void update() {
         if (ON) {
             if (down) {
-                alternateIntake.setPosition(0);
+                pos = 0;
             } else {
-                alternateIntake.setPosition(0.5);
+                pos = 0.5;
             }
             if (blockDetection.getState()) {
                 state = true;
@@ -32,12 +33,18 @@ public class AlternateIntake extends Subsystem {
             if (!blockDetection.getState()) {
                 state = false;
             }
+            alternateIntake.setPosition(pos);
         } else {
             down = true;
+
         }
+
 
     }
 
+    public void setPos(double pos) {
+        pos = this.pos;
+    }
     public void setDown(boolean down) {
         this.down = down;
     }
