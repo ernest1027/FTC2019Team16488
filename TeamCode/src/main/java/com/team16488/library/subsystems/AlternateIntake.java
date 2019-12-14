@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 public class AlternateIntake extends Subsystem {
     public DigitalChannel blockDetection;
     public boolean state;
+    public boolean ON = false;
     Servo alternateIntake;
     private boolean down;
 
@@ -19,16 +20,20 @@ public class AlternateIntake extends Subsystem {
 
     @Override
     public void update() {
-        if (down) {
-            alternateIntake.setPosition(0);
+        if (ON) {
+            if (down) {
+                alternateIntake.setPosition(0);
+            } else {
+                alternateIntake.setPosition(0.5);
+            }
+            if (blockDetection.getState()) {
+                state = true;
+            }
+            if (!blockDetection.getState()) {
+                state = false;
+            }
         } else {
-            alternateIntake.setPosition(0.5);
-        }
-        if (blockDetection.getState()) {
-            state = true;
-        }
-        if (!blockDetection.getState()) {
-            state = false;
+            down = true;
         }
 
     }

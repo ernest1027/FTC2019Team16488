@@ -97,6 +97,9 @@ public class ChassisControl {
         if (chassisControl.left_bumper) {
             robot.puller.setDown(false);
         }
+        if (chassisControl.start) {
+            robot.alternateIntake.ON = true;
+        }
         if (chassisControl.b) {
             robot.alternateIntake.setDown(true);
         }
