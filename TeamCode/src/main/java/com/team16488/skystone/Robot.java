@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.util.ThreadPool;
 import com.team16488.library.subsystems.AlternateIntake;
 import com.team16488.library.subsystems.Arm;
 import com.team16488.library.subsystems.ArmHead;
+import com.team16488.library.subsystems.ColourSensor;
 import com.team16488.library.subsystems.Intake;
 import com.team16488.library.subsystems.Lift;
 import com.team16488.library.subsystems.MecanumDrive;
@@ -43,6 +44,8 @@ public class Robot {
     public Intake intake;
     /** Lift subsystem object*/
     public Lift lift;
+
+    public ColourSensor colourSensor;
 
     public AlternateIntake alternateIntake;
 
@@ -152,6 +155,13 @@ public class Robot {
             alternateIntake = new AlternateIntake(opMode.hardwareMap);
             subsystems.add(alternateIntake);
         } catch (IllegalArgumentException e) {
+        }
+
+        try {
+            colourSensor = new ColourSensor((opMode.hardwareMap));
+            subsystems.add(colourSensor);
+        } catch (IllegalArgumentException e) {
+
         }
 
         subsystemUpdateExecutor = ThreadPool.newSingleThreadExecutor("subsystem update");
