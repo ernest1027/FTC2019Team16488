@@ -42,9 +42,14 @@ public class AlternateIntake extends Subsystem {
 
     }
 
-    public void setPos(double pos) {
-        pos = this.pos;
+    public double getPos() {
+        return pos;
     }
+
+    public void setPos(double robopos) {
+        this.pos = robopos;
+    }
+
     public void setDown(boolean down) {
         this.down = down;
     }

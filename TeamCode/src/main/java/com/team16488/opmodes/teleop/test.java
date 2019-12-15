@@ -2,7 +2,6 @@ package com.team16488.opmodes.teleop;
 
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.qualcomm.robotcore.util.ElapsedTime;
 import com.team16488.control.ChassisControl;
 import com.team16488.control.SubsystemControl;
 import com.team16488.skystone.Robot;
@@ -19,7 +18,7 @@ import com.team16488.skystone.Robot;
  * <p>github: https://github.com/StrRamsRobotics/SkyStone/tree/Parham-Baghbanbashi</p>
  */
 @com.qualcomm.robotcore.eventloop.opmode.TeleOp
-public class TeleOp extends OpMode {
+public class test extends OpMode {
     /**
      * Robot object
      *
@@ -31,13 +30,13 @@ public class TeleOp extends OpMode {
      *
      * <p>See: {@link ChassisControl}</p>
      */
-    private ChassisControl chassisControl;
+
     /**
      * Subsystem control object
      *
      * <p>See: {@link SubsystemControl}</p>
      */
-    private SubsystemControl subsystemControl;
+
 
     /**
      * This is what will be run on initialization of the robot
@@ -45,13 +44,9 @@ public class TeleOp extends OpMode {
      * The main function of the method is to construct and create our objects
      * </p>
      */
-    private ElapsedTime runtime;
-    private double currentTime = runtime.seconds();
-
     public void init() {
         robot = new Robot(this, telemetry);
-        chassisControl = new ChassisControl(this, robot);
-        runtime = new ElapsedTime();
+
     }
 
 
@@ -64,7 +59,6 @@ public class TeleOp extends OpMode {
      */
     @Override
     public void start() {
-        runtime.reset();
         robot.start();
     }
 
@@ -78,13 +72,40 @@ public class TeleOp extends OpMode {
      */
     @Override
     public void loop() {
+        if (gamepad1.a) {
+            robot.alternateIntake.setPos(0);
 
-        chassisControl.driverPad(telemetry);
+
+        }
+        if (gamepad1.b) {
+            robot.alternateIntake.setPos(0.4);
+
+        }
+        if (gamepad1.x) {
+            robot.alternateIntake.setPos(0.5);
+        }
+        if (gamepad1.y) {
+            robot.alternateIntake.setPos(1.0);
+        }
+        if (gamepad1.left_bumper) {
+            robot.alternateIntake.setPos(-0.4);
+        }
+        if (gamepad1.right_bumper) {
+            robot.alternateIntake.setPos((-0.5));
+        }
+        if (gamepad1.start) {
+            robot.alternateIntake.setPos(-1.0);
+        }
+
+        telemetry.addData("pos", robot.alternateIntake.getPos());
+        telemetry.update();
+
     }
+
 
     /**
      * This method Runs once the Driver hits stop
-     *
+     * <p>
      * Stops the robot
      * <p>See: {@link Robot}</p>
      */

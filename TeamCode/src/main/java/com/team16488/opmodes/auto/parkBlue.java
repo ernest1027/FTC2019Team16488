@@ -146,7 +146,7 @@ public class parkBlue extends LinearOpMode {
 
             telemetry.update();
             if (!parked) {
-                robot.drive.setVelocity(0, 0.3, 0);
+                robot.drive.setVelocity(0, 0.2, 0);
                 robot.lift.setPower(-0.85);
             }
             if (sensorColor.blue() > 500) {

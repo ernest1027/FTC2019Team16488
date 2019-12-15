@@ -91,6 +91,20 @@ public class SubsystemControl {
         if (subsystemDriver.right_trigger != 0) {
             shift = true;
         }
+
+        if (subsystemDriver.dpad_down) {
+            // here is the macro code
+        }
+        if (subsystemDriver.dpad_up) {
+            //here is the macro code
+        }
+        if (subsystemDriver.dpad_right) {
+            //here is the macro code
+        }
+        if (subsystemDriver.dpad_left) {
+            //here is the macro code
+        }
+
         if (shift) {
             if (subsystemDriver.dpad_down) {
                 // here is the macro code

@@ -2,6 +2,10 @@ package com.team16488.control;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.Gamepad;
+import com.team16488.control.chassis.AlternateIntakeControl;
+import com.team16488.control.chassis.DrivetrianControl;
+import com.team16488.control.chassis.IntakeControl;
+import com.team16488.control.chassis.PullerControl;
 import com.team16488.skystone.Robot;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
@@ -34,17 +38,29 @@ public class ChassisControl {
 
     private boolean crainmode;
 
+    private AlternateIntakeControl alternateIntakeControl;
+
+    private DrivetrianControl drivetrianControl;
+
+    private IntakeControl intakeControl;
+
+    private PullerControl pullerControl;
 
     /**
      * This is the constructor for a chassis control this allows the opmode to run the code in the class
      * @param opMode The opmode that this class is being used in
      * @param oprobot   The robot object in the acctual OpMode that it
-     *                  is being used in.
+     *                  is being used ins.
      */
     public ChassisControl(OpMode opMode, Robot oprobot) {
         robot = oprobot;
         chassisControl = opMode.gamepad1;
         subsystemChassisControl = opMode.gamepad2;
+        alternateIntakeControl = new AlternateIntakeControl(opMode, robot);
+        drivetrianControl = new DrivetrianControl(opMode, robot);
+        intakeControl = new IntakeControl(opMode, robot);
+        pullerControl = new PullerControl(opMode, robot);
+
     }
 
     /**
@@ -53,6 +69,12 @@ public class ChassisControl {
      * @param telemetry the telemetry for the class.
      */
     public void driverPad(Telemetry telemetry) {
+        alternateIntakeControl.alternateIntakeControl();
+        drivetrianControl.driveControl();
+        intakeControl.intakeCOntrol();
+        pullerControl.pullerControl();
+
+        /*
         robot.drive.setVelocity(chassisControl.left_stick_x, -chassisControl.left_stick_y, chassisControl.right_stick_x);
 
         if (chassisControl.right_stick_x == 0 && chassisControl.left_stick_y == 0 && chassisControl.left_stick_x == 0) {
@@ -60,7 +82,7 @@ public class ChassisControl {
             robot.drive.setVelocity(-subsystemChassisControl.left_stick_x * slowmode, -subsystemChassisControl.right_stick_y * slowmode, -subsystemChassisControl.right_stick_x * slowmode);
         }
 
-        if (chassisControl.right_trigger != 0) {
+        if (chassisControl.x) {
             On = false;
             reverse = false;
 
@@ -69,12 +91,14 @@ public class ChassisControl {
             On = true;
 
         }
-        if (chassisControl.x) {
-            reverse = true;
-        }
-        if (chassisControl.a) {
+        if (chassisControl.right_trigger != 0) {
+            On = true;
             reverse = false;
         }
+        if (chassisControl.right_bumper) {
+            reverse = true;
+        }
+
         if (On) {
             robot.intake.setOn(true);
             telemetry.addData("state", "Intake on");
@@ -93,6 +117,11 @@ public class ChassisControl {
         if (chassisControl.left_bumper) {
             robot.puller.setDown(false);
         }
+
+
+        if (chassisControl.dpad_up) {
+            robot.alternateIntake.setPos(-0.5);
+        }
         if (chassisControl.start) {
             robot.alternateIntake.ON = true;
         }
@@ -110,9 +139,7 @@ public class ChassisControl {
             telemetry.addData("Alternate intake state", "You Have Block");
 
         }
-        if (chassisControl.back) {
-            robot.alternateIntake.setPos(-0.5);
-        }
+*/
 
         telemetry.addData("Subsystem Status", "ON");
         telemetry.addData("----------------------------------------------", " ");
