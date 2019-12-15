@@ -2,6 +2,8 @@ package com.team16488.control;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.Gamepad;
+import com.team16488.control.subsystems.ArmControl;
+import com.team16488.control.subsystems.LiftControl;
 import com.team16488.skystone.Robot;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
@@ -22,38 +24,13 @@ public class SubsystemControl {
      * Robot Class Object
      */
     private Robot robot;
-    /**
-     * Sets the Virtical rotation power
-     *
-     * @see com.team16488.library.subsystems.ArmHead
-     */
-    private double vPower;
-    /**
-     * Sets the Horizontal rotation power
-     *
-     * @see com.team16488.library.subsystems.ArmHead
-     */
-    private double hPower;
-    /**
-     * Sets the direction of the lift
-     *
-     * @see com.team16488.library.subsystems.Lift
-     */
-    private boolean up = false;
-    /**
-     * Sets the position of the claw
-     *
-     * @see com.team16488.library.subsystems.ArmHead
-     */
-    private boolean clawOpen = true;
 
-    private boolean liftOn = true;
-
-    private boolean lock = true;
-
-    private boolean shift;
 
     private Gamepad subsystemDriver;
+
+    private LiftControl liftControl;
+
+    private ArmControl armControl;
 
     /**
      * Constructs the subsystemControl class in the main OpMode
@@ -65,6 +42,8 @@ public class SubsystemControl {
     public SubsystemControl(OpMode opMode, Robot oprobot) {
         robot = oprobot;
         subsystemDriver = opMode.gamepad2;
+        liftControl = new LiftControl(opMode, robot);
+        armControl = new ArmControl(opMode, robot);
     }
 
     /**
@@ -73,7 +52,11 @@ public class SubsystemControl {
      * @param telemetry OpMode telemetry
      */
     public void subsystemDriver(Telemetry telemetry) {
+        liftControl.liftControl();
+        armControl.armControl();
 
+
+/*
         robot.lift.setOn(liftOn);
 
         if (lock) {
@@ -140,7 +123,7 @@ public class SubsystemControl {
             // reset pos using encoders
         }
 
-/*
+
         if (subsystemDriver.dpad_up) {
             vPower += 0.1;
         }
@@ -185,8 +168,7 @@ public class SubsystemControl {
         telemetry.addData("Lift Direction", robot.lift.goingUp);
         telemetry.addData("Lift power acctual", robot.lift.LiftTop.getPower());
         telemetry.addData("Lift power set", robot.lift.power);
-        telemetry.addData("vpower", vPower);
-        telemetry.addData("hpower", hPower);
+
     }
 
 

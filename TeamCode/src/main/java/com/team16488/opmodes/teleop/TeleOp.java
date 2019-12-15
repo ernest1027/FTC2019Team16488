@@ -51,6 +51,7 @@ public class TeleOp extends OpMode {
     public void init() {
         robot = new Robot(this, telemetry);
         chassisControl = new ChassisControl(this, robot);
+        subsystemControl = new SubsystemControl(this, robot);
         runtime = new ElapsedTime();
     }
 
@@ -80,6 +81,7 @@ public class TeleOp extends OpMode {
     public void loop() {
 
         chassisControl.driverPad(telemetry);
+        subsystemControl.subsystemDriver(telemetry);
     }
 
     /**
