@@ -74,7 +74,14 @@ public class ChassisControl {
         intakeControl.intakeCOntrol();
         pullerControl.pullerControl();
 
-        /*
+
+        telemetry.addData("Subsystem Status", "ON");
+        telemetry.addData("----------------------------------------------", " ");
+        telemetry.addData("Gamepad1 start", chassisControl.start);
+        telemetry.addData("Gamepad1 right bumper", chassisControl.right_bumper);
+        telemetry.addData("Gamepad1 left bumper", chassisControl.left_bumper);
+
+ /*
         robot.drive.setVelocity(chassisControl.left_stick_x, -chassisControl.left_stick_y, chassisControl.right_stick_x);
 
         if (chassisControl.right_stick_x == 0 && chassisControl.left_stick_y == 0 && chassisControl.left_stick_x == 0) {
@@ -140,13 +147,5 @@ public class ChassisControl {
 
         }
 */
-
-        telemetry.addData("Subsystem Status", "ON");
-        telemetry.addData("----------------------------------------------", " ");
-        telemetry.addData("Gamepad1 start", chassisControl.start);
-        telemetry.addData("Gamepad1 right bumper", chassisControl.right_bumper);
-        telemetry.addData("Gamepad1 left bumper", chassisControl.left_bumper);
-
-
     }
 }
