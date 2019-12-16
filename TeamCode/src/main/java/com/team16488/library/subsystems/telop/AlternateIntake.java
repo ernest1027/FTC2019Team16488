@@ -18,7 +18,7 @@ public class AlternateIntake extends Subsystem {
     public DigitalChannel blockDetection;
     public boolean state;
     public boolean ON = false;
-    Servo alternateIntake;
+    private Servo alternateIntake;
     private boolean down;
     private double pos;
 

@@ -25,8 +25,6 @@ public class Lift extends Subsystem {
     public DcMotor LiftTop, LiftBottom;
 
 
-
-
     /**
      * This is the constructor for the subsystem
      *

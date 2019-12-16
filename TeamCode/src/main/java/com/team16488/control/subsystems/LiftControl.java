@@ -45,6 +45,7 @@ public class LiftControl {
         this.robot = robot;
         subsystemDriver = opMode.gamepad2;
         this.currentTime = currentTime;
+        stackBlocks = new StackBlocks(robot, tickCount);
     }
 
     /**
@@ -68,15 +69,18 @@ public class LiftControl {
 
         if (subsystemDriver.dpad_down) {
             // here is the macro code 3
+            stackBlocks.stackThreeBlockHigh();
         }
         if (subsystemDriver.dpad_up) {
             //here is the macro code 1
+            stackBlocks.stackOneBlockHigh();
         }
         if (subsystemDriver.dpad_right) {
             //here is the macro code 4
         }
         if (subsystemDriver.dpad_left) {
             //here is the macro code 2
+            stackBlocks.stackTwoBlockHigh();
         }
 
         if (shift) {

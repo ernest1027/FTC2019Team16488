@@ -33,5 +33,8 @@ public class StackBlocks {
         robot.lift.setPosition(tickCount * 2);
     }
 
+    public void stackThreeBlockHigh() {
+        robot.lift.setPosition(tickCount * 3);
+    }
 
 }
