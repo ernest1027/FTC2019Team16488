@@ -2,6 +2,7 @@ package com.team16488.control.subsystems;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.Gamepad;
+import com.team16488.library.subsystems.telop.ArmHead;
 import com.team16488.skystone.Robot;
 
 public class ArmControl {
@@ -12,19 +13,19 @@ public class ArmControl {
     /**
      * Sets the Virtical rotation power
      *
-     * @see com.team16488.library.subsystems.ArmHead
+     * @see ArmHead
      */
     private double vPower;
     /**
      * Sets the Horizontal rotation power
      *
-     * @see com.team16488.library.subsystems.ArmHead
+     * @see ArmHead
      */
     private double hPower;
     /**
      * Sets the position of the claw
      *
-     * @see com.team16488.library.subsystems.ArmHead
+     * @see ArmHead
      */
     private boolean clawOpen = true;
 

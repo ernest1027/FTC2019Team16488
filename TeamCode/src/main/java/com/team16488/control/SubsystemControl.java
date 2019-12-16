@@ -28,9 +28,11 @@ public class SubsystemControl {
 
     private Gamepad subsystemDriver;
 
-    private LiftControl liftControl;
+    private OpMode opMode;
 
+    private LiftControl liftControl;
     private ArmControl armControl;
+    private double currentTime;
 
     /**
      * Constructs the subsystemControl class in the main OpMode
@@ -39,21 +41,27 @@ public class SubsystemControl {
      * @param oprobot   The robot object in the acctual OpMode that it
      *                  is being used in.
      */
-    public SubsystemControl(OpMode opMode, Robot oprobot) {
+    public SubsystemControl(OpMode opMode, Robot oprobot, double currentTime) {
         robot = oprobot;
         subsystemDriver = opMode.gamepad2;
-        liftControl = new LiftControl(opMode, robot);
-        armControl = new ArmControl(opMode, robot);
+        this.opMode = opMode;
+        this.currentTime = currentTime;
+
     }
+
 
     /**
      * This is the method that updates the Subsystems based on driver input
      *
      * @param telemetry OpMode telemetry
      */
-    public void subsystemDriver(Telemetry telemetry) {
+    public void subsystemDriverPad(Telemetry telemetry) {
+        liftControl = new LiftControl(this.opMode, robot, currentTime);
+        armControl = new ArmControl(this.opMode, robot);
+
         liftControl.liftControl();
         armControl.armControl();
+
 
 
 /*

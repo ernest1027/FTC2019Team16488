@@ -1,7 +1,8 @@
-package com.team16488.library.subsystems;
+package com.team16488.library.subsystems.telop;
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.team16488.library.subsystems.Subsystem;
 
 
 /**

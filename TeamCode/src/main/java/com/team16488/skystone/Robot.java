@@ -2,15 +2,15 @@ package com.team16488.skystone;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.util.ThreadPool;
-import com.team16488.library.subsystems.AlternateIntake;
-import com.team16488.library.subsystems.Arm;
-import com.team16488.library.subsystems.ArmHead;
-import com.team16488.library.subsystems.ColourSensor;
-import com.team16488.library.subsystems.Intake;
-import com.team16488.library.subsystems.Lift;
-import com.team16488.library.subsystems.MecanumDrive;
-import com.team16488.library.subsystems.Puller;
 import com.team16488.library.subsystems.Subsystem;
+import com.team16488.library.subsystems.aoutonomus.ColourSensor;
+import com.team16488.library.subsystems.telop.AlternateIntake;
+import com.team16488.library.subsystems.telop.Arm;
+import com.team16488.library.subsystems.telop.ArmHead;
+import com.team16488.library.subsystems.telop.Intake;
+import com.team16488.library.subsystems.telop.Lift;
+import com.team16488.library.subsystems.telop.MecanumDrive;
+import com.team16488.library.subsystems.telop.Puller;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 

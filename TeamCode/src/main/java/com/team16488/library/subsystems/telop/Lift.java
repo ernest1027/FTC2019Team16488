@@ -1,8 +1,9 @@
-package com.team16488.library.subsystems;
+package com.team16488.library.subsystems.telop;
 
 
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.team16488.library.subsystems.Subsystem;
 
 /**
  * This class controls the Double Reverse 4 bar

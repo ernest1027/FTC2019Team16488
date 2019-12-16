@@ -3,6 +3,7 @@ package com.team16488.opmodes.teleop;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
+import com.team16488.automated_proccess.ArmRealese;
 import com.team16488.control.ChassisControl;
 import com.team16488.control.SubsystemControl;
 import com.team16488.skystone.Robot;
@@ -18,7 +19,7 @@ import com.team16488.skystone.Robot;
  * @author Ernest Wong
  * <p>github: https://github.com/StrRamsRobotics/SkyStone/tree/Parham-Baghbanbashi</p>
  */
-@com.qualcomm.robotcore.eventloop.opmode.TeleOp
+@com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "TeleOp Main", group = "telop")
 public class TeleOp extends OpMode {
     /**
      * Robot object
@@ -47,12 +48,15 @@ public class TeleOp extends OpMode {
      */
     private ElapsedTime runtime;
     private double currentTime = runtime.seconds();
+    private ArmRealese armRealese;
 
     public void init() {
         robot = new Robot(this, telemetry);
         chassisControl = new ChassisControl(this, robot);
-        subsystemControl = new SubsystemControl(this, robot);
+        subsystemControl = new SubsystemControl(this, robot, currentTime);
         runtime = new ElapsedTime();
+        armRealese = new ArmRealese(robot);
+
     }
 
 
@@ -79,9 +83,10 @@ public class TeleOp extends OpMode {
      */
     @Override
     public void loop() {
-
+        armRealese.procces(currentTime);
         chassisControl.driverPad(telemetry);
-        subsystemControl.subsystemDriver(telemetry);
+        subsystemControl.subsystemDriverPad(telemetry);
+
     }
 
     /**

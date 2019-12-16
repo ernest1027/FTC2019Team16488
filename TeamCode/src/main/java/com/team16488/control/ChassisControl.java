@@ -34,7 +34,7 @@ public class ChassisControl {
     /** this turns the intake on */
     private boolean On = false;
 
-    private Gamepad chassisControl, subsystemChassisControl;
+    private Gamepad chassisControl;
 
     private boolean crainmode;
 
@@ -46,6 +46,9 @@ public class ChassisControl {
 
     private PullerControl pullerControl;
 
+    private OpMode opMode;
+
+
     /**
      * This is the constructor for a chassis control this allows the opmode to run the code in the class
      * @param opMode The opmode that this class is being used in
@@ -55,12 +58,7 @@ public class ChassisControl {
     public ChassisControl(OpMode opMode, Robot oprobot) {
         robot = oprobot;
         chassisControl = opMode.gamepad1;
-        subsystemChassisControl = opMode.gamepad2;
-        alternateIntakeControl = new AlternateIntakeControl(opMode, robot);
-        drivetrianControl = new DrivetrianControl(opMode, robot);
-        intakeControl = new IntakeControl(opMode, robot);
-        pullerControl = new PullerControl(opMode, robot);
-
+        this.opMode = opMode;
     }
 
     /**
@@ -69,6 +67,11 @@ public class ChassisControl {
      * @param telemetry the telemetry for the class.
      */
     public void driverPad(Telemetry telemetry) {
+        alternateIntakeControl = new AlternateIntakeControl(opMode, robot);
+        drivetrianControl = new DrivetrianControl(opMode, robot);
+        intakeControl = new IntakeControl(opMode, robot);
+        pullerControl = new PullerControl(opMode, robot);
+
         alternateIntakeControl.alternateIntakeControl();
         drivetrianControl.driveControl();
         intakeControl.intakeCOntrol();
