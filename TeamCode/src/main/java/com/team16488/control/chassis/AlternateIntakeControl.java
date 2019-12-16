@@ -43,6 +43,9 @@ public class AlternateIntakeControl {
         if (chassisControl.start) {
             robot.alternateIntake.ON = true;
         }
+        if (chassisControl.back) {
+            robot.alternateIntake.setPos(1.00);
+        }
         if (chassisControl.b) {
             robot.alternateIntake.setDown(true);
         }

@@ -31,6 +31,9 @@ public class LiftControl {
 
     private double currentTime;
 
+    private double tickCount;
+
+
     /**
      * This is the construtor for the class
      *
@@ -49,23 +52,19 @@ public class LiftControl {
      */
     public void liftControl() {
 
-        robot.lift.setOn(liftOn);
-
-        if (lock) {
-            robot.lift.setPower(0.1);
-        }
-
         if (subsystemDriver.left_bumper) {
-            robot.lift.setPower(0.85);
+            tickCount += 1;
         }
 
         if (subsystemDriver.left_trigger != 0) {
-            robot.lift.setPower(-0.85);
+            tickCount -= 1;
         }
 
         if (subsystemDriver.right_trigger != 0) {
             shift = true;
         }
+
+        robot.lift.setPosition(tickCount);
 
         if (subsystemDriver.dpad_down) {
             // here is the macro code 3

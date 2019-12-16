@@ -1,7 +1,7 @@
 package com.team16488.library.subsystems.telop;
 
 
-import com.qualcomm.robotcore.hardware.CRServo;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.team16488.library.subsystems.Subsystem;
 
@@ -13,21 +13,17 @@ import com.team16488.library.subsystems.Subsystem;
  * <p>github: https://github.com/StrRamsRobotics/SkyStone/tree/Parham-Baghbanbashi</p>
  */
 public class Lift extends Subsystem {
-    /**
-     * Sets the direction of the double reverse 4 bar
-     */
-    public boolean goingUp;
+
     /**
      * Sets the speed of the Double Reverse 4 Bar
      */
-    public double power = 0.85;
+    public double position = 0;
 
     /**
      * The servo groups that will be Controlled
      */
-    public CRServo LiftTop, LiftBottom;
+    public DcMotor LiftTop, LiftBottom;
 
-    public boolean On = false;
 
 
 
@@ -37,8 +33,10 @@ public class Lift extends Subsystem {
      * @param map This is the hardware map of the actual OpMode for the Lift Class
      */
     public Lift(HardwareMap map) {
-        LiftTop = map.crservo.get("LTOP");
-        LiftBottom = map.crservo.get("LBOTTOM");
+        LiftTop = map.dcMotor.get("LTOP");
+        LiftBottom = map.dcMotor.get("LBOTTOM");
+        LiftTop.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        LiftBottom.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
     }
 
@@ -50,42 +48,22 @@ public class Lift extends Subsystem {
      */
     @Override
     public void update() {
-        if (On) {
-            LiftTop.setPower(power);
-            LiftBottom.setPower(-power);
-        }
-        if (!On) {
-            LiftTop.setPower(0);
-            LiftBottom.setPower(0);
-        }
+        LiftTop.setTargetPosition((int) position);
+        LiftBottom.setTargetPosition((int) position);
+
+        LiftBottom.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        LiftTop.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
     }
 
     /**
      * Sets the speed of the lift
      *
-     * @param power sets the speed of the servos
+     * @param position sets the position of the lift
      */
-    public void setPower(double power) {
-        this.power = power;
+    public void setPosition(double position) {
+        this.position = (int) position;
     }
 
-    /**
-     * Sets the direction of the lift(UP or DOWN)
-     *
-     * @param goingUp sets the direction of the Lift
-     */
-    public void setGoingUp(boolean goingUp) {
-        this.goingUp = goingUp;
-    }
-
-    /**
-     * This turns the lif on
-     *
-     * @param on state ON or OFF
-     */
-    public void setOn(boolean on) {
-        this.On = on;
-    }
 
 }

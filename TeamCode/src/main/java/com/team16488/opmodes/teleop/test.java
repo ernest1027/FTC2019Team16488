@@ -72,6 +72,7 @@ public class test extends OpMode {
      */
     @Override
     public void loop() {
+        robot.alternateIntake.ON = true;
         if (gamepad1.a) {
             robot.alternateIntake.setPos(0);
 

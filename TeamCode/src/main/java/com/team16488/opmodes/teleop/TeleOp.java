@@ -46,16 +46,19 @@ public class TeleOp extends OpMode {
      * The main function of the method is to construct and create our objects
      * </p>
      */
-    private ElapsedTime runtime;
+    private ElapsedTime runtime = new ElapsedTime();
+    private ElapsedTime gameTime = new ElapsedTime();
+
     private double currentTime = runtime.seconds();
+    private double timeFromStart = gameTime.seconds();
     private ArmRealese armRealese;
 
     public void init() {
         robot = new Robot(this, telemetry);
         chassisControl = new ChassisControl(this, robot);
-        subsystemControl = new SubsystemControl(this, robot, currentTime);
-        runtime = new ElapsedTime();
+        //subsystemControl = new SubsystemControl(this, robot, currentTime);
         armRealese = new ArmRealese(robot);
+
 
     }
 
@@ -70,6 +73,7 @@ public class TeleOp extends OpMode {
     @Override
     public void start() {
         runtime.reset();
+        gameTime.reset();
         robot.start();
     }
 
@@ -83,9 +87,12 @@ public class TeleOp extends OpMode {
      */
     @Override
     public void loop() {
-        armRealese.procces(currentTime);
+        while (currentTime < 10) {
+            armRealese.procces(currentTime);
+        }
+        //armRealese.procces(currentTime);
         chassisControl.driverPad(telemetry);
-        subsystemControl.subsystemDriverPad(telemetry);
+        //subsystemControl.subsystemDriverPad(telemetry);
 
     }
 

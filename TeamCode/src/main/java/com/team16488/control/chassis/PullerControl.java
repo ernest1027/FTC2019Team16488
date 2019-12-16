@@ -26,11 +26,11 @@ public class PullerControl {
     public void pullerControl() {
 
         if (chassisControl.left_trigger != 0) {
-            robot.puller.setDown(true);
+            robot.puller.setDown(false);
         }
 
         if (chassisControl.left_bumper) {
-            robot.puller.setDown(false);
+            robot.puller.setDown(true);
         }
 
     }

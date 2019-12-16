@@ -34,11 +34,14 @@ public class DrivetrianControl {
      * The method that deals with the drive control
      */
     public void driveControl() {
+
         robot.drive.setVelocity(chassisControl.left_stick_x, -chassisControl.left_stick_y, chassisControl.right_stick_x);
 
         if (chassisControl.right_stick_x == 0 && chassisControl.left_stick_y == 0 && chassisControl.left_stick_x == 0) {
             double slowmode = 0.5;
             robot.drive.setVelocity(-subsystemChassisControl.left_stick_x * slowmode, -subsystemChassisControl.right_stick_y * slowmode, -subsystemChassisControl.right_stick_x * slowmode);
         }
+
+
     }
 }

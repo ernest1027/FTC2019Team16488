@@ -10,6 +10,7 @@ import com.team16488.library.subsystems.telop.ArmHead;
 import com.team16488.library.subsystems.telop.Intake;
 import com.team16488.library.subsystems.telop.Lift;
 import com.team16488.library.subsystems.telop.MecanumDrive;
+import com.team16488.library.subsystems.telop.MecanumDrive2;
 import com.team16488.library.subsystems.telop.Puller;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
@@ -44,6 +45,8 @@ public class Robot {
     public Intake intake;
     /** Lift subsystem object*/
     public Lift lift;
+
+    public MecanumDrive2 drive2;
 
     public ColourSensor colourSensor;
 
@@ -81,7 +84,7 @@ public class Robot {
 
                     } catch (Throwable t) {
 
-                        this.telemetry.addData("Exception running thread 1", "");
+                        this.telemetry.addData("Exception running thread 1", t);
                         this.telemetry.update();
 
                     }
@@ -111,6 +114,7 @@ public class Robot {
         this.telemetry = telemetry;
 
         subsystems = new ArrayList<>();
+
 
         try{
             drive = new MecanumDrive(opMode.hardwareMap);
@@ -157,13 +161,14 @@ public class Robot {
         } catch (IllegalArgumentException e) {
         }
 
+        /*
         try {
             colourSensor = new ColourSensor((opMode.hardwareMap));
             subsystems.add(colourSensor);
         } catch (IllegalArgumentException e) {
 
         }
-
+*/
         subsystemUpdateExecutor = ThreadPool.newSingleThreadExecutor("subsystem update");
 
     }

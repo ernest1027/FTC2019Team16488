@@ -14,25 +14,24 @@ import com.team16488.skystone.Robot;
 public class StackBlocks {
     public Robot robot;
 
+    public double tickCount;
     /**
      * This is the constructor for the class
      *
      * @param oprobot The robot Object for the OpMode
      */
-    public StackBlocks(Robot oprobot) {
+    public StackBlocks(Robot oprobot, double tickCount) {
         robot = oprobot;
+        this.tickCount = tickCount;
     }
 
-    /**
-     * This is the Method that will determine the motor movement for the
-     * hight specified
-     * @param curentTime The current Time
-     * @param hight How meany blocks high that the driver wants to stack
-     */
-    public void stackOneBlockHigh(double curentTime, double hight) {
-        if (curentTime < 1) {
-            robot.lift.setPower(0.85);
-        }
+    public void stackOneBlockHigh() {
+        robot.lift.setPosition(tickCount * 1);
     }
+
+    public void stackTwoBlockHigh() {
+        robot.lift.setPosition(tickCount * 2);
+    }
+
 
 }

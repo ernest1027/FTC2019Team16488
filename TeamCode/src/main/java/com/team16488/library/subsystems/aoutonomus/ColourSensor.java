@@ -1,31 +1,25 @@
 package com.team16488.library.subsystems.aoutonomus;
 
-import android.graphics.Color;
-
-import com.qualcomm.robotcore.hardware.ColorSensor;
-import com.qualcomm.robotcore.hardware.DistanceSensor;
-import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.team16488.library.subsystems.Subsystem;
 
-import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
-
 public class ColourSensor extends Subsystem {
-    final double SCALE_FACTOR = 255;
-    public float[] hsvValues;
-    private ColorSensor sensorColor;
-    private DistanceSensor sensorDistance;
+    /*
+        final double SCALE_FACTOR = 255;
+        public float[] hsvValues;
+        private ColorSensor sensorColor;
+        private DistanceSensor sensorDistance;
 
 
-    public ColourSensor(HardwareMap map) {
-        sensorColor = map.get(ColorSensor.class, "colour");
-        sensorDistance = map.get(DistanceSensor.class, "colour");
-        float[] hsvValues = {0F, 0F, 0F};
-        final float[] values = hsvValues;
+        public ColourSensor(HardwareMap map) {
+            sensorColor = map.get(ColorSensor.class, "colour");
+            sensorDistance = map.get(DistanceSensor.class, "colour");
+            float[] hsvValues = {0F, 0F, 0F};
+            final float[] values = hsvValues;
 
-    }
-
+        }
+    */
     public void update() {
-        // convert the RGB values to HSV values.
+  /*      // convert the RGB values to HSV values.
         // multiply by the SCALE_FACTOR.
         // then cast it back to int (SCALE_FACTOR is a double)
         Color.RGBToHSV((int) (sensorColor.red() * SCALE_FACTOR),
@@ -33,9 +27,9 @@ public class ColourSensor extends Subsystem {
                 (int) (sensorColor.blue() * SCALE_FACTOR),
                 hsvValues);
 
-
+*/
     }
-
+/*
     public double[] getColour() {
         double[] colours = new double[6];
         colours[0] = sensorDistance.getDistance(DistanceUnit.CM);
@@ -46,5 +40,5 @@ public class ColourSensor extends Subsystem {
         colours[5] = hsvValues[0];
         return colours;
     }
-
+*/
 }

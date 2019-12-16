@@ -172,10 +172,7 @@ public class SubsystemControl {
         telemetry.addData("Gamepad2 start", subsystemDriver.start);
         telemetry.addData("Gamepad2 right bumper", subsystemDriver.right_bumper);
         telemetry.addData("Gamepad 2 left bumper", subsystemDriver.left_bumper);
-        telemetry.addData("Lift State", robot.lift.On);
-        telemetry.addData("Lift Direction", robot.lift.goingUp);
-        telemetry.addData("Lift power acctual", robot.lift.LiftTop.getPower());
-        telemetry.addData("Lift power set", robot.lift.power);
+
 
     }
 
