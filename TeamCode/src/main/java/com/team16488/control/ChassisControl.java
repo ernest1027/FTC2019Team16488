@@ -59,6 +59,10 @@ public class ChassisControl {
         robot = oprobot;
         chassisControl = opMode.gamepad1;
         this.opMode = opMode;
+        alternateIntakeControl = new AlternateIntakeControl(opMode, robot);
+        drivetrianControl = new DrivetrianControl(opMode, robot);
+        intakeControl = new IntakeControl(opMode, robot);
+        pullerControl = new PullerControl(opMode, robot);
     }
 
     /**
@@ -67,14 +71,9 @@ public class ChassisControl {
      * @param telemetry the telemetry for the class.
      */
     public void driverPad(Telemetry telemetry) {
-        alternateIntakeControl = new AlternateIntakeControl(opMode, robot);
-        drivetrianControl = new DrivetrianControl(opMode, robot);
-        intakeControl = new IntakeControl(opMode, robot);
-        pullerControl = new PullerControl(opMode, robot);
-
         alternateIntakeControl.alternateIntakeControl();
         drivetrianControl.driveControl();
-        intakeControl.intakeCOntrol();
+        intakeControl.intakeControl();
         pullerControl.pullerControl();
 
 

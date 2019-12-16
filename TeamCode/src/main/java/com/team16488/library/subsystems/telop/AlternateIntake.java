@@ -5,6 +5,15 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.team16488.library.subsystems.Subsystem;
 
+/**
+ * This is the Alternate Intake, It deals with the hook on the side that we use to
+ * move blocks when the Intake is unavailable
+ *
+ * @author Parham Baghbanbashi: parhambagh@gmail.com
+ * @author Ernest Wong
+ *
+ * <p>github: https://github.com/StrRamsRobotics/SkyStone/tree/Parham-Baghbanbashi</p>
+ */
 public class AlternateIntake extends Subsystem {
     public DigitalChannel blockDetection;
     public boolean state;

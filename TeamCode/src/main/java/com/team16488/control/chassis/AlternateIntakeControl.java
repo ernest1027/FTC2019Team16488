@@ -6,7 +6,14 @@ import com.team16488.skystone.Robot;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
-
+/**
+ * This Class deals with the control of the alternate Intake
+ *
+ * @author Parham Baghbanbashi: parhambagh@gmail.com
+ * @author Ernest Wong
+ *
+ * <p>github: https://github.com/StrRamsRobotics/SkyStone/tree/Parham-Baghbanbashi</p>
+ */
 public class AlternateIntakeControl {
     private Robot robot;
 
@@ -14,12 +21,21 @@ public class AlternateIntakeControl {
 
     private Telemetry telemetry;
 
+    /**
+     * The class constructor
+     *
+     * @param opMode  this is the OpMode that it is being used in
+     * @param oprobot The Robot object of the OpMode
+     */
     public AlternateIntakeControl(OpMode opMode, Robot oprobot) {
         robot = oprobot;
         chassisControl = opMode.gamepad1;
         telemetry = opMode.telemetry;
     }
 
+    /**
+     * This is the Method that deals with the control of the alternate intake
+     */
     public void alternateIntakeControl() {
         if (chassisControl.dpad_up) {
             robot.alternateIntake.setPos(-0.5);

@@ -5,7 +5,16 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 import com.team16488.automated_proccess.StackBlocks;
 import com.team16488.skystone.Robot;
 
-
+/**
+ * This class deals with the control of the lift movement.
+ * It als contains the Macros for the lift hight
+ * {@link StackBlocks}
+ *
+ * @author Parham Baghbanbashi: parhambagh@gmail.com
+ * @author Ernest Wong
+ *
+ * <p>github: https://github.com/StrRamsRobotics/SkyStone/tree/Parham-Baghbanbashi</p>
+ */
 public class LiftControl {
 
     private Robot robot;
@@ -22,12 +31,22 @@ public class LiftControl {
 
     private double currentTime;
 
+    /**
+     * This is the construtor for the class
+     *
+     * @param opMode      The OpMode that it is being used in
+     * @param robot       The robot object
+     * @param currentTime the current time
+     */
     public LiftControl(OpMode opMode, Robot robot, double currentTime) {
         this.robot = robot;
         subsystemDriver = opMode.gamepad2;
         this.currentTime = currentTime;
     }
 
+    /**
+     * The main method that deals with the control of the lift
+     */
     public void liftControl() {
 
         robot.lift.setOn(liftOn);

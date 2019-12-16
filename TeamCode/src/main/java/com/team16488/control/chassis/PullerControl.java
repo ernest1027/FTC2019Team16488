@@ -4,6 +4,14 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.team16488.skystone.Robot;
 
+/**
+ * This is the class that deals with the puller control
+ *
+ * @author Parham Baghbanbashi: parhambagh@gmail.com
+ * @author Ernest Wong
+ *
+ * <p>github: https://github.com/StrRamsRobotics/SkyStone/tree/Parham-Baghbanbashi</p>
+ */
 public class PullerControl {
     private Robot robot;
 

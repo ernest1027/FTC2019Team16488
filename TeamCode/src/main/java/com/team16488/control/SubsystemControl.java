@@ -46,6 +46,8 @@ public class SubsystemControl {
         subsystemDriver = opMode.gamepad2;
         this.opMode = opMode;
         this.currentTime = currentTime;
+        liftControl = new LiftControl(this.opMode, robot, currentTime);
+        armControl = new ArmControl(this.opMode, robot);
 
     }
 
@@ -56,8 +58,6 @@ public class SubsystemControl {
      * @param telemetry OpMode telemetry
      */
     public void subsystemDriverPad(Telemetry telemetry) {
-        liftControl = new LiftControl(this.opMode, robot, currentTime);
-        armControl = new ArmControl(this.opMode, robot);
 
         liftControl.liftControl();
         armControl.armControl();

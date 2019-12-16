@@ -5,6 +5,15 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 import com.team16488.library.subsystems.telop.ArmHead;
 import com.team16488.skystone.Robot;
 
+/**
+ * This class deals with the control of the Arm/Claw part of the
+ * Robot
+ *
+ * @author Parham Baghbanbashi: parhambagh@gmail.com
+ * @author Ernest Wong
+ *
+ * <p>github: https://github.com/StrRamsRobotics/SkyStone/tree/Parham-Baghbanbashi</p>
+ */
 public class ArmControl {
     /**
      * Robot Class Object
@@ -31,12 +40,22 @@ public class ArmControl {
 
     private Gamepad subsystemDriver;
 
+    /**
+     * This is the constructor for the class
+     *
+     * @param opMode The opMode  that it is being used in
+     * @param robot  The robot object for the OpMode
+     */
     public ArmControl(OpMode opMode, Robot robot) {
         this.robot = robot;
         subsystemDriver = opMode.gamepad2;
 
     }
 
+    /**
+     * The method that deals with the control
+     * of the arm/claw
+     */
     public void armControl() {
 
         if (subsystemDriver.right_bumper) {
