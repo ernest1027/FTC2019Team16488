@@ -57,7 +57,7 @@ public class TeleOp extends OpMode {
         robot = new Robot(this, telemetry);
         chassisControl = new ChassisControl(this, robot);
         //subsystemControl = new SubsystemControl(this, robot, currentTime);
-        armRealese = new ArmRealese(robot);
+        // armRealese = new ArmRealese(robot);
 
 
     }
@@ -87,13 +87,27 @@ public class TeleOp extends OpMode {
      */
     @Override
     public void loop() {
+        /*
         while (currentTime < 10) {
             armRealese.procces(currentTime);
         }
+        */
+
+
+
+
+
+
+
+
+
+
+
+
         //armRealese.procces(currentTime);
         chassisControl.driverPad(telemetry);
         //subsystemControl.subsystemDriverPad(telemetry);
-        telemetry.addData("tick count for the lift", robot.lift.LiftBottom.getCurrentPosition());
+        //telemetry.addData("tick count for the lift", robot.lift.LiftBottom.getCurrentPosition());
 
     }
 

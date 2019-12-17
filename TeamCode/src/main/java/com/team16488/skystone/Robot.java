@@ -114,15 +114,20 @@ public class Robot {
         this.telemetry = telemetry;
 
         subsystems = new ArrayList<>();
+        try {
+            drive2 = new MecanumDrive2(opMode.hardwareMap);
+            subsystems.add(drive2);
+        } catch (IllegalArgumentException e) {
 
-
+        }
+/*
         try{
             drive = new MecanumDrive(opMode.hardwareMap);
             subsystems.add(drive);
         } catch (IllegalArgumentException e){
 
         }
-
+*/
         try{
             arm = new Arm(opMode.hardwareMap);
             subsystems.add(arm);
