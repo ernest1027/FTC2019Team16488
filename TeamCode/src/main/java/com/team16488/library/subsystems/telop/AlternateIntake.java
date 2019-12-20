@@ -18,13 +18,14 @@ public class AlternateIntake extends Subsystem {
     public DigitalChannel blockDetection;
     public boolean state;
     public boolean ON = false;
-    private Servo alternateIntake;
+    private Servo alternateIntakeRaise, alternateIntakeClose;
     private boolean down;
     private double pos;
 
     public AlternateIntake(HardwareMap map) {
         blockDetection = map.digitalChannel.get("Block");
-        alternateIntake = map.servo.get("alternate intake");
+        alternateIntakeRaise = map.servo.get("alternate intake raise");
+        alternateIntakeClose = map.servo.get("alternate intake close");
 
         blockDetection.setMode(DigitalChannel.Mode.INPUT);
     }
@@ -39,11 +40,13 @@ public class AlternateIntake extends Subsystem {
             }
             if (blockDetection.getState()) {
                 state = true;
+                alternateIntakeClose.setPosition(pos);
             }
             if (!blockDetection.getState()) {
                 state = false;
+                alternateIntakeClose.setPosition(0.5);
             }
-            alternateIntake.setPosition(pos);
+            alternateIntakeRaise.setPosition(pos);
         } else {
             down = true;
 

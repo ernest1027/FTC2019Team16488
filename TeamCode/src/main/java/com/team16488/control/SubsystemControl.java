@@ -65,18 +65,18 @@ public class SubsystemControl {
 
 
 /*
-        robot.lift.setOn(liftOn);
+        robot.LiftStageOne.setOn(liftOn);
 
         if (lock) {
-            robot.lift.setPower(0.1);
+            robot.LiftStageOne.setPower(0.1);
         }
 
         if (subsystemDriver.left_bumper) {
-            robot.lift.setPower(0.85);
+            robot.LiftStageOne.setPower(0.85);
         }
 
         if (subsystemDriver.left_trigger != 0) {
-            robot.lift.setPower(-0.85);
+            robot.LiftStageOne.setPower(-0.85);
         }
 
         if (subsystemDriver.right_trigger != 0) {

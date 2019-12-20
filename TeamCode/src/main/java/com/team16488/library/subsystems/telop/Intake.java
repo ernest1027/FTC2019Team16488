@@ -1,7 +1,7 @@
 package com.team16488.library.subsystems.telop;
 
 
-import com.qualcomm.robotcore.hardware.CRServo;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.team16488.library.subsystems.Subsystem;
 
@@ -18,7 +18,9 @@ public class Intake extends Subsystem {
     /**
      * Servo group of the intake
      */
-    private CRServo intake;
+    private static final String[] MOTOR_NAMES = {"LeftIntake", "RightIntake"};
+    private DcMotor[] motors;
+    private double[] powers;
     /**
      * Sets the state of the intake. ON. OFF
      */
@@ -38,8 +40,16 @@ public class Intake extends Subsystem {
      * @param map This is the hardware map of the actual OpMode for the Intake
      */
     public Intake(HardwareMap map) {
+        powers = new double[2];
+        motors = new DcMotor[2];
 
-        intake = map.crservo.get("Intake");
+        for (int i = 0; i < 2; i++) {
+            DcMotor dcMotor = map.get(DcMotor.class, MOTOR_NAMES[i]);
+            motors[i] = dcMotor;
+            motors[i].setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            motors[i].setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        }
     }
 
     /**
@@ -52,15 +62,19 @@ public class Intake extends Subsystem {
         if (isOn) {
 
             if (reverse) {
-                intake.setPower(-0.85);
+                for (int i = 0; i < 2; i++) {
+                    motors[i].setPower(-1.0);
+                }
             } else {
-                intake.setPower(0.85);
+                for (int i = 0; i < 2; i++) {
+                    motors[i].setPower(1.0);
+                }
             }
         } else {
-            intake.setPower(0.0);
+            for (int i = 0; i < 2; i++) {
+                motors[i].setPower(0);
+            }
         }
-
-
     }
 
     /**

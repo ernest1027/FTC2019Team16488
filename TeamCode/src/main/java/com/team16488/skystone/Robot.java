@@ -8,7 +8,9 @@ import com.team16488.library.subsystems.telop.AlternateIntake;
 import com.team16488.library.subsystems.telop.Arm;
 import com.team16488.library.subsystems.telop.ArmHead;
 import com.team16488.library.subsystems.telop.Intake;
-import com.team16488.library.subsystems.telop.Lift;
+import com.team16488.library.subsystems.telop.IntakeRaise;
+import com.team16488.library.subsystems.telop.LiftStageFourBar;
+import com.team16488.library.subsystems.telop.LiftStageOne;
 import com.team16488.library.subsystems.telop.MecanumDrive;
 import com.team16488.library.subsystems.telop.MecanumDrive2;
 import com.team16488.library.subsystems.telop.Puller;
@@ -43,14 +45,20 @@ public class Robot {
     public Puller puller;
     /** Intake subsystem object */
     public Intake intake;
-    /** Lift subsystem object*/
-    public Lift lift;
+    /**
+     * LiftStageOne subsystem object
+     */
+    public LiftStageOne LIftStageOne;
 
     public MecanumDrive2 drive2;
 
     public ColourSensor colourSensor;
 
     public AlternateIntake alternateIntake;
+
+    public LiftStageFourBar liftStageFourBar;
+
+    public IntakeRaise intakeRaise;
 
     /** The executor service that is responsible for the submitting of tasks (subsystem.update()) */
     private ExecutorService subsystemUpdateExecutor;
@@ -120,6 +128,17 @@ public class Robot {
         } catch (IllegalArgumentException e) {
 
         }
+        try {
+            intakeRaise = new IntakeRaise(opMode.hardwareMap);
+            subsystems.add(drive2);
+        } catch (IllegalArgumentException e) {
+        }
+        try {
+            liftStageFourBar = new LiftStageFourBar(opMode.hardwareMap);
+            subsystems.add(liftStageFourBar);
+        } catch (IllegalArgumentException e) {
+
+        }
 /*
         try{
             drive = new MecanumDrive(opMode.hardwareMap);
@@ -149,9 +168,9 @@ public class Robot {
         }catch(IllegalArgumentException e){}
 
 
-        try{
-            lift = new Lift(opMode.hardwareMap);
-            subsystems.add(lift);
+        try {
+            LIftStageOne = new LiftStageOne(opMode.hardwareMap);
+            subsystems.add(LIftStageOne);
         }catch(IllegalArgumentException e){}
 
         try{

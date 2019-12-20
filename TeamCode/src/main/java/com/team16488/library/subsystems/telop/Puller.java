@@ -26,7 +26,7 @@ public class Puller extends Subsystem {
     /**
      * This is the Constructor for the Puller Class
      *
-     * @param map This is the hardware map of the actual OpMode for the Lift Class
+     * @param map This is the hardware map of the actual OpMode for the LiftStageOne Class
      */
     public Puller(HardwareMap map) {
         Left = map.servo.get("LP");

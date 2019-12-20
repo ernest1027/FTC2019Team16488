@@ -12,7 +12,7 @@ import com.team16488.library.subsystems.Subsystem;
  * @author Eernest Wong
  * <p>github: https://github.com/StrRamsRobotics/SkyStone/tree/Parham-Baghbanbashi</p>
  */
-public class Lift extends Subsystem {
+public class LiftStageOne extends Subsystem {
 
     /**
      * Sets the speed of the Double Reverse 4 Bar
@@ -22,19 +22,19 @@ public class Lift extends Subsystem {
     /**
      * The servo groups that will be Controlled
      */
-    public DcMotor LiftTop, LiftBottom;
+    public DcMotor LiftLeft, LiftRight;
 
 
     /**
      * This is the constructor for the subsystem
      *
-     * @param map This is the hardware map of the actual OpMode for the Lift Class
+     * @param map This is the hardware map of the actual OpMode for the LiftStageOne Class
      */
-    public Lift(HardwareMap map) {
-        LiftTop = map.dcMotor.get("LTOP");
-        LiftBottom = map.dcMotor.get("LBOTTOM");
-        LiftTop.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        LiftBottom.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+    public LiftStageOne(HardwareMap map) {
+        LiftLeft = map.dcMotor.get("LiftLeft");
+        LiftRight = map.dcMotor.get("LiftRight");
+        LiftLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        LiftRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
     }
 
@@ -46,18 +46,18 @@ public class Lift extends Subsystem {
      */
     @Override
     public void update() {
-        LiftTop.setTargetPosition((int) position);
-        LiftBottom.setTargetPosition((int) position);
+        LiftLeft.setTargetPosition((int) position);
+        LiftRight.setTargetPosition((int) position);
 
-        LiftBottom.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        LiftTop.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        LiftRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        LiftLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
     }
 
     /**
-     * Sets the speed of the lift
+     * Sets the speed of the LiftStageOne
      *
-     * @param position sets the position of the lift
+     * @param position sets the position of the LiftStageOne
      */
     public void setPosition(double position) {
         this.position = (int) position;

@@ -6,8 +6,8 @@ import com.team16488.automated_proccess.StackBlocks;
 import com.team16488.skystone.Robot;
 
 /**
- * This class deals with the control of the lift movement.
- * It als contains the Macros for the lift hight
+ * This class deals with the control of the LiftStageOne movement.
+ * It als contains the Macros for the LiftStageOne hight
  * {@link StackBlocks}
  *
  * @author Parham Baghbanbashi: parhambagh@gmail.com
@@ -31,7 +31,7 @@ public class LiftControl {
 
     private double currentTime;
 
-    private double tickCount;
+    private double tickCount = 288;
 
 
     /**
@@ -49,38 +49,40 @@ public class LiftControl {
     }
 
     /**
-     * The main method that deals with the control of the lift
+     * The main method that deals with the control of the LiftStageOne
      */
     public void liftControl() {
 
         if (subsystemDriver.left_bumper) {
             tickCount += 1;
+            robot.liftStageFourBar.setExtend(true);
         }
 
         if (subsystemDriver.left_trigger != 0) {
             tickCount -= 1;
+            robot.liftStageFourBar.setExtend(false);
         }
 
         if (subsystemDriver.right_trigger != 0) {
             shift = true;
         }
 
-        robot.lift.setPosition(tickCount);
+        robot.LIftStageOne.setPosition(tickCount);
 
         if (subsystemDriver.dpad_down) {
-            // here is the macro code 3
-            stackBlocks.stackThreeBlockHigh();
+            // here is the macro co5de 3
+            stackBlocks.stackBlocks(3);
         }
         if (subsystemDriver.dpad_up) {
             //here is the macro code 1
-            stackBlocks.stackOneBlockHigh();
+            stackBlocks.stackBlocks(1);
         }
         if (subsystemDriver.dpad_right) {
             //here is the macro code 4
         }
         if (subsystemDriver.dpad_left) {
             //here is the macro code 2
-            stackBlocks.stackTwoBlockHigh();
+            stackBlocks.stackBlocks(2);
         }
 
         if (shift) {

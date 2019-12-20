@@ -13,7 +13,7 @@ import com.team16488.skystone.Robot;
  */
 public class StackBlocks {
     public Robot robot;
-
+    // tickcount = 1440
     public double tickCount;
     /**
      * This is the constructor for the class
@@ -25,16 +25,8 @@ public class StackBlocks {
         this.tickCount = tickCount;
     }
 
-    public void stackOneBlockHigh() {
-        robot.lift.setPosition(tickCount * 1);
-    }
-
-    public void stackTwoBlockHigh() {
-        robot.lift.setPosition(tickCount * 2);
-    }
-
-    public void stackThreeBlockHigh() {
-        robot.lift.setPosition(tickCount * 3);
+    public void stackBlocks(int hight) {
+        robot.LIftStageOne.setPosition(tickCount * hight);
     }
 
 }

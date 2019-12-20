@@ -107,7 +107,7 @@ public class TeleOp extends OpMode {
         //armRealese.procces(currentTime);
         chassisControl.driverPad(telemetry);
         //subsystemControl.subsystemDriverPad(telemetry);
-        //telemetry.addData("tick count for the lift", robot.lift.LiftBottom.getCurrentPosition());
+        //telemetry.addData("tick count for the LiftStageOne", robot.LiftStageOne.LiftBottom.getCurrentPosition());
 
     }
 
