@@ -4,8 +4,9 @@ package com.team16488.opmodes.teleop;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.team16488.automated_proccess.ArmRealese;
-import com.team16488.control.ChassisControl;
-import com.team16488.control.SubsystemControl;
+import com.team16488.control.Control;
+import com.team16488.control.general.ChassisControl;
+import com.team16488.control.general.SubsystemControl;
 import com.team16488.skystone.Robot;
 
 /**
@@ -27,18 +28,6 @@ public class TeleOp extends OpMode {
      * <p>See: {@link com.team16488.skystone.Robot}</p>
      */
     private Robot robot;
-    /**
-     * ChassisControl object
-     *
-     * <p>See: {@link ChassisControl}</p>
-     */
-    private ChassisControl chassisControl;
-    /**
-     * Subsystem control object
-     *
-     * <p>See: {@link SubsystemControl}</p>
-     */
-    private SubsystemControl subsystemControl;
 
     /**
      * This is what will be run on initialization of the robot
@@ -49,14 +38,13 @@ public class TeleOp extends OpMode {
     private ElapsedTime runtime = new ElapsedTime();
     private ElapsedTime gameTime = new ElapsedTime();
 
-    private double currentTime = runtime.seconds();
-    private double timeFromStart = gameTime.seconds();
     private ArmRealese armRealese;
+
+    private Control control;
 
     public void init() {
         robot = new Robot(this, telemetry);
-        chassisControl = new ChassisControl(this, robot);
-        //subsystemControl = new SubsystemControl(this, robot, currentTime);
+        control = new Control(this, robot);
         // armRealese = new ArmRealese(robot);
 
 
@@ -93,22 +81,10 @@ public class TeleOp extends OpMode {
         }
         */
 
-
-
-
-
-
-
-
-
-
-
-
         //armRealese.procces(currentTime);
-        chassisControl.driverPad(telemetry);
         //subsystemControl.subsystemDriverPad(telemetry);
         //telemetry.addData("tick count for the LiftStageOne", robot.LiftStageOne.LiftBottom.getCurrentPosition());
-
+        control.control();
     }
 
     /**

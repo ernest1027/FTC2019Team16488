@@ -2,8 +2,8 @@ package com.team16488.opmodes.teleop;
 
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.team16488.control.ChassisControl;
-import com.team16488.control.SubsystemControl;
+import com.team16488.control.general.ChassisControl;
+import com.team16488.control.general.SubsystemControl;
 import com.team16488.skystone.Robot;
 
 /**

@@ -28,9 +28,13 @@ public class IntakeControl {
      */
     private boolean On = false;
 
+    private boolean yeet = false;
+
     private Telemetry telemetry;
 
     private Gamepad chassisControl;
+
+    private Gamepad yeetControl;
 
     /**
      * This is the class constructor
@@ -42,6 +46,7 @@ public class IntakeControl {
         robot = oprobot;
         chassisControl = opMode.gamepad1;
         telemetry = opMode.telemetry;
+        yeetControl = opMode.gamepad2;
 
     }
 
@@ -65,6 +70,15 @@ public class IntakeControl {
         if (chassisControl.right_bumper) {
             reverse = true;
         }
+
+        if (yeetControl.dpad_up) {
+            yeet = true;
+        }
+        if (yeetControl.dpad_down) {
+            yeet = false;
+        }
+        robot.intakeRaise.setYeet(yeet);
+
 
         if (On) {
             robot.intake.setOn(true);

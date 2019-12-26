@@ -19,17 +19,11 @@ public class LiftControl {
 
     private Robot robot;
 
-    private boolean liftOn = true;
-
-    private boolean lock = true;
-
     private boolean shift;
 
     private Gamepad subsystemDriver;
 
     private StackBlocks stackBlocks;
-
-    private double currentTime;
 
     private double tickCount = 288;
 
@@ -39,12 +33,10 @@ public class LiftControl {
      *
      * @param opMode      The OpMode that it is being used in
      * @param robot       The robot object
-     * @param currentTime the current time
      */
-    public LiftControl(OpMode opMode, Robot robot, double currentTime) {
+    public LiftControl(OpMode opMode, Robot robot) {
         this.robot = robot;
         subsystemDriver = opMode.gamepad2;
-        this.currentTime = currentTime;
         stackBlocks = new StackBlocks(robot, tickCount);
     }
 

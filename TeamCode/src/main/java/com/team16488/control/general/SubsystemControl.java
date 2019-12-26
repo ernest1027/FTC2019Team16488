@@ -1,4 +1,4 @@
-package com.team16488.control;
+package com.team16488.control.general;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.Gamepad;
@@ -32,7 +32,6 @@ public class SubsystemControl {
 
     private LiftControl liftControl;
     private ArmControl armControl;
-    private double currentTime;
 
     /**
      * Constructs the subsystemControl class in the main OpMode
@@ -41,12 +40,11 @@ public class SubsystemControl {
      * @param oprobot   The robot object in the acctual OpMode that it
      *                  is being used in.
      */
-    public SubsystemControl(OpMode opMode, Robot oprobot, double currentTime) {
+    public SubsystemControl(OpMode opMode, Robot oprobot) {
         robot = oprobot;
         subsystemDriver = opMode.gamepad2;
         this.opMode = opMode;
-        this.currentTime = currentTime;
-        liftControl = new LiftControl(this.opMode, robot, currentTime);
+        liftControl = new LiftControl(this.opMode, robot);
         armControl = new ArmControl(this.opMode, robot);
 
     }

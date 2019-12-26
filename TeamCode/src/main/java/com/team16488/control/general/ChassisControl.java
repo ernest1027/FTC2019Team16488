@@ -1,4 +1,4 @@
-package com.team16488.control;
+package com.team16488.control.general;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.Gamepad;
