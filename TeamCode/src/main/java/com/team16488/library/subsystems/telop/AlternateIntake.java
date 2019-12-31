@@ -55,6 +55,7 @@ public class AlternateIntake extends Subsystem {
 
     }
 
+
     public double getPos() {
         return pos;
     }
