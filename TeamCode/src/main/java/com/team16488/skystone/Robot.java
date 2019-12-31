@@ -5,7 +5,6 @@ import com.qualcomm.robotcore.util.ThreadPool;
 import com.team16488.library.subsystems.Subsystem;
 import com.team16488.library.subsystems.aoutonomus.ColourSensor;
 import com.team16488.library.subsystems.telop.AlternateIntake;
-import com.team16488.library.subsystems.telop.Arm;
 import com.team16488.library.subsystems.telop.ArmHead;
 import com.team16488.library.subsystems.telop.Intake;
 import com.team16488.library.subsystems.telop.IntakeRaise;
@@ -37,8 +36,7 @@ import java.util.concurrent.ExecutorService;
 public class Robot {
     /** MecanumDrive object*/
     public MecanumDrive drive;
-    /** Arm subsystem object*/
-    public Arm arm;
+
     /** ArmHead subsystem object*/
     public ArmHead armHead;
     /** Puller subsystem object*/
@@ -146,14 +144,8 @@ public class Robot {
         } catch (IllegalArgumentException e){
 
         }
+
 */
-        try{
-            arm = new Arm(opMode.hardwareMap);
-            subsystems.add(arm);
-        }catch(IllegalArgumentException e){
-
-        }
-
 
         try{
             armHead = new ArmHead(opMode.hardwareMap);

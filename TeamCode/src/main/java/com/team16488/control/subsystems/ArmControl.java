@@ -14,7 +14,7 @@ import com.team16488.skystone.Robot;
  *
  * <p>github: https://github.com/StrRamsRobotics/SkyStone/tree/Parham-Baghbanbashi</p>
  */
-public class ArmControl {
+public class  ArmControl {
     /**
      * Robot Class Object
      */
@@ -69,13 +69,13 @@ public class ArmControl {
         }
 
         if (subsystemDriver.x) {
-            robot.arm.setPower(1.0);
+            robot.liftStageFourBar.setExtend(false);
         }
         if (subsystemDriver.y) {
-            robot.arm.setPower(-1.0);
+            robot.liftStageFourBar.setExtend(true);
         }
         if (subsystemDriver.a) {
-            // reset pos using encoders
+            robot.liftStageFourBar.setExtend(false);
         }
 
 
@@ -111,7 +111,7 @@ public class ArmControl {
         }
 
 
-        robot.arm.setPower(-subsystemDriver.right_stick_y);
+
 
 
     }
