@@ -63,6 +63,7 @@ public class ChassisControl {
         drivetrianControl = new DrivetrianControl(opMode, robot);
         intakeControl = new IntakeControl(opMode, robot);
         pullerControl = new PullerControl(opMode, robot);
+
     }
 
     /**
@@ -82,7 +83,8 @@ public class ChassisControl {
         telemetry.addData("Gamepad1 start", chassisControl.start);
         telemetry.addData("Gamepad1 right bumper", chassisControl.right_bumper);
         telemetry.addData("Gamepad1 left bumper", chassisControl.left_bumper);
-
+        telemetry.addData("yeet power", robot.intakeRaise.leftyeet.getPower());
+        telemetry.addData("yeet set", robot.intakeRaise.yeet);
  /*
         robot.drive.setVelocity(chassisControl.left_stick_x, -chassisControl.left_stick_y, chassisControl.right_stick_x);
 

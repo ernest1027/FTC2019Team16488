@@ -46,7 +46,7 @@ public class Robot {
     /**
      * LiftStageOne subsystem object
      */
-    public LiftStageOne LIftStageOne;
+    public LiftStageOne lIftStageOne;
 
     public MecanumDrive2 drive2;
 
@@ -128,7 +128,7 @@ public class Robot {
         }
         try {
             intakeRaise = new IntakeRaise(opMode.hardwareMap);
-            subsystems.add(drive2);
+            subsystems.add(intakeRaise);
         } catch (IllegalArgumentException e) {
         }
         try {
@@ -161,8 +161,8 @@ public class Robot {
 
 
         try {
-            LIftStageOne = new LiftStageOne(opMode.hardwareMap);
-            subsystems.add(LIftStageOne);
+            lIftStageOne = new LiftStageOne(opMode.hardwareMap);
+            subsystems.add(lIftStageOne);
         }catch(IllegalArgumentException e){}
 
         try{

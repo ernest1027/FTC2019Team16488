@@ -46,7 +46,7 @@ public class IntakeControl {
         robot = oprobot;
         chassisControl = opMode.gamepad1;
         telemetry = opMode.telemetry;
-        yeetControl = opMode.gamepad2;
+        yeetControl = opMode.gamepad1;
 
     }
 

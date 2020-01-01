@@ -26,7 +26,7 @@ public class StackBlocks {
     }
 
     public void stackBlocks(int hight) {
-        robot.LIftStageOne.setPosition(tickCount * hight);
+        robot.lIftStageOne.setPosition(tickCount * hight);
     }
 
 }

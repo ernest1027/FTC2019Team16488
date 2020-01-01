@@ -62,13 +62,11 @@ public class Intake extends Subsystem {
         if (isOn) {
 
             if (reverse) {
-                for (int i = 0; i < 2; i++) {
-                    motors[i].setPower(-1.0);
-                }
+                motors[0].setPower(1.0);
+                motors[1].setPower(-1.0);
             } else {
-                for (int i = 0; i < 2; i++) {
-                    motors[i].setPower(1.0);
-                }
+                motors[0].setPower(-1.0);
+                motors[1].setPower(1.0);
             }
         } else {
             for (int i = 0; i < 2; i++) {

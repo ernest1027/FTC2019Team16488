@@ -11,19 +11,19 @@ public class LiftStageFourBar extends Subsystem {
     private static final String[] FOUR_BAR_NAMES = {"Left", "Right"};
     private double[] powers;
     private CRServo[] crServos;
-    private DigitalChannel extended, lowered;
+    private DigitalChannel extended;
     private boolean extend;
 
     public LiftStageFourBar(HardwareMap map) {
         powers = new double[2];
         crServos = new CRServo[2];
 
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 2; i++) {
             CRServo crServo = map.get(CRServo.class, FOUR_BAR_NAMES[i]);
             crServos[i] = crServo;
         }
         extended = map.digitalChannel.get("Extended");
-        lowered = map.digitalChannel.get("Lowerd");
+
     }
 
     private void setPowers(double power) {
@@ -47,9 +47,6 @@ public class LiftStageFourBar extends Subsystem {
         }
         if (!extend) {
             setPowers(-0.85);
-            if (lowered.getState()) {
-                setPowers(-0.1);
-            }
         }
 
         setCrServos(powers[0], powers[1]);

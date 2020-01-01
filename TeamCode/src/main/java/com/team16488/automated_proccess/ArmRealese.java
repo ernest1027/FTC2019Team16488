@@ -34,7 +34,7 @@ public class ArmRealese {
             robot.drive.setVelocity(0.0, 1.0, 0.0);
         }
         if (currentTime < 23 && currentTime < 8) {
-            robot.LIftStageOne.setPosition(1120);
+            robot.lIftStageOne.setPosition(1120);
         }
         if (currentTime < 18) {
             robot.alternateIntake.ON = true;

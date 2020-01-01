@@ -23,9 +23,8 @@ public class LiftControl {
 
     private Gamepad subsystemDriver;
 
-    private StackBlocks stackBlocks;
-
-    private double tickCount = 288;
+    private double tickCount = 0;
+    private static double count = 1440;
 
 
     /**
@@ -37,7 +36,6 @@ public class LiftControl {
     public LiftControl(OpMode opMode, Robot robot) {
         this.robot = robot;
         subsystemDriver = opMode.gamepad2;
-        stackBlocks = new StackBlocks(robot, tickCount);
     }
 
     /**
@@ -46,12 +44,12 @@ public class LiftControl {
     public void liftControl() {
 
         if (subsystemDriver.left_bumper) {
-            tickCount += 1;
+            tickCount += 1440;
             robot.liftStageFourBar.setExtend(true);
         }
 
         if (subsystemDriver.left_trigger != 0) {
-            tickCount -= 1;
+            tickCount -= 1440;
             robot.liftStageFourBar.setExtend(false);
         }
 
@@ -59,22 +57,21 @@ public class LiftControl {
             shift = true;
         }
 
-        robot.LIftStageOne.setPosition(tickCount);
 
         if (subsystemDriver.dpad_down) {
             // here is the macro co5de 3
-            stackBlocks.stackBlocks(3);
+            this.tickCount = count*3;
         }
         if (subsystemDriver.dpad_up) {
             //here is the macro code 1
-            stackBlocks.stackBlocks(1);
+            this.tickCount = count*1;
         }
         if (subsystemDriver.dpad_right) {
-            //here is the macro code 4
+            this.tickCount = count*4;
         }
         if (subsystemDriver.dpad_left) {
             //here is the macro code 2
-            stackBlocks.stackBlocks(2);
+            this.tickCount = count*2;
         }
 
         if (shift) {
@@ -91,7 +88,7 @@ public class LiftControl {
                 //here is the macro code 6
             }
         }
-
+        robot.lIftStageOne.setPosition(tickCount);
 
     }
 

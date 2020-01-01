@@ -2,6 +2,7 @@ package com.team16488.control.subsystems;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.Gamepad;
+import com.team16488.automated_proccess.StackBlocks;
 import com.team16488.library.subsystems.telop.ArmHead;
 import com.team16488.skystone.Robot;
 
@@ -40,6 +41,8 @@ public class  ArmControl {
 
     private Gamepad subsystemDriver;
 
+    private StackBlocks stackBlocks;
+
     /**
      * This is the constructor for the class
      *
@@ -49,7 +52,7 @@ public class  ArmControl {
     public ArmControl(OpMode opMode, Robot robot) {
         this.robot = robot;
         subsystemDriver = opMode.gamepad2;
-
+        stackBlocks = new StackBlocks(robot, 1000);
     }
 
     /**
@@ -72,7 +75,10 @@ public class  ArmControl {
             robot.liftStageFourBar.setExtend(false);
         }
         if (subsystemDriver.y) {
-            robot.liftStageFourBar.setExtend(true);
+            stackBlocks.stackBlocks(6);
+            if (robot.lIftStageOne.position > 6000){
+                robot.liftStageFourBar.setExtend(true);
+            }
         }
         if (subsystemDriver.a) {
             robot.liftStageFourBar.setExtend(false);

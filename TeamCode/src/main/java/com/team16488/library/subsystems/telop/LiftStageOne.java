@@ -1,7 +1,10 @@
 package com.team16488.library.subsystems.telop;
 
 
+import android.service.autofill.DateValueSanitizer;
+
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.team16488.library.subsystems.Subsystem;
 
@@ -17,7 +20,7 @@ public class LiftStageOne extends Subsystem {
     /**
      * Sets the speed of the Double Reverse 4 Bar
      */
-    public double position = 0;
+    public double position;
 
     /**
      * The servo groups that will be Controlled
@@ -33,8 +36,16 @@ public class LiftStageOne extends Subsystem {
     public LiftStageOne(HardwareMap map) {
         LiftLeft = map.dcMotor.get("LiftLeft");
         LiftRight = map.dcMotor.get("LiftRight");
-        LiftLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        LiftRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+
+
+        LiftLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        LiftRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        LiftRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        LiftLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        LiftRight.setDirection(DcMotorSimple.Direction.REVERSE);
 
     }
 
@@ -49,8 +60,21 @@ public class LiftStageOne extends Subsystem {
         LiftLeft.setTargetPosition((int) position);
         LiftRight.setTargetPosition((int) position);
 
+
         LiftRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         LiftLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        LiftRight.setPower(1);
+        LiftLeft.setPower(1);
+
+        while(LiftRight.isBusy()){
+            //wait
+        }
+        while(LiftRight.isBusy()){}
+
+        LiftRight.setPower(0);
+        LiftLeft.setPower(0);
+
 
     }
 
@@ -62,6 +86,7 @@ public class LiftStageOne extends Subsystem {
     public void setPosition(double position) {
         this.position = (int) position;
     }
+
 
 
 }
