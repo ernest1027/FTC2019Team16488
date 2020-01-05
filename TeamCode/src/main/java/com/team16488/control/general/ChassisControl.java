@@ -2,10 +2,8 @@ package com.team16488.control.general;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.Gamepad;
-import com.team16488.control.chassis.AlternateIntakeControl;
-import com.team16488.control.chassis.DrivetrianControl;
-import com.team16488.control.chassis.IntakeControl;
-import com.team16488.control.chassis.PullerControl;
+import com.team16488.automated_proccess.StackBlocks;
+import com.team16488.library.subsystems.MecanumDrive2;
 import com.team16488.skystone.Robot;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
@@ -25,74 +23,77 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
  *
  */
 public class ChassisControl {
-    /**
-     * This is the robot object
-     */
+
     private Robot robot;
-    /** sets the intake on reverse mode*/
-    private boolean reverse = false;
-    /** this turns the intake on */
-    private boolean On = false;
-
-    private Gamepad chassisControl;
-
-    private boolean crainmode;
-
-    private AlternateIntakeControl alternateIntakeControl;
-
-    private DrivetrianControl drivetrianControl;
-
-    private IntakeControl intakeControl;
-
-    private PullerControl pullerControl;
 
     private OpMode opMode;
 
+    private Telemetry telemetry;
+
+    private Gamepad chassisControl, subsystemChassisControl;
 
     /**
+     * sets the intake on reverse mode
+     */
+    private boolean reverse = false;
+    /**
+     * this turns the intake on
+     */
+    private boolean On = false;
+
+    private boolean yeet = false;
+    /**
      * This is the constructor for a chassis control this allows the opmode to run the code in the class
-     * @param opMode The opmode that this class is being used in
+     * @param ropMode The opmode that this class is being used in
      * @param oprobot   The robot object in the acctual OpMode that it
      *                  is being used ins.
      */
-    public ChassisControl(OpMode opMode, Robot oprobot) {
+    public ChassisControl(OpMode ropMode, Robot oprobot) {
         robot = oprobot;
-        chassisControl = opMode.gamepad1;
-        this.opMode = opMode;
-        alternateIntakeControl = new AlternateIntakeControl(opMode, robot);
-        drivetrianControl = new DrivetrianControl(opMode, robot);
-        intakeControl = new IntakeControl(opMode, robot);
-        pullerControl = new PullerControl(opMode, robot);
-
+        this.opMode = ropMode;
+        this.telemetry = opMode.telemetry;
+        this.chassisControl = opMode.gamepad1;
+        this.subsystemChassisControl = opMode.gamepad2;
     }
 
-    /**
-     * This is the method that handles the control of the chassis via driver inputs
-     *
-     * @param telemetry the telemetry for the class.
-     */
-    public void driverPad(Telemetry telemetry) {
-        alternateIntakeControl.alternateIntakeControl();
-        drivetrianControl.driveControl();
-        intakeControl.intakeControl();
-        pullerControl.pullerControl();
+    public void alternateIntakeControl() {
+        if (chassisControl.dpad_up) {
+            robot.alternateIntake.setPos(-0.5);
+        }
+        if (chassisControl.start) {
+            robot.alternateIntake.ON = true;
+        }
+        if (chassisControl.back) {
+            robot.alternateIntake.setPos(1.00);
+        }
+        if (chassisControl.b) {
+            robot.alternateIntake.setDown(true);
+        }
+        if (chassisControl.y) {
+            robot.alternateIntake.setDown(false);
+        }
+        if (robot.alternateIntake.state) {
+            telemetry.addData("Alternate intake state", "No Block");
 
+        }
+        if (!robot.alternateIntake.state) {
+            telemetry.addData("Alternate intake state", "You Have Block");
 
-        telemetry.addData("Subsystem Status", "ON");
-        telemetry.addData("----------------------------------------------", " ");
-        telemetry.addData("Gamepad1 start", chassisControl.start);
-        telemetry.addData("Gamepad1 right bumper", chassisControl.right_bumper);
-        telemetry.addData("Gamepad1 left bumper", chassisControl.left_bumper);
-        telemetry.addData("yeet power", robot.intakeRaise.leftyeet.getPower());
-        telemetry.addData("yeet set", robot.intakeRaise.yeet);
- /*
-        robot.drive.setVelocity(chassisControl.left_stick_x, -chassisControl.left_stick_y, chassisControl.right_stick_x);
+        }
+    }
+
+    public void driveControl() {
+
+        robot.drive2.setVelocity(chassisControl.right_stick_x, -chassisControl.left_stick_y, chassisControl.left_stick_x);
 
         if (chassisControl.right_stick_x == 0 && chassisControl.left_stick_y == 0 && chassisControl.left_stick_x == 0) {
             double slowmode = 0.5;
-            robot.drive.setVelocity(-subsystemChassisControl.left_stick_x * slowmode, -subsystemChassisControl.right_stick_y * slowmode, -subsystemChassisControl.right_stick_x * slowmode);
+            robot.drive2.setVelocity(-subsystemChassisControl.left_stick_x * slowmode, -subsystemChassisControl.right_stick_y * slowmode, -subsystemChassisControl.right_stick_x * slowmode);
         }
 
+    }
+
+    public void intakeControl() {
         if (chassisControl.x) {
             On = false;
             reverse = false;
@@ -110,6 +111,15 @@ public class ChassisControl {
             reverse = true;
         }
 
+        if (chassisControl.dpad_up) {
+            yeet = true;
+        }
+        if (chassisControl.dpad_down) {
+            yeet = false;
+        }
+        robot.intakeRaise.setYeet(yeet);
+
+
         if (On) {
             robot.intake.setOn(true);
             telemetry.addData("state", "Intake on");
@@ -120,36 +130,32 @@ public class ChassisControl {
         }
 
         robot.intake.setReverse(reverse);
+    }
+
+    public void pullerControl() {
 
         if (chassisControl.left_trigger != 0) {
-            robot.puller.setDown(true);
-        }
-
-        if (chassisControl.left_bumper) {
             robot.puller.setDown(false);
         }
 
+        if (chassisControl.left_bumper) {
+            robot.puller.setDown(true);
+        }
 
-        if (chassisControl.dpad_up) {
-            robot.alternateIntake.setPos(-0.5);
-        }
-        if (chassisControl.start) {
-            robot.alternateIntake.ON = true;
-        }
-        if (chassisControl.b) {
-            robot.alternateIntake.setDown(true);
-        }
-        if (chassisControl.y) {
-            robot.alternateIntake.setDown(false);
-        }
-        if (robot.alternateIntake.state) {
-            telemetry.addData("Alternate intake state", "No Block");
+    }
 
+    public void printState() {
+        telemetry.addData("Drivetrian State", "ON");
+        telemetry.addData("----------------------------------------------", " ");
+        telemetry.addData("Motors","");
+        for (int i = 0; i < 4; i++) {
+            telemetry.addData("Motor" + String.valueOf(i), robot.drive2.motors[i].getPower());
         }
-        if (!robot.alternateIntake.state) {
-            telemetry.addData("Alternate intake state", "You Have Block");
+        telemetry.addData("Servos", "");
+        telemetry.addData("Intake Raise l", robot.intakeRaise.leftyeet.getPower());
+        telemetry.addData("Intake Raise R", robot.intakeRaise.rightyeet.getPower());
+        telemetry.addData("Pullers", robot.puller.Left.getPosition());
 
-        }
-*/
+
     }
 }

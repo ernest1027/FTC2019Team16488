@@ -1,14 +1,14 @@
-package com.team16488.library.subsystems.telop;
+package com.team16488.library.subsystems;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.team16488.library.subsystems.Subsystem;
+
 
 public class MecanumDrive2 extends Subsystem {
 
     private static final String[] MOTOR_NAMES = {"FR", "BR", "FL", "BL"};
-    private DcMotor[] motors;
+    public DcMotor[] motors;
     private double[] powers;
 
     public MecanumDrive2(HardwareMap map) {

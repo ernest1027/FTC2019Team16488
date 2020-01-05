@@ -1,4 +1,4 @@
-package com.team16488.library.subsystems.telop;
+package com.team16488.library.subsystems;
 
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DigitalChannel;

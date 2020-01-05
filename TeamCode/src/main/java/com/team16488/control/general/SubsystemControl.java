@@ -2,8 +2,8 @@ package com.team16488.control.general;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.Gamepad;
-import com.team16488.control.subsystems.ArmControl;
-import com.team16488.control.subsystems.LiftControl;
+import com.team16488.automated_proccess.StackBlocks;
+import com.team16488.library.subsystems.ArmHead;
 import com.team16488.skystone.Robot;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
@@ -20,18 +20,38 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
  *
  */
 public class SubsystemControl {
-    /**
-     * Robot Class Object
-     */
     private Robot robot;
-
+    /**
+     * Sets the Virtical rotation power
+     *
+     * @see ArmHead
+     */
+    private double vPower;
+    /**
+     * Sets the Horizontal rotation power
+     *
+     * @see ArmHead
+     */
+    private double hPower;
+    /**
+     * Sets the position of the claw
+     *
+     * @see ArmHead
+     */
+    private boolean clawOpen = true;
 
     private Gamepad subsystemDriver;
 
+    private StackBlocks stackBlocks;
+
+    private boolean shift;
+
+    private double tickCount = 0;
+
+    private static double count = 1440;
+
     private OpMode opMode;
 
-    private LiftControl liftControl;
-    private ArmControl armControl;
 
     /**
      * Constructs the subsystemControl class in the main OpMode
@@ -44,70 +64,11 @@ public class SubsystemControl {
         robot = oprobot;
         subsystemDriver = opMode.gamepad2;
         this.opMode = opMode;
-        liftControl = new LiftControl(this.opMode, robot);
-        armControl = new ArmControl(this.opMode, robot);
+
 
     }
 
-
-    /**
-     * This is the method that updates the Subsystems based on driver input
-     *
-     * @param telemetry OpMode telemetry
-     */
-    public void subsystemDriverPad(Telemetry telemetry) {
-
-        liftControl.liftControl();
-        armControl.armControl();
-
-
-
-/*
-        robot.LiftStageOne.setOn(liftOn);
-
-        if (lock) {
-            robot.LiftStageOne.setPower(0.1);
-        }
-
-        if (subsystemDriver.left_bumper) {
-            robot.LiftStageOne.setPower(0.85);
-        }
-
-        if (subsystemDriver.left_trigger != 0) {
-            robot.LiftStageOne.setPower(-0.85);
-        }
-
-        if (subsystemDriver.right_trigger != 0) {
-            shift = true;
-        }
-
-        if (subsystemDriver.dpad_down) {
-            // here is the macro code
-        }
-        if (subsystemDriver.dpad_up) {
-            //here is the macro code
-        }
-        if (subsystemDriver.dpad_right) {
-            //here is the macro code
-        }
-        if (subsystemDriver.dpad_left) {
-            //here is the macro code
-        }
-
-        if (shift) {
-            if (subsystemDriver.dpad_down) {
-                // here is the macro code
-            }
-            if (subsystemDriver.dpad_up) {
-                //here is the macro code
-            }
-            if (subsystemDriver.dpad_right) {
-                //here is the macro code
-            }
-            if (subsystemDriver.dpad_left) {
-                //here is the macro code
-            }
-        }
+    public void armControl() {
 
         if (subsystemDriver.right_bumper) {
             clawOpen = true;
@@ -120,13 +81,16 @@ public class SubsystemControl {
         }
 
         if (subsystemDriver.x) {
-            robot.arm.setPower(1.0);
+            robot.liftStageFourBar.setExtend(false);
         }
         if (subsystemDriver.y) {
-            robot.arm.setPower(-1.0);
+            stackBlocks.stackBlocks(6);
+            if (robot.lIftStageOne.position > 6000){
+                robot.liftStageFourBar.setExtend(true);
+            }
         }
         if (subsystemDriver.a) {
-            // reset pos using encoders
+            robot.liftStageFourBar.setExtend(false);
         }
 
 
@@ -161,10 +125,64 @@ public class SubsystemControl {
             robot.armHead.setOpen(false);
         }
 
+    }
 
-        robot.arm.setPower(-subsystemDriver.right_stick_y);
-*/
+    public void liftControl() {
 
+        if (subsystemDriver.left_bumper) {
+            tickCount += 1440;
+            robot.liftStageFourBar.setExtend(true);
+        }
+
+        if (subsystemDriver.left_trigger != 0) {
+            tickCount -= 1440;
+            robot.liftStageFourBar.setExtend(false);
+        }
+
+        if (subsystemDriver.right_trigger != 0) {
+            shift = true;
+        }
+
+
+        if (subsystemDriver.dpad_down) {
+            // here is the macro co5de 3
+            this.tickCount = count*3;
+        }
+        if (subsystemDriver.dpad_up) {
+            //here is the macro code 1
+            this.tickCount = count*1;
+        }
+        if (subsystemDriver.dpad_right) {
+            this.tickCount = count*4;
+        }
+        if (subsystemDriver.dpad_left) {
+            //here is the macro code 2
+            this.tickCount = count*2;
+        }
+
+        if (shift) {
+            if (subsystemDriver.dpad_down) {
+                // here is the macro code 7
+                this.tickCount = count*7;
+            }
+            if (subsystemDriver.dpad_up) {
+                //here is the macro code 5
+                this.tickCount = count*5;
+            }
+            if (subsystemDriver.dpad_right) {
+                //here is the macro code8
+                this.tickCount = count*8;
+            }
+            if (subsystemDriver.dpad_left) {
+                //here is the macro code 6
+                this.tickCount = count*6;
+            }
+        }
+        robot.lIftStageOne.setPosition(tickCount);
+
+    }
+
+    public void printState(Telemetry telemetry) {
         telemetry.addData("Subsystem Status", "ON");
         telemetry.addData("------------------------------", "----------------");
         telemetry.addData("Gamepad2 start", subsystemDriver.start);

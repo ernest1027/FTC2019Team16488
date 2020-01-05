@@ -21,7 +21,14 @@ public class Control {
     }
 
     public void control() {
-        chassisControl.driverPad(telemetry);
-        subsystemControl.subsystemDriverPad(telemetry);
+        chassisControl.alternateIntakeControl();
+        chassisControl.driveControl();
+        chassisControl.pullerControl();
+        chassisControl.intakeControl();
+        chassisControl.printState();
+
+        subsystemControl.armControl();
+        subsystemControl.liftControl();
+        subsystemControl.printState(telemetry);
     }
 }

@@ -1,4 +1,4 @@
-package com.team16488.library.subsystems.telop;
+package com.team16488.library.subsystems;
 
 import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -14,7 +14,7 @@ import com.team16488.library.subsystems.Subsystem;
  *
  * <p>github: https://github.com/StrRamsRobotics/SkyStone/tree/Parham-Baghbanbashi</p>
  */
-public class AlternateIntake extends Subsystem {
+public class  AlternateIntake extends Subsystem {
     public DigitalChannel blockDetection;
     public boolean state;
     public boolean ON = false;

@@ -510,7 +510,7 @@ public class FtcRobotControllerActivity extends Activity
     // (e.g.: no one can screw things up by messing with the contents of the config file) fix is
     // to do away with configuration file entirely.
     //
-    // Control hubs are always running the access point model.  Everything else, for the time
+    // general hubs are always running the access point model.  Everything else, for the time
     // being always runs the wifi direct model.
     if (Device.isRevControlHub() == true) {
       networkType = NetworkType.RCWIRELESSAP;

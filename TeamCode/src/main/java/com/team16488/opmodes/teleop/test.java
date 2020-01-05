@@ -2,8 +2,6 @@ package com.team16488.opmodes.teleop;
 
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.team16488.control.general.ChassisControl;
-import com.team16488.control.general.SubsystemControl;
 import com.team16488.skystone.Robot;
 
 /**
@@ -67,8 +65,6 @@ public class test extends OpMode {
      * <p>
      * This method runs the Chassis control class and subsystem control class
      *
-     * <p>See: {@link ChassisControl}</p>
-     * <p>See: {@link SubsystemControl}</p>
      */
     @Override
     public void loop() {

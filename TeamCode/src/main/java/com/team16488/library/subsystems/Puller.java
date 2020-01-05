@@ -1,4 +1,4 @@
-package com.team16488.library.subsystems.telop;
+package com.team16488.library.subsystems;
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -17,7 +17,7 @@ public class Puller extends Subsystem {
     /**
      * Puller servos
      */
-    private Servo Left, Right;
+    public Servo Left, Right;
     /**
      * Sets if the puller is down
      */

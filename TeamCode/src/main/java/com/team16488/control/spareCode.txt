@@ -1,0 +1,178 @@
+/*
+        robot.LiftStageOne.setOn(liftOn);
+
+        if (lock) {
+            robot.LiftStageOne.setPower(0.1);
+        }
+
+        if (subsystemDriver.left_bumper) {
+            robot.LiftStageOne.setPower(0.85);
+        }
+
+        if (subsystemDriver.left_trigger != 0) {
+            robot.LiftStageOne.setPower(-0.85);
+        }
+
+        if (subsystemDriver.right_trigger != 0) {
+            shift = true;
+        }
+
+        if (subsystemDriver.dpad_down) {
+            // here is the macro code
+        }
+        if (subsystemDriver.dpad_up) {
+            //here is the macro code
+        }
+        if (subsystemDriver.dpad_right) {
+            //here is the macro code
+        }
+        if (subsystemDriver.dpad_left) {
+            //here is the macro code
+        }
+
+        if (shift) {
+            if (subsystemDriver.dpad_down) {
+                // here is the macro code
+            }
+            if (subsystemDriver.dpad_up) {
+                //here is the macro code
+            }
+            if (subsystemDriver.dpad_right) {
+                //here is the macro code
+            }
+            if (subsystemDriver.dpad_left) {
+                //here is the macro code
+            }
+        }
+
+        if (subsystemDriver.right_bumper) {
+            clawOpen = true;
+        }
+        if (clawOpen) {
+            robot.armHead.setOpen(true);
+        }
+        if (!clawOpen) {
+            robot.armHead.setOpen(false);
+        }
+
+        if (subsystemDriver.x) {
+            robot.arm.setPower(1.0);
+        }
+        if (subsystemDriver.y) {
+            robot.arm.setPower(-1.0);
+        }
+        if (subsystemDriver.a) {
+            // reset pos using encoders
+        }
+
+
+        if (subsystemDriver.dpad_up) {
+            vPower += 0.1;
+        }
+        if (subsystemDriver.dpad_down) {
+            vPower -= 0.1;
+        }
+        if (subsystemDriver.dpad_left) {
+            hPower += 0.1;
+        }
+
+        if (subsystemDriver.dpad_right) {
+            hPower -= 0.1;
+        }
+
+        robot.armHead.setverticalRotation(vPower);
+        robot.armHead.sethorizontalRotationPosition(hPower);
+
+
+        if (subsystemDriver.x) {
+            clawOpen = true;
+        }
+        if (subsystemDriver.b) {
+            clawOpen = false;
+        }
+        if (clawOpen) {
+            robot.armHead.setOpen(true);
+        }
+        if (!clawOpen) {
+            robot.armHead.setOpen(false);
+        }
+
+
+        robot.arm.setPower(-subsystemDriver.right_stick_y);
+*/
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ /*
+        robot.drive.setVelocity(chassisControl.left_stick_x, -chassisControl.left_stick_y, chassisControl.right_stick_x);
+
+        if (chassisControl.right_stick_x == 0 && chassisControl.left_stick_y == 0 && chassisControl.left_stick_x == 0) {
+            double slowmode = 0.5;
+            robot.drive.setVelocity(-subsystemChassisControl.left_stick_x * slowmode, -subsystemChassisControl.right_stick_y * slowmode, -subsystemChassisControl.right_stick_x * slowmode);
+        }
+
+        if (chassisControl.x) {
+            On = false;
+            reverse = false;
+
+        }
+        if (chassisControl.right_bumper) {
+            On = true;
+
+        }
+        if (chassisControl.right_trigger != 0) {
+            On = true;
+            reverse = false;
+        }
+        if (chassisControl.right_bumper) {
+            reverse = true;
+        }
+
+        if (On) {
+            robot.intake.setOn(true);
+            telemetry.addData("state", "Intake on");
+        }
+        if (!On) {
+            robot.intake.setOn(false);
+            telemetry.addData("state", "Intake off");
+        }
+
+        robot.intake.setReverse(reverse);
+
+        if (chassisControl.left_trigger != 0) {
+            robot.puller.setDown(true);
+        }
+
+        if (chassisControl.left_bumper) {
+            robot.puller.setDown(false);
+        }
+
+
+        if (chassisControl.dpad_up) {
+            robot.alternateIntake.setPos(-0.5);
+        }
+        if (chassisControl.start) {
+            robot.alternateIntake.ON = true;
+        }
+        if (chassisControl.b) {
+            robot.alternateIntake.setDown(true);
+        }
+        if (chassisControl.y) {
+            robot.alternateIntake.setDown(false);
+        }
+        if (robot.alternateIntake.state) {
+            telemetry.addData("Alternate intake state", "No Block");
+
+        }
+        if (!robot.alternateIntake.state) {
+            telemetry.addData("Alternate intake state", "You Have Block");
+
+        }
+   -------------------------------------------------------------------------------------------------------------------
+   /*
+           robot.drive.setVelocity(chassisControl.left_stick_x, -chassisControl.left_stick_y, chassisControl.right_stick_x);
+
+           if (chassisControl.right_stick_x == 0 && chassisControl.left_stick_y == 0 && chassisControl.left_stick_x == 0) {
+               double slowmode = 0.5;
+               robot.drive.setVelocity(-subsystemChassisControl.left_stick_x * slowmode, -subsystemChassisControl.right_stick_y * slowmode, -subsystemChassisControl.right_stick_x * slowmode);
+           }
+   */
+*/

@@ -3,16 +3,16 @@ package com.team16488.skystone;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.util.ThreadPool;
 import com.team16488.library.subsystems.Subsystem;
-import com.team16488.library.subsystems.aoutonomus.ColourSensor;
-import com.team16488.library.subsystems.telop.AlternateIntake;
-import com.team16488.library.subsystems.telop.ArmHead;
-import com.team16488.library.subsystems.telop.Intake;
-import com.team16488.library.subsystems.telop.IntakeRaise;
-import com.team16488.library.subsystems.telop.LiftStageFourBar;
-import com.team16488.library.subsystems.telop.LiftStageOne;
-import com.team16488.library.subsystems.telop.MecanumDrive;
-import com.team16488.library.subsystems.telop.MecanumDrive2;
-import com.team16488.library.subsystems.telop.Puller;
+import com.team16488.library.subsystems.ColourSensor;
+import com.team16488.library.subsystems.AlternateIntake;
+import com.team16488.library.subsystems.ArmHead;
+import com.team16488.library.subsystems.Intake;
+import com.team16488.library.subsystems.IntakeRaise;
+import com.team16488.library.subsystems.LiftStageFourBar;
+import com.team16488.library.subsystems.LiftStageOne;
+import com.team16488.library.subsystems.MecanumDrive;
+import com.team16488.library.subsystems.MecanumDrive2;
+import com.team16488.library.subsystems.Puller;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
@@ -124,17 +124,20 @@ public class Robot {
             drive2 = new MecanumDrive2(opMode.hardwareMap);
             subsystems.add(drive2);
         } catch (IllegalArgumentException e) {
-
+            telemetry.addData("error runnning Drive", "look at robot or subsystem");
         }
         try {
             intakeRaise = new IntakeRaise(opMode.hardwareMap);
             subsystems.add(intakeRaise);
         } catch (IllegalArgumentException e) {
+            telemetry.addData("error runnning intakeRaise", "look at robot or subsystem");
+
         }
         try {
             liftStageFourBar = new LiftStageFourBar(opMode.hardwareMap);
             subsystems.add(liftStageFourBar);
         } catch (IllegalArgumentException e) {
+            telemetry.addData("error runnning shortStick", "look at robot or subsystem");
 
         }
 /*
@@ -151,24 +154,32 @@ public class Robot {
             armHead = new ArmHead(opMode.hardwareMap);
             subsystems.add(armHead);
         }catch(IllegalArgumentException e){
+            telemetry.addData("error runnning armHead", "look at robot or subsystem");
 
         }
 
         try{
             intake = new Intake(opMode.hardwareMap);
             subsystems.add(intake);
-        }catch(IllegalArgumentException e){}
+        }catch(IllegalArgumentException e){
+            telemetry.addData("error runnning Intake", "look at robot or subsystem");
+
+        }
 
 
         try {
             lIftStageOne = new LiftStageOne(opMode.hardwareMap);
             subsystems.add(lIftStageOne);
-        }catch(IllegalArgumentException e){}
+        }catch(IllegalArgumentException e){
+            telemetry.addData("error runnning liftStageOne", "look at robot or subsystem");
+
+        }
 
         try{
             puller = new Puller(opMode.hardwareMap);
             subsystems.add(puller);
         }catch(IllegalArgumentException e){
+            telemetry.addData("error runnning pullers", "look at robot or subsystem");
 
         }
         try {

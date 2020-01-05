@@ -3,11 +3,8 @@ package com.team16488.opmodes.teleop;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.util.ElapsedTime;
 import com.team16488.automated_proccess.ArmRealese;
 import com.team16488.control.Control;
-import com.team16488.control.general.ChassisControl;
-import com.team16488.control.general.SubsystemControl;
 import com.team16488.skystone.Robot;
 
 /**
@@ -21,7 +18,7 @@ import com.team16488.skystone.Robot;
  * @author Ernest Wong
  * <p>github: https://github.com/StrRamsRobotics/SkyStone/tree/Parham-Baghbanbashi</p>
  */
-@com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "TeleOp Main", group = "telop")
+@com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "TeleOp", group = "telop")
 public class TeleOp extends OpMode {
     /**
      * Robot object
@@ -36,8 +33,6 @@ public class TeleOp extends OpMode {
      * The main function of the method is to construct and create our objects
      * </p>
      */
-    private ElapsedTime runtime = new ElapsedTime();
-    private ElapsedTime gameTime = new ElapsedTime();
 
     private ArmRealese armRealese;
 
@@ -49,9 +44,7 @@ public class TeleOp extends OpMode {
         // armRealese = new ArmRealese(robot);
         robot.lIftStageOne.LiftLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.lIftStageOne.LiftRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
     }
-
 
     /**
      * This method runs once the driver hits start
@@ -62,8 +55,6 @@ public class TeleOp extends OpMode {
      */
     @Override
     public void start() {
-        runtime.reset();
-        gameTime.reset();
         robot.start();
     }
 
@@ -72,20 +63,9 @@ public class TeleOp extends OpMode {
      * <p>
      * This method runs the Chassis control class and subsystem control class
      *
-     * <p>See: {@link ChassisControl}</p>
-     * <p>See: {@link SubsystemControl}</p>
      */
     @Override
     public void loop() {
-        /*
-        while (currentTime < 10) {
-            armRealese.procces(currentTime);
-        }
-        */
-
-        //armRealese.procces(currentTime);
-        //subsystemControl.subsystemDriverPad(telemetry);
-        //telemetry.addData("tick count for the LiftStageOne", robot.LiftStageOne.LiftBottom.getCurrentPosition());
         control.control();
     }
 
