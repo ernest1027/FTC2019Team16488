@@ -36,7 +36,8 @@ public class ChassisControl {
 
     private boolean yeet = false;
 
-
+    private boolean pressedRT = false;
+    private boolean pressedRB = false;
     public ChassisControl(OpMode ropMode, Robot oprobot) {
         robot = oprobot;
         this.opMode = ropMode;
@@ -189,21 +190,33 @@ public class ChassisControl {
     }
 
     public void rightTrigger(){
-        if(chassisControl.right_trigger > 0){
-            this.On = true;
-            robot.intake.setReverse(false);
+        if(!pressedRT) {
+            if (chassisControl.right_trigger > 0) {
+               On = !On;
+                pressedRT = true;
+            }
+
 
         }
-
-        if(On && chassisControl.right_bumper){
-            this.On = false;
-
+        if(chassisControl.right_trigger== 0)
+        {
+            pressedRT = false;
         }
-        if(!On && chassisControl.right_bumper){
-            this.On = true;
-            robot.intake.setReverse(true);
+        if(!pressedRB)
+        {
+            if(chassisControl.right_bumper == true)
+            {
+                reverse = !reverse;
+                pressedRB = true;
+            }
         }
+        if(chassisControl.right_bumper==false)
+        {
+            pressedRB = false;
+        }
+        robot.intake.setReverse(reverse);
         robot.intake.setOn(On);
+
     }
 
     public void printState() {

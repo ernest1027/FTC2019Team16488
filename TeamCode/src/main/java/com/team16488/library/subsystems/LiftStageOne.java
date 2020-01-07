@@ -38,7 +38,7 @@ public class LiftStageOne extends Subsystem {
         LiftLeft = map.dcMotor.get("LiftLeft");
         LiftRight = map.dcMotor.get("LiftRight");
 
-
+        LiftLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         LiftRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         LiftLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
