@@ -8,6 +8,7 @@ public class IntakeRaise extends Subsystem {
     public boolean yeet;
     public CRServo leftyeet, rightyeet;
     double power = 0.85;
+    public boolean On;
 
 
     public IntakeRaise(HardwareMap map) {
@@ -19,16 +20,20 @@ public class IntakeRaise extends Subsystem {
 
     @Override
     public void update() {
-
-        if (yeet) {
-            leftyeet.setPower(power);
-            rightyeet.setPower(power);
+        if(On) {
+            if (yeet) {
+                leftyeet.setPower(power);
+                rightyeet.setPower(power);
+            }
+            if (!yeet) {
+                leftyeet.setPower(-power);
+                rightyeet.setPower(-power);
+            }
         }
-        if (!yeet) {
-            leftyeet.setPower(-power);
-            rightyeet.setPower(-power);
+        else{
+            leftyeet.setPower(0);
+            rightyeet.setPower(0);
         }
-
     }
 
     public void setYeet(boolean yeet) {

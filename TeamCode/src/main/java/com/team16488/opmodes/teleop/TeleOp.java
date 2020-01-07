@@ -2,8 +2,6 @@ package com.team16488.opmodes.teleop;
 
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.team16488.automated_proccess.ArmRealese;
 import com.team16488.control.Control;
 import com.team16488.skystone.Robot;
 
@@ -34,16 +32,12 @@ public class TeleOp extends OpMode {
      * </p>
      */
 
-    private ArmRealese armRealese;
 
     private Control control;
 
     public void init() {
         robot = new Robot(this, telemetry);
         control = new Control(this, robot);
-        // armRealese = new ArmRealese(robot);
-        robot.lIftStageOne.LiftLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.lIftStageOne.LiftRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     }
 
     /**

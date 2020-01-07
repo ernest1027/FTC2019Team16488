@@ -15,36 +15,34 @@ import com.team16488.library.subsystems.Subsystem;
  * <p>github: https://github.com/StrRamsRobotics/SkyStone/tree/Parham-Baghbanbashi</p>
  */
 public class  AlternateIntake extends Subsystem {
-    public DigitalChannel blockDetection;
     public boolean state;
     public boolean ON = false;
-    private Servo alternateIntakeRaise, alternateIntakeClose;
-    private boolean down;
+    public Servo alternateIntakeRaise, alternateIntakeClose;
+    private boolean down, lock;
     private double pos;
 
     public AlternateIntake(HardwareMap map) {
-        blockDetection = map.digitalChannel.get("Block");
         alternateIntakeRaise = map.servo.get("alternate intake raise");
         alternateIntakeClose = map.servo.get("alternate intake close");
 
-        blockDetection.setMode(DigitalChannel.Mode.INPUT);
+
     }
 
     @Override
     public void update() {
         if (ON) {
             if (down) {
-                pos = 0;
-            } else {
                 pos = 0.5;
+            }else {
+                pos = 0;
             }
-            if (blockDetection.getState()) {
+            if (lock) {
                 state = true;
-                alternateIntakeClose.setPosition(pos);
-            }
-            if (!blockDetection.getState()) {
-                state = false;
                 alternateIntakeClose.setPosition(0.5);
+            }
+            if (lock) {
+                state = false;
+                alternateIntakeClose.setPosition(0);
             }
             alternateIntakeRaise.setPosition(pos);
         } else {
@@ -65,5 +63,9 @@ public class  AlternateIntake extends Subsystem {
 
     public void setDown(boolean down) {
         this.down = down;
+    }
+
+    public void setLock(boolean lock) {
+        this.lock = lock;
     }
 }

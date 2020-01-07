@@ -21,14 +21,17 @@ public class Control {
     }
 
     public void control() {
-        chassisControl.alternateIntakeControl();
-        chassisControl.driveControl();
-        chassisControl.pullerControl();
-        chassisControl.intakeControl();
+        chassisControl.joysticks();
+        chassisControl.buttons();
+        chassisControl.leftTriggers();
+        chassisControl.rightTrigger();
         chassisControl.printState();
 
-        subsystemControl.armControl();
-        subsystemControl.liftControl();
+        subsystemControl.dpad();
+        subsystemControl.buttons();
+        subsystemControl.joySticks();
+        subsystemControl.leftTriggers();
+        subsystemControl.rightTriggers();
         subsystemControl.printState(telemetry);
     }
 }

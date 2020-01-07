@@ -1,5 +1,7 @@
 package com.team16488.library.subsystems;
 
+import android.nfc.NfcAdapter;
+
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -11,8 +13,8 @@ public class LiftStageFourBar extends Subsystem {
     private static final String[] FOUR_BAR_NAMES = {"Left", "Right"};
     private double[] powers;
     private CRServo[] crServos;
-    private DigitalChannel extended;
     private boolean extend;
+    public boolean On;
 
     public LiftStageFourBar(HardwareMap map) {
         powers = new double[2];
@@ -22,11 +24,10 @@ public class LiftStageFourBar extends Subsystem {
             CRServo crServo = map.get(CRServo.class, FOUR_BAR_NAMES[i]);
             crServos[i] = crServo;
         }
-        extended = map.digitalChannel.get("Extended");
 
     }
 
-    private void setPowers(double power) {
+    public void setPowers(double power) {
         powers[0] = power;
         powers[1] = power;
     }
@@ -38,17 +39,18 @@ public class LiftStageFourBar extends Subsystem {
 
     @Override
     public void update() {
-        if (extend) {
-            setPowers(0.85);
-            if (extended.getState()) {
-                setPowers(0.1);
+        if(On) {
+            if (extend) {
+                setPowers(0.85);
+
+
             }
-
+            if (!extend) {
+                setPowers(-0.85);
+            }
+        }else{
+            setPowers(0);
         }
-        if (!extend) {
-            setPowers(-0.85);
-        }
-
         setCrServos(powers[0], powers[1]);
 
 

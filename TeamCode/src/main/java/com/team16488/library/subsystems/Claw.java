@@ -21,22 +21,12 @@ import com.team16488.library.subsystems.Subsystem;
  *
  * <p>github: https://github.com/StrRamsRobotics/SkyStone/tree/Parham-Baghbanbashi</p>
  */
-public class ArmHead extends Subsystem {
+public class Claw extends Subsystem {
     /**
      * This is the servo that controls the position of the Claw
      */
     private Servo claw;
-    /**
-     * This it the servo that controls the vertical movement of the Arm Head
-     */
-    private Servo verticalRotation;
-    /**
-     * This is the servo that controls the horizontal rotation of the Arm Head
-     */
-    private Servo horizontalRotation;
-    /**
-     * Sets the position of the claw(Open or Closed
-     */
+
     private boolean open = false;
     /** Position of the Vertical rotation servo and horizontal rotation servo*/
     private double verticalRotationPosition, horizontalRotationPosition;
@@ -50,10 +40,8 @@ public class ArmHead extends Subsystem {
      *
      * @param map This is the hardware map of the actual OpMode for the Arm Head
      */
-    public ArmHead(HardwareMap map) {
+    public Claw(HardwareMap map) {
         claw = map.servo.get("ch1");
-        verticalRotation = map.servo.get("VR");
-        horizontalRotation = map.servo.get("HR");
     }
 
     /**
@@ -75,8 +63,6 @@ public class ArmHead extends Subsystem {
 
         }
 
-        verticalRotation.setPosition(verticalRotationPosition);
-        horizontalRotation.setPosition(horizontalRotationPosition);
 
 
     }
@@ -91,21 +77,4 @@ public class ArmHead extends Subsystem {
 
     }
 
-    /**
-     * Changes the postion of the vertical servo on the head apparatus
-     *
-     * @param pos The desired position of the servo
-     */
-    public void setverticalRotation(double pos) {
-        this.verticalRotationPosition = pos;
-    }
-
-    /**
-     * Changes the position of the horizontal servo on the head apparatus
-     *
-     * @param horizontalRotationPosition the desired position of the horizontal servo
-     */
-    public void sethorizontalRotationPosition(double horizontalRotationPosition) {
-        this.horizontalRotationPosition = horizontalRotationPosition;
-    }
 }

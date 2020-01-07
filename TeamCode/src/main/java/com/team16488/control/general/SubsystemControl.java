@@ -2,8 +2,7 @@ package com.team16488.control.general;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.Gamepad;
-import com.team16488.automated_proccess.StackBlocks;
-import com.team16488.library.subsystems.ArmHead;
+import com.team16488.library.subsystems.Claw;
 import com.team16488.skystone.Robot;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
@@ -15,171 +14,114 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
  * @author Parham Baghbanbashi
  * <p>See: {@link com.team16488.skystone.Robot}</p>
  * <p>
- *     github: https://github.com/StrRamsRobotics/SkyStone/tree/Parham-Baghbanbashi
+ * github: https://github.com/StrRamsRobotics/SkyStone/tree/Parham-Baghbanbashi
  * </p>
- *
  */
 public class SubsystemControl {
     private Robot robot;
     /**
      * Sets the Virtical rotation power
      *
-     * @see ArmHead
+     * @see Claw
      */
     private double vPower;
     /**
      * Sets the Horizontal rotation power
      *
-     * @see ArmHead
+     * @see Claw
      */
     private double hPower;
     /**
      * Sets the position of the claw
      *
-     * @see ArmHead
+     * @see Claw
      */
     private boolean clawOpen = true;
 
-    private Gamepad subsystemDriver;
+    private Gamepad subsystemDriver, chassisControl;
 
-    private StackBlocks stackBlocks;
 
     private boolean shift;
 
     private double tickCount = 0;
 
-    private static double count = 1440;
-
-    private OpMode opMode;
-
 
     /**
      * Constructs the subsystemControl class in the main OpMode
      *
-     * @param opMode    The OpMode the class is being used in
-     * @param oprobot   The robot object in the acctual OpMode that it
-     *                  is being used in.
+     * @param opMode  The OpMode the class is being used in
+     * @param oprobot The robot object in the acctual OpMode that it
+     *                is being used in.
      */
     public SubsystemControl(OpMode opMode, Robot oprobot) {
         robot = oprobot;
         subsystemDriver = opMode.gamepad2;
-        this.opMode = opMode;
+        this.chassisControl = opMode.gamepad1;
+
+    }
+
+
+    public void dpad() {
+        if(chassisControl.dpad_up){
+            robot.stop();
+        }
+        if(chassisControl.dpad_down){
+            robot.start();
+        }
+    }
+
+
+    public void joySticks() {
+        if (chassisControl.right_stick_x == 0 && chassisControl.left_stick_y == 0 && chassisControl.left_stick_x == 0) {
+            double slowmode = 0.5;
+            robot.drive2.setVelocity(-subsystemDriver.left_stick_x * slowmode, -subsystemDriver.left_stick_y * slowmode, -subsystemDriver.right_stick_x * slowmode);
+        }
+        robot.lIftStageOne.setPower(subsystemDriver.right_stick_y);
 
 
     }
 
-    public void armControl() {
 
+    public void buttons() {
+        if (subsystemDriver.x) {
+
+        }
+        if (subsystemDriver.y) {
+        }
+        if (subsystemDriver.a) {
+        }
+        if (subsystemDriver.b){}
+    }
+
+
+    public void rightTriggers() {
         if (subsystemDriver.right_bumper) {
             clawOpen = true;
         }
-        if (clawOpen) {
-            robot.armHead.setOpen(true);
-        }
-        if (!clawOpen) {
-            robot.armHead.setOpen(false);
-        }
-
-        if (subsystemDriver.x) {
-            robot.liftStageFourBar.setExtend(false);
-        }
-        if (subsystemDriver.y) {
-            stackBlocks.stackBlocks(6);
-            if (robot.lIftStageOne.position > 6000){
-                robot.liftStageFourBar.setExtend(true);
-            }
-        }
-        if (subsystemDriver.a) {
-            robot.liftStageFourBar.setExtend(false);
-        }
-
-
-        if (subsystemDriver.dpad_up) {
-            vPower += 0.1;
-        }
-        if (subsystemDriver.dpad_down) {
-            vPower -= 0.1;
-        }
-        if (subsystemDriver.dpad_left) {
-            hPower += 0.1;
-        }
-
-        if (subsystemDriver.dpad_right) {
-            hPower -= 0.1;
-        }
-
-        robot.armHead.setverticalRotation(vPower);
-        robot.armHead.sethorizontalRotationPosition(hPower);
-
-
-        if (subsystemDriver.x) {
-            clawOpen = true;
-        }
-        if (subsystemDriver.b) {
+        if (subsystemDriver.right_trigger != 0) {
             clawOpen = false;
         }
         if (clawOpen) {
-            robot.armHead.setOpen(true);
+            robot.claw.setOpen(true);
         }
         if (!clawOpen) {
-            robot.armHead.setOpen(false);
+            robot.claw.setOpen(false);
         }
+
 
     }
 
-    public void liftControl() {
-
+    public void leftTriggers() {
         if (subsystemDriver.left_bumper) {
-            tickCount += 1440;
+            robot.liftStageFourBar.On = true;
             robot.liftStageFourBar.setExtend(true);
         }
-
-        if (subsystemDriver.left_trigger != 0) {
-            tickCount -= 1440;
+        else if (subsystemDriver.left_trigger != 0) {
+            robot.liftStageFourBar.On = true;
             robot.liftStageFourBar.setExtend(false);
+        }else{
+            robot.liftStageFourBar.On = false;
         }
-
-        if (subsystemDriver.right_trigger != 0) {
-            shift = true;
-        }
-
-
-        if (subsystemDriver.dpad_down) {
-            // here is the macro co5de 3
-            this.tickCount = count*3;
-        }
-        if (subsystemDriver.dpad_up) {
-            //here is the macro code 1
-            this.tickCount = count*1;
-        }
-        if (subsystemDriver.dpad_right) {
-            this.tickCount = count*4;
-        }
-        if (subsystemDriver.dpad_left) {
-            //here is the macro code 2
-            this.tickCount = count*2;
-        }
-
-        if (shift) {
-            if (subsystemDriver.dpad_down) {
-                // here is the macro code 7
-                this.tickCount = count*7;
-            }
-            if (subsystemDriver.dpad_up) {
-                //here is the macro code 5
-                this.tickCount = count*5;
-            }
-            if (subsystemDriver.dpad_right) {
-                //here is the macro code8
-                this.tickCount = count*8;
-            }
-            if (subsystemDriver.dpad_left) {
-                //here is the macro code 6
-                this.tickCount = count*6;
-            }
-        }
-        robot.lIftStageOne.setPosition(tickCount);
-
     }
 
     public void printState(Telemetry telemetry) {

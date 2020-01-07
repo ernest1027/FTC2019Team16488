@@ -27,6 +27,7 @@ public class LiftStageOne extends Subsystem {
      */
     public DcMotor LiftLeft, LiftRight;
 
+    public double power;
 
     /**
      * This is the constructor for the subsystem
@@ -36,11 +37,6 @@ public class LiftStageOne extends Subsystem {
     public LiftStageOne(HardwareMap map) {
         LiftLeft = map.dcMotor.get("LiftLeft");
         LiftRight = map.dcMotor.get("LiftRight");
-
-
-
-        LiftLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        LiftRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         LiftRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         LiftLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -57,33 +53,16 @@ public class LiftStageOne extends Subsystem {
      */
     @Override
     public void update() {
-        LiftLeft.setTargetPosition((int) position);
-        LiftRight.setTargetPosition((int) position);
-
-
-        LiftRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        LiftLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-        LiftRight.setPower(1);
-        LiftLeft.setPower(1);
-
-        while(LiftRight.isBusy()){
-            //wait
-        }
-        while(LiftRight.isBusy()){}
-
-        LiftRight.setPower(0);
-        LiftLeft.setPower(0);
-
-
+        LiftRight.setPower(position);
+        LiftLeft.setPower(position);
     }
 
     /**
      * Sets the speed of the LiftStageOne
      *
-     * @param position sets the position of the LiftStageOne
+     * @param power sets the power of the LiftStageOne
      */
-    public void setPosition(double position) {
+    public void setPower(double power) {
         this.position = (int) position;
     }
 

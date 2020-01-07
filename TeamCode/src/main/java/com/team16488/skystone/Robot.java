@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.util.ThreadPool;
 import com.team16488.library.subsystems.Subsystem;
 import com.team16488.library.subsystems.ColourSensor;
 import com.team16488.library.subsystems.AlternateIntake;
-import com.team16488.library.subsystems.ArmHead;
+import com.team16488.library.subsystems.Claw;
 import com.team16488.library.subsystems.Intake;
 import com.team16488.library.subsystems.IntakeRaise;
 import com.team16488.library.subsystems.LiftStageFourBar;
@@ -37,8 +37,8 @@ public class Robot {
     /** MecanumDrive object*/
     public MecanumDrive drive;
 
-    /** ArmHead subsystem object*/
-    public ArmHead armHead;
+    /** Claw subsystem object*/
+    public Claw claw;
     /** Puller subsystem object*/
     public Puller puller;
     /** Intake subsystem object */
@@ -151,10 +151,10 @@ public class Robot {
 */
 
         try{
-            armHead = new ArmHead(opMode.hardwareMap);
-            subsystems.add(armHead);
+            claw = new Claw(opMode.hardwareMap);
+            subsystems.add(claw);
         }catch(IllegalArgumentException e){
-            telemetry.addData("error runnning armHead", "look at robot or subsystem");
+            telemetry.addData("error runnning claw", "look at robot or subsystem");
 
         }
 
