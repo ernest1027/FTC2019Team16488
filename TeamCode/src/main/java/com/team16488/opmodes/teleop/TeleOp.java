@@ -39,7 +39,7 @@ public class TeleOp extends OpMode {
     public void init() {
         robot = new Robot(this, telemetry);
         control = new Control(this, robot);
-        robot.lIftStageOne.LiftLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
     }
 
     /**
