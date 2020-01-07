@@ -151,17 +151,15 @@ public class ChassisControl {
 
         if(chassisControl.b){
             robot.alternateIntake.setDown(true);
-            if(robot.alternateIntake.alternateIntakeRaise.getPosition() >= 1.0){
-                robot.alternateIntake.setLock(true);
-            }
+            robot.alternateIntake.setLock(true);
+
 
         }
 
         if(chassisControl.a){
             robot.alternateIntake.setLock(false);
-            if(robot.alternateIntake.alternateIntakeClose.getPosition() >= 0){
-                robot.alternateIntake.setDown(false);
-            }
+            robot.alternateIntake.setDown(false);
+
         }
 
 
