@@ -148,17 +148,17 @@ public class ChassisControl {
             robot.alternateIntake.ON = true;
         }
 
-        if(chassisControl.a){
+        if(chassisControl.b){
             robot.alternateIntake.setDown(true);
-            if(robot.alternateIntake.alternateIntakeRaise.getPosition() == 0.5){
+            if(robot.alternateIntake.alternateIntakeRaise.getPosition() >= 1.0){
                 robot.alternateIntake.setLock(true);
             }
 
         }
 
-        if(chassisControl.b){
+        if(chassisControl.a){
             robot.alternateIntake.setLock(false);
-            if(robot.alternateIntake.alternateIntakeClose.getPosition() == 0){
+            if(robot.alternateIntake.alternateIntakeClose.getPosition() >= 0){
                 robot.alternateIntake.setDown(false);
             }
         }
@@ -178,11 +178,8 @@ public class ChassisControl {
         if(chassisControl.left_trigger != 0){
             robot.intakeRaise.On = true;
             robot.intakeRaise.setYeet(true);
-        }else{
-            robot.intakeRaise.On = false;
         }
-
-        if(chassisControl.left_bumper){
+        else if(chassisControl.left_bumper){
             robot.intakeRaise.On = true;
             robot.intakeRaise.setYeet(false);
         }else{
@@ -193,18 +190,20 @@ public class ChassisControl {
 
     public void rightTrigger(){
         if(chassisControl.right_trigger > 0){
-            robot.intake.setOn(true);
+            this.On = true;
             robot.intake.setReverse(false);
 
         }
 
-        if(chassisControl.right_bumper){
-            On = !On;
+        if(On && chassisControl.right_bumper){
+            this.On = false;
+
+        }
+        if(!On && chassisControl.right_bumper){
+            this.On = true;
             robot.intake.setReverse(true);
         }
-        if(this.On){
-            robot.intake.setOn(false);
-        }
+        robot.intake.setOn(On);
     }
 
     public void printState() {
@@ -217,6 +216,9 @@ public class ChassisControl {
         telemetry.addData("Servos", "");
         telemetry.addData("Intake Raise l", robot.intakeRaise.leftyeet.getPower());
         telemetry.addData("Intake Raise R", robot.intakeRaise.rightyeet.getPower());
+        telemetry.addData("intake state", robot.intake.isOn);
+        telemetry.addData("alternate intake raise", robot.alternateIntake.alternateIntakeRaise.getPosition());
+        telemetry.addData("alternate intake Close", robot.alternateIntake.alternateIntakeClose.getPosition());
 
     }
 }

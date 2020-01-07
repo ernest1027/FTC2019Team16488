@@ -63,7 +63,7 @@ public class LiftStageOne extends Subsystem {
      * @param power sets the power of the LiftStageOne
      */
     public void setPower(double power) {
-        this.position = (int) position;
+        this.position = power;
     }
 
 

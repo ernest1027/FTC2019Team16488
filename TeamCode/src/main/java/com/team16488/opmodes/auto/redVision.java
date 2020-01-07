@@ -374,7 +374,7 @@ public class redVision extends LinearOpMode {
                     robot.LiftStageOne.setPower(-0.85);
                 }*/
                 robot.alternateIntake.setDown(false);
-                robot.lIftStageOne.setPosition(0);
+
                 init = true;
             }
             // check all the trackable targets to see which one (if any) is visible.

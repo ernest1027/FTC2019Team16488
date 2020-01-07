@@ -24,7 +24,7 @@ public class Intake extends Subsystem {
     /**
      * Sets the state of the intake. ON. OFF
      */
-    private boolean isOn = false;
+    public boolean isOn = false;
     /**
      * Sets if the intake is reverse
      */

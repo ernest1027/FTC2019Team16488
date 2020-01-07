@@ -21,7 +21,7 @@ public class Puller extends Subsystem {
     /**
      * Sets if the puller is down
      */
-    private boolean down = false;
+    private boolean down;
 
     /**
      * This is the Constructor for the Puller Class
@@ -41,16 +41,15 @@ public class Puller extends Subsystem {
      */
     @Override
     public void update() {
-        if (down == false) {
+        if (!down) {
             Right.setPosition(1.0);
-            Left.setPosition(-0.95);
+            Left.setPosition(1.0);
 
         }
 
-
-        if (down == true) {
-            Left.setPosition(-0.95);
-            Right.setPosition(1.0);
+        if (down) {
+            Left.setPosition(0.5);
+            Right.setPosition(0.5);
 
         }
 
@@ -59,12 +58,12 @@ public class Puller extends Subsystem {
     /**
      * Sets the portion of the stage pullers
      *
-     * @param down The state of the servos (down, UP)
+     * @param dowen The state of the servos (down, UP)
      *             this is what allows the update to
      *             change the servo position
      */
-    public void setDown(boolean down) {
-        this.down = down;
+    public void setDown(boolean dowen) {
+        this.down = dowen;
 
     }
 }

@@ -147,12 +147,12 @@ public class parkRed extends LinearOpMode {
             telemetry.update();
             if (!parked) {
                 robot.drive.setVelocity(0, 0.2, 0);
-                robot.lIftStageOne.setPosition(0);
+
             }
             if (sensorColor.red() > 500) {
                 robot.drive.setVelocity(0, 0, 0);
                 parked = true;
-                robot.lIftStageOne.setPosition(0);
+
             }
         }
 

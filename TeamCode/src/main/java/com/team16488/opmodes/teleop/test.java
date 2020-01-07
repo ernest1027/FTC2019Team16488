@@ -70,31 +70,31 @@ public class test extends OpMode {
     public void loop() {
         robot.alternateIntake.ON = true;
         if (gamepad1.a) {
-            robot.alternateIntake.setPos(0);
+            robot.puller.Left.setPosition(0);
 
 
         }
         if (gamepad1.b) {
-            robot.alternateIntake.setPos(0.4);
+            robot.puller.Left.setPosition(0.4);
 
         }
         if (gamepad1.x) {
-            robot.alternateIntake.setPos(0.5);
+            robot.puller.Left.setPosition(0.5);
         }
         if (gamepad1.y) {
-            robot.alternateIntake.setPos(1.0);
+            robot.puller.Left.setPosition(1.0);
         }
         if (gamepad1.left_bumper) {
-            robot.alternateIntake.setPos(-0.4);
+            robot.puller.Left.setPosition(-0.4);
         }
         if (gamepad1.right_bumper) {
-            robot.alternateIntake.setPos((-0.5));
+            robot.puller.Left.setPosition(-0.5);
         }
         if (gamepad1.start) {
-            robot.alternateIntake.setPos(-1.0);
+            robot.puller.Left.setPosition(-1.0);
         }
 
-        telemetry.addData("pos", robot.alternateIntake.getPos());
+        telemetry.addData("pos", robot.puller.Left.getPosition());
         telemetry.update();
 
     }

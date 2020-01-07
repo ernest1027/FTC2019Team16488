@@ -32,13 +32,13 @@ public class  AlternateIntake extends Subsystem {
     public void update() {
         if (ON) {
             if (down) {
-                pos = 0.5;
+                pos = 1.0;
             }else {
                 pos = 0;
             }
             if (lock) {
                 state = true;
-                alternateIntakeClose.setPosition(0.5);
+                alternateIntakeClose.setPosition(1.0);
             }
             if (lock) {
                 state = false;
