@@ -76,8 +76,9 @@ public class SubsystemControl {
             double slowmode = 0.5;
             robot.drive2.setVelocity(-subsystemDriver.left_stick_x * slowmode, -subsystemDriver.left_stick_y * slowmode, -subsystemDriver.right_stick_x * slowmode);
         }
-        robot.lIftStageOne.setPower(-subsystemDriver.right_stick_y);
-
+        if (robot.lIftStageOne.LiftLeft.getCurrentPosition() < 5000) {
+            robot.lIftStageOne.setPower(-subsystemDriver.right_stick_y);
+        }
 
     }
 
