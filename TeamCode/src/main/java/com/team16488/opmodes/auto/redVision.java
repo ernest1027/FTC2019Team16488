@@ -89,7 +89,7 @@ import static org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocaliz
  */
 
 
-@Autonomous(name = "TestAuto", group = "Linear Opmode")
+@Autonomous(name = "RedSideOneBlock", group = "Linear Opmode")
 public class redVision extends LinearOpMode {
 
     private static final VuforiaLocalizer.CameraDirection CAMERA_CHOICE = BACK;
