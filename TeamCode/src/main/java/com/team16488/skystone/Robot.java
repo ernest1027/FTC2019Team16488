@@ -3,7 +3,8 @@ package com.team16488.skystone;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.util.ThreadPool;
 import com.team16488.library.subsystems.Subsystem;
-import com.team16488.library.subsystems.ColourSensor;
+import com.team16488.library.subsystems.autonomous.ColourSensor;
+import com.team16488.library.subsystems.autonomous.Vision;
 import com.team16488.library.subsystems.AlternateIntake;
 import com.team16488.library.subsystems.Claw;
 import com.team16488.library.subsystems.Intake;
@@ -13,6 +14,7 @@ import com.team16488.library.subsystems.LiftStageOne;
 import com.team16488.library.subsystems.MecanumDrive;
 import com.team16488.library.subsystems.MecanumDrive2;
 import com.team16488.library.subsystems.Puller;
+import com.team16488.library.subsystems.autonomous.ColourSensor;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
@@ -57,6 +59,8 @@ public class Robot {
     public LiftStageFourBar liftStageFourBar;
 
     public IntakeRaise intakeRaise;
+
+    public Vision vision;
 
     /** The executor service that is responsible for the submitting of tasks (subsystem.update()) */
     private ExecutorService subsystemUpdateExecutor;
@@ -188,14 +192,21 @@ public class Robot {
         } catch (IllegalArgumentException e) {
         }
 
-        /*
+
         try {
             colourSensor = new ColourSensor((opMode.hardwareMap));
             subsystems.add(colourSensor);
         } catch (IllegalArgumentException e) {
 
         }
-*/
+
+        try {
+            vision = new Vision((opMode.hardwareMap));
+            subsystems.add(vision);
+        } catch (IllegalArgumentException e) {
+
+        }
+
         subsystemUpdateExecutor = ThreadPool.newSingleThreadExecutor("subsystem update");
 
     }
