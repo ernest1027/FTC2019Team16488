@@ -59,7 +59,7 @@ public class Claw extends Subsystem {
 
 
         if (open) {
-            claw.setPosition(-1.0);
+            claw.setPosition(0.3);
 
         }
 

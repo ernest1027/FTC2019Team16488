@@ -42,11 +42,10 @@ public class Puller extends Subsystem {
     @Override
     public void update() {
         if (!down) {
-            Right.setPosition(1.0);
-            Left.setPosition(-0.95);
+            Right.setPosition(0.85);
+            Left.setPosition(-0.85);
 
         }
-
         if (down) {
             Left.setPosition(1.0);
             Right.setPosition(0);

@@ -34,7 +34,11 @@ public class ChassisControl {
 
     private boolean On = false;
 
-    private boolean yeet = false;
+
+    private boolean pressedA;
+    private boolean pressedB;
+    private boolean arm;
+    private boolean lock;
 
     private boolean pressedRT = false;
     private boolean pressedRB = false;
@@ -149,19 +153,37 @@ public class ChassisControl {
             robot.alternateIntake.ON = true;
         }
 
+        if(!pressedB){
+            if(chassisControl.b){
+                arm = !arm;
+                pressedB = true;
+                for(int i = 0; i<600; i++){
+                    telemetry.addData("delay", i);
+                }
+            }
+        }
         if(chassisControl.b){
-            robot.alternateIntake.setDown(true);
-            robot.alternateIntake.setLock(true);
-
-
+            pressedB = false;
+            for(int i = 0; i<600; i++){
+                telemetry.addData("delay", i);
+            }
         }
+        robot.alternateIntake.setDown(arm);
 
+        if(!pressedA){
+            lock = !lock;
+            pressedA = true;
+            for(int i = 0; i<600; i++){
+                telemetry.addData("delay", i);
+            }
+        }
         if(chassisControl.a){
-            robot.alternateIntake.setLock(false);
-            robot.alternateIntake.setDown(false);
-
+            pressedA = false;
+            for(int i = 0; i<600; i++){
+                telemetry.addData("delay", i);
+            }
         }
-
+        robot.alternateIntake.setLock(lock);
 
         if(chassisControl.x){
             robot.puller.setDown(true);
@@ -169,6 +191,17 @@ public class ChassisControl {
 
         if(chassisControl.y){
             robot.puller.setDown(false);
+        }
+
+        if(chassisControl.dpad_up){
+            robot.lIftStageOne.setPower(0);
+            robot.intake.setOn(false);
+            robot.liftStageFourBar.On = false;
+            robot.alternateIntake.ON = false;
+            robot.intakeRaise.On = false;
+            robot.claw.setOpen(false);
+            robot.stop();
+            opMode.stop();
         }
 
     }
@@ -231,6 +264,8 @@ public class ChassisControl {
         telemetry.addData("intake state", robot.intake.isOn);
         telemetry.addData("alternate intake raise", robot.alternateIntake.alternateIntakeRaise.getPosition());
         telemetry.addData("alternate intake Close", robot.alternateIntake.alternateIntakeClose.getPosition());
+        telemetry.addData("puller posR",robot.puller.Right.getPosition() );
+        telemetry.addData("puller posL",robot.puller.Left.getPosition() );
 
 
     }
