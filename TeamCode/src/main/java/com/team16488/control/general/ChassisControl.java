@@ -189,14 +189,15 @@ public class ChassisControl {
 
     public void rightTrigger(){
         if(!pressedRT) {
-            if (chassisControl.right_trigger > 0) {
-               On = !On;
+            if (chassisControl.right_trigger > 0)
+            {
+                On = !On;
                 pressedRT = true;
             }
 
 
         }
-        if(chassisControl.right_trigger== 0)
+        if(chassisControl.right_trigger == 0)
         {
             pressedRT = false;
         }
