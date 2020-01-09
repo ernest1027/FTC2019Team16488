@@ -200,12 +200,12 @@ public class Robot {
 
         }
 
-        try {
+     /*   try {
             vision = new Vision((opMode.hardwareMap));
             subsystems.add(vision);
         } catch (IllegalArgumentException e) {
 
-        }
+        }*/
 
         subsystemUpdateExecutor = ThreadPool.newSingleThreadExecutor("subsystem update");
 

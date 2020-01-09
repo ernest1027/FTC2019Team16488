@@ -91,13 +91,13 @@ public class parkRedWithSubsystem extends LinearOpMode {
 
             telemetry.update();
             if (!parked) {
-                robot.drive.setVelocity(0, 0.2, 0);
-                robot.LIftStageOne.setPosition(0);
+                robot.drive2.setVelocity(0, 0.2, 0);
+
             }
             if (robot.colourSensor.getRed() > 500) {
-                robot.drive.setVelocity(0, 0, 0);
+                robot.drive2.setVelocity(0, 0, 0);
                 parked = true;
-                robot.LIftStageOne.setPosition(0);
+
             }
         }
 

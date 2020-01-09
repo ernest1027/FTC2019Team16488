@@ -211,7 +211,7 @@ public class ChassisControl {
         telemetry.addData("----------------------------------------------", " ");
         telemetry.addData("Motors","");
         for (int i = 0; i < 4; i++) {
-            telemetry.addData("Motor" + String.valueOf(i), robot.drive2.motors[i].getPower());
+
         }
         telemetry.addData("Servos", "");
         telemetry.addData("Intake Raise l", robot.intakeRaise.leftyeet.getPower());

@@ -42,14 +42,6 @@ import com.team16488.skystone.Robot;
 public class RedSideOneBlock extends LinearOpMode {
 
 
-    private boolean align = false;
-    private boolean close = false;
-    private boolean backedUp = false;
-    private boolean otherSide = false;
-    private boolean parked = false;
-    // Class Members
-
-    private int asd = 0;
     private Robot robot;
     private ElapsedTime runtime = new ElapsedTime();
     public enum AutonomousStates
@@ -82,15 +74,15 @@ public class RedSideOneBlock extends LinearOpMode {
 
                 }
                 if (robot.vision.angleFromPhone > 91) {
-                    robot.drive.setVelocity(0, -0.4, 0);
+                    robot.drive2.setVelocity(0, -0.4, 0);
                 }
                 if (robot.vision.angleFromPhone < 89) {
-                    robot.drive.setVelocity(0, 0.4, 0);
+                    robot.drive2.setVelocity(0, 0.4, 0);
                 }
             }
             else
             {
-                robot.drive.setVelocity(0, -0.3, 0);
+                robot.drive2.setVelocity(0, -0.3, 0);
             }
         }
         return AutonomousStates.ALIGNED;
@@ -160,6 +152,7 @@ public class RedSideOneBlock extends LinearOpMode {
             if (robot.vision.isTargetVisible()) {
 
                 telemetry.addData("Relative Angle", robot.vision.getRelativeAngle());
+                telemetry.addData("Angle From Phone", robot.vision.angleFromPhone);
                 telemetry.addData("Total distance", robot.vision.getTotalDistance());
                 telemetry.addData("Alpha", robot.colourSensor.getAlpha());
                 telemetry.addData("Red  ", robot.colourSensor.getRed());
