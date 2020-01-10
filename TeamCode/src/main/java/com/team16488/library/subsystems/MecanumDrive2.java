@@ -36,10 +36,10 @@ public class MecanumDrive2 extends Subsystem {
     }
 
     private void setMotors(double FL, double FR, double BL, double BR) {
-        motors[0].setVelocity(FR*1440);
-        motors[3].setVelocity(BR*1440);
-        motors[1].setVelocity(FL*1440);
-        motors[2].setVelocity(BL*1440);
+        motors[0].setVelocity(FR*14000);
+        motors[3].setVelocity(BR*14400);
+        motors[1].setVelocity(FL*14400);
+        motors[2].setVelocity(BL*14400);
     }
 
     public void Stop() {

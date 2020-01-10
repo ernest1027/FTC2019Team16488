@@ -42,7 +42,7 @@ import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.team16488.library.subsystems.Subsystem;
-import com.team16488.skystone.Robot;
+
 
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
@@ -182,7 +182,7 @@ public class redVision extends LinearOpMode {
     public redVision.AutonomousStates Aligning()
     {
 
-        while(true || !isStopped)
+        while(true && opModeIsActive())
         {
             if(targetVisible)
             {
@@ -231,7 +231,7 @@ public class redVision extends LinearOpMode {
     }
     public redVision.AutonomousStates Parking()
     {
-        while(true){
+        while(true && opModeIsActive()){
             mecanumDrive.setVelocity(0, -0.2, 0);
             if(sensorColor.red()>500) break;
         }
@@ -249,7 +249,7 @@ public class redVision extends LinearOpMode {
          * We can pass Vuforia the handle to a camera preview resource (on the RC phone);
          * If no camera monitor is desired, use the parameter-less constructor instead (commented out below).
          */
-        Robot robot = new Robot(this, telemetry);
+
         webcamName = hardwareMap.get(WebcamName.class, "Webcam 1");
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters(cameraMonitorViewId);

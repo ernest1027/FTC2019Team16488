@@ -157,7 +157,7 @@ public class ChassisControl {
             if(chassisControl.b){
                 arm = !arm;
                 pressedB = true;
-                for(int i = 0; i<1000; i++){
+                for(int i = 0; i<26000; i++){
                     telemetry.addData("delay", i);
                     pressedB = true;
                 }
@@ -165,7 +165,7 @@ public class ChassisControl {
         }
         if(chassisControl.b){
             pressedB = false;
-            for(int i = 0; i < 1600 ; i++){
+            for(int i = 0; i < 26000 ; i++){
                 telemetry.addData("delay", i);
                 pressedB = false;
             }
@@ -174,7 +174,7 @@ public class ChassisControl {
 
         if(!pressedA){
             lock = !lock;
-            for(int i = 0; i < 1600; i++){
+            for(int i = 0; i < 26000; i++){
                 telemetry.addData("delay", i);
                 pressedA = true;
             }
@@ -183,7 +183,7 @@ public class ChassisControl {
         }
         if(chassisControl.a){
             pressedA = false;
-            for(int i = 0; i<600; i++){
+            for(int i = 0; i<26000; i++){
                 telemetry.addData("delay", i);
                 pressedA = false;
             }
