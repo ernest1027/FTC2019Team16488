@@ -157,30 +157,35 @@ public class ChassisControl {
             if(chassisControl.b){
                 arm = !arm;
                 pressedB = true;
-                for(int i = 0; i<600; i++){
+                for(int i = 0; i<1000; i++){
                     telemetry.addData("delay", i);
+                    pressedB = true;
                 }
             }
         }
         if(chassisControl.b){
             pressedB = false;
-            for(int i = 0; i<600; i++){
+            for(int i = 0; i < 1600 ; i++){
                 telemetry.addData("delay", i);
+                pressedB = false;
             }
         }
         robot.alternateIntake.setDown(arm);
 
         if(!pressedA){
             lock = !lock;
-            pressedA = true;
-            for(int i = 0; i<600; i++){
+            for(int i = 0; i < 1600; i++){
                 telemetry.addData("delay", i);
+                pressedA = true;
             }
+            pressedA = true;
+
         }
         if(chassisControl.a){
             pressedA = false;
             for(int i = 0; i<600; i++){
                 telemetry.addData("delay", i);
+                pressedA = false;
             }
         }
         robot.alternateIntake.setLock(lock);
@@ -256,8 +261,10 @@ public class ChassisControl {
         telemetry.addData("----------------------------------------------", " ");
         telemetry.addData("Motors","");
         for (int i = 0; i < 4; i++) {
-            telemetry.addData("Motor" + String.valueOf(i), robot.drive2.motors[i].getPower());
+            telemetry.addData("Motor" + String.valueOf(i), robot.drive2.motors[i].getVelocity() );
         }
+        telemetry.addData("intake speed L", robot.lIftStageOne.LiftLeft.getVelocity());
+        telemetry.addData("intake speed R", robot.lIftStageOne.LiftRight.getVelocity());
         telemetry.addData("Servos", "");
         telemetry.addData("Intake Raise l", robot.intakeRaise.leftyeet.getPower());
         telemetry.addData("Intake Raise R", robot.intakeRaise.rightyeet.getPower());

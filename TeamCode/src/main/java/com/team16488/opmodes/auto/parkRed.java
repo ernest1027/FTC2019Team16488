@@ -37,6 +37,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DistanceSensor;
+import com.team16488.library.subsystems.MecanumDrive;
 import com.team16488.skystone.Robot;
 
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
@@ -90,7 +91,7 @@ public class parkRed extends LinearOpMode {
     @Override
     public void runOpMode() {
         boolean parked = false;
-        Robot robot = new Robot(this, telemetry);
+        MecanumDriveAuto driveAuto = new MecanumDriveAuto(hardwareMap);
         // get a reference to the color sensor.
         sensorColor = hardwareMap.get(ColorSensor.class, "colour");
 
@@ -114,7 +115,7 @@ public class parkRed extends LinearOpMode {
 
         // wait for the start button to be pressed.
         waitForStart();
-        robot.start();
+
         // loop and read the RGB and distance data.
         // Note we use opModeIsActive() as our loop condition because it is an interruptible method.
         while (opModeIsActive()) {
@@ -146,11 +147,11 @@ public class parkRed extends LinearOpMode {
 
             telemetry.update();
             if (!parked) {
-                robot.drive.setVelocity(0, 0.2, 0);
+                driveAuto.setVelocity(0, 0.2, 0);
 
             }
             if (sensorColor.red() > 500) {
-                robot.drive.setVelocity(0, 0, 0);
+                driveAuto.setVelocity(0, 0, 0);
                 parked = true;
 
             }
@@ -162,7 +163,7 @@ public class parkRed extends LinearOpMode {
                 relativeLayout.setBackgroundColor(Color.WHITE);
             }
         });
-        robot.stop();
+
     }
 
 }

@@ -4,6 +4,7 @@ package com.team16488.library.subsystems;
 import android.service.autofill.DateValueSanitizer;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.team16488.library.subsystems.Subsystem;
@@ -25,7 +26,7 @@ public class LiftStageOne extends Subsystem {
     /**
      * The servo groups that will be Controlled
      */
-    public DcMotor LiftLeft, LiftRight;
+    public DcMotorEx LiftLeft, LiftRight;
 
     public double power;
 
@@ -35,8 +36,8 @@ public class LiftStageOne extends Subsystem {
      * @param map This is the hardware map of the actual OpMode for the LiftStageOne Class
      */
     public LiftStageOne(HardwareMap map) {
-        LiftLeft = map.dcMotor.get("LiftLeft");
-        LiftRight = map.dcMotor.get("LiftRight");
+        LiftLeft = (DcMotorEx)map.dcMotor.get("LiftLeft");
+        LiftRight = (DcMotorEx)map.dcMotor.get("LiftRight");
 
 
         LiftRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -54,8 +55,8 @@ public class LiftStageOne extends Subsystem {
      */
     @Override
     public void update() {
-        LiftRight.setPower(position);
-        LiftLeft.setPower(position);
+        LiftRight.setVelocity(position * 1440);
+        LiftLeft.setVelocity(position * 1440);
     }
 
     /**

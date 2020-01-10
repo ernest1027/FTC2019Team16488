@@ -81,7 +81,7 @@ public class SubsystemControl {
             robot.drive2.setVelocity(-subsystemDriver.left_stick_x * slowmode, -subsystemDriver.left_stick_y * slowmode, -subsystemDriver.right_stick_x * slowmode);
         }
 
-        if (robot.lIftStageOne.LiftLeft.getCurrentPosition() > 2000) {
+        if (robot.lIftStageOne.LiftLeft.getCurrentPosition() > 3210) {
             if (subsystemDriver.right_stick_y < 0) {
                 robot.lIftStageOne.setPower(0);
             } else {
@@ -149,6 +149,7 @@ public class SubsystemControl {
         telemetry.addData("Gamepad2 right bumper", subsystemDriver.right_bumper);
         telemetry.addData("Gamepad 2 left bumper", subsystemDriver.left_bumper);
         telemetry.addData("Ticks", robot.lIftStageOne.LiftLeft.getCurrentPosition());
+        telemetry.addData("Lift Velocity", robot.lIftStageOne.LiftLeft.getVelocity());
 
 
     }

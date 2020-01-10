@@ -36,8 +36,12 @@ import android.view.View;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.ColorSensor;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.DistanceSensor;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.ElapsedTime;
+import com.team16488.library.subsystems.Subsystem;
 import com.team16488.skystone.Robot;
 
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
@@ -58,6 +62,11 @@ import static org.firstinspires.ftc.robotcore.external.navigation.AxesOrder.XYZ;
 import static org.firstinspires.ftc.robotcore.external.navigation.AxesOrder.YZX;
 import static org.firstinspires.ftc.robotcore.external.navigation.AxesReference.EXTRINSIC;
 import static org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer.CameraDirection.BACK;
+
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.team16488.library.subsystems.Subsystem;
 
 /**
  * This 2019-2020 OpMode illustrates the basics of using the Vuforia localizer to determine
@@ -89,7 +98,7 @@ import static org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocaliz
  */
 
 
-@Autonomous(name = "TestAuto", group = "Linear Opmode")
+@Autonomous(name = "redVision1", group = "Linear Opmode")
 public class redVision extends LinearOpMode {
 
     private static final VuforiaLocalizer.CameraDirection CAMERA_CHOICE = BACK;
@@ -137,6 +146,7 @@ public class redVision extends LinearOpMode {
     private boolean backedUp = false;
     private boolean otherSide = false;
     private boolean parked = false;
+    private boolean isStopped = false;
     // Class Members
     private OpenGLMatrix lastLocation = null;
     private VuforiaLocalizer vuforia = null;
@@ -145,9 +155,91 @@ public class redVision extends LinearOpMode {
     private float phoneYRotate = 0;
     private float phoneZRotate = 0;
     private int asd = 0;
+    private double angleFromPhone;
 
     private ElapsedTime runtime = new ElapsedTime();
+    private MecanumDriveAuto mecanumDrive;
 
+    public enum AutonomousStates
+    {
+        STARTED,
+        DRIVEN_TO_BLOCKS,
+        ALIGNED,
+        PICKED_UP_BLOCK,
+        DRIVEN_TO_BRIDGE,
+        DROPPED,
+        PARKED,
+    }
+
+
+    public redVision.AutonomousStates DrivingToBlocks()
+    {
+        mecanumDrive.setVelocity(-0.7, 0, 0);
+        sleep(500);
+        mecanumDrive.setVelocity(0,0,0);
+        return redVision.AutonomousStates.DRIVEN_TO_BLOCKS;
+    }
+    public redVision.AutonomousStates Aligning()
+    {
+
+        while(true || !isStopped)
+        {
+            if(targetVisible)
+            {
+                if (89 <= angleFromPhone && angleFromPhone <= 91) {
+                    break;
+
+                }
+                if (angleFromPhone > 91) {
+                    mecanumDrive.setVelocity(0, -0.4, 0);
+                }
+                if (angleFromPhone < 89) {
+                    mecanumDrive.setVelocity(0, 0.4, 0);
+                }
+                if (isStopRequested()) {
+                    isStopped = true;
+                    break;
+                }
+            }
+            else
+            {
+                mecanumDrive.setVelocity(0, -0.3, 0);
+            }
+        }
+        return AutonomousStates.ALIGNED;
+    }
+    public redVision.AutonomousStates PickingUpBlock()
+    {
+        //alternateIntake.setDown(true);
+        sleep(500);
+        return AutonomousStates.PICKED_UP_BLOCK;
+    }
+    public redVision.AutonomousStates DrivingToBridge()
+    {
+        mecanumDrive.setVelocity(0.7, 0, 0);
+        sleep(500);
+        mecanumDrive.setVelocity(0,0.5,0);
+        sleep(2000);
+        mecanumDrive.setVelocity(0,0,0);
+        return AutonomousStates.DRIVEN_TO_BRIDGE;
+    }
+    public redVision.AutonomousStates Dropping()
+    {
+        //alternateIntake.setDown(false);
+        sleep(500);
+        return AutonomousStates.DROPPED;
+    }
+    public redVision.AutonomousStates Parking()
+    {
+        while(true){
+            mecanumDrive.setVelocity(0, -0.2, 0);
+            if(sensorColor.red()>500) break;
+        }
+
+        mecanumDrive.setVelocity(0, 0, 0);
+        return AutonomousStates.PARKED;
+
+    }
     @Override
     public void runOpMode() {
 
@@ -345,7 +437,7 @@ public class redVision extends LinearOpMode {
         /**  Let all the trackable listeners know where the phone is.  */
 //        for (VuforiaTrackable trackable : allTrackables) {
         ((VuforiaTrackableDefaultListener) stoneTarget.getListener()).setPhoneInformation(robotFromCamera, parameters.cameraDirection);
-
+        mecanumDrive = new MecanumDriveAuto(hardwareMap);
 
         // WARNING:
         // In this sample, we do not wait for PLAY to be pressed.  Target Tracking is started immediately when INIT is pressed.
@@ -358,22 +450,14 @@ public class redVision extends LinearOpMode {
         // Note: To use the remote camera preview:
         // AFTER you hit Init on the Driver Station, use the "options menu" to select "Camera Stream"
         // Tap the preview window to receive a fresh image.
-
+        AutonomousStates currentState = AutonomousStates.STARTED;
         while (opModeIsActive()) {
             if (!init) {
-                robot.start();
+
                 runtime.reset();
                 targetsSkyStone.activate();
-                double a = runtime.seconds();
-                /*while (runtime.seconds() < (a + 1)) {
-                    robot.LiftStageOne.setPower(0.85);
 
-                }/*
-                robot.alternateIntake.setDown(true);
-               /* while (runtime.seconds() < (a + 2)) {
-                    robot.LiftStageOne.setPower(-0.85);
-                }*/
-                robot.alternateIntake.setDown(false);
+
 
                 init = true;
             }
@@ -411,7 +495,7 @@ public class redVision extends LinearOpMode {
 
                 // get the rotation of the robot
                 Orientation rotation = Orientation.getOrientation(lastLocation, EXTRINSIC, XYZ, DEGREES);
-                double angleFromPhone = rotation.thirdAngle;
+                angleFromPhone = rotation.thirdAngle;
                 // output the 'Z' angle rotation, or heading of the robot
                 // this angle goes from a line parallel to the x axis and the current camera rotation
                 telemetry.addData("Rot (Heading)", angleFromPhone);
@@ -445,92 +529,62 @@ public class redVision extends LinearOpMode {
                 telemetry.addData("Green", sensorColor.green());
                 telemetry.addData("Blue ", sensorColor.blue());
                 telemetry.addData("Hue", hsvValues[0]);
+                telemetry.addData("Stop?", isStopRequested());
 
                 // change the background color to match the color detected by the RGB sensor.
                 // pass a reference to the hue, saturation, and value array as an argument
                 // to the HSVToColor method.
                 relativeLayout.post(new Runnable() {
+                    @Override
                     public void run() {
                         relativeLayout.setBackgroundColor(Color.HSVToColor(0xff, values));
                     }
                 });
 
                 telemetry.update();
-                if (89 <= angleFromPhone && angleFromPhone <= 91) {
-                    align = true;
 
-                }
-                if (!align && angleFromPhone > 91) {
-                    robot.drive.setVelocity(0, -0.4, 0);
-                }
-                if (!align && angleFromPhone < 89) {
-                    robot.drive.setVelocity(0, 0.4, 0);
-                }
-                if (align && !close) {
-                    robot.drive.setVelocity(-0.7, 0, 0);
-                }
-
-                if (3.35 >= delta_x && 3.15 <= delta_x) {
-                    close = true;
-                }
 
             } else {
                 telemetry.addData("Visible Target", "none");
-                if (!align) {
-                    robot.drive.setVelocity(0, -0.3, 0);
-                }
+
 
 
             }
 
-            if (align && close && !backedUp) {
-                robot.alternateIntake.setDown(true);
-                if (b == 0) {
-                    b = runtime.seconds();
-                }
 
+            switch (currentState) {
+                case STARTED:
+                    currentState = DrivingToBlocks();
+                    break;
+                case DRIVEN_TO_BLOCKS:
+                    currentState = Aligning();
+                    break;
+                case ALIGNED:
+                    currentState = PickingUpBlock();
+                    break;
+                case PICKED_UP_BLOCK:
+                    currentState = DrivingToBridge();
+                    break;
+                case DRIVEN_TO_BRIDGE:
+                    currentState = Dropping();
+                    break;
+                case DROPPED:
+                    currentState = Parking();
+                    break;
             }
-            if (align && close && !backedUp && runtime.seconds() > (b + 0.5)) {
-                robot.drive.setVelocity(0.7, 0, 0);
-                if (c == 0) {
-                    c = runtime.seconds();
-                }
-
-            }
-            if (align && close && !backedUp && runtime.seconds() > (c + 1)) {
-                robot.drive.setVelocity(0, 0, 0);
-                backedUp = true;
-            }
-
-            if (align && close && backedUp && !otherSide) {
-                robot.drive.setVelocity(0.0, 0.5, 0.0);
-                if (d == 0) {
-                    d = runtime.seconds();
-                }
-
-            }
-            if (align && close && backedUp && runtime.seconds() > (d + 0.5)) {
-                robot.drive.setVelocity(0, 0, 0);
-                otherSide = true;
-                robot.alternateIntake.setDown(false);
-            }
-            if (align && close && backedUp && otherSide && sensorColor.red() < 500) {
-                robot.drive.setVelocity(0, -0.3, 0);
-            }
-            if (align && close && backedUp && otherSide && sensorColor.red() > 500)
-
-
-                telemetry.addData("align", align);
-            telemetry.addData("close", close);
-
             telemetry.update();
-            robot.drive.update();
+
 
         }
+        mecanumDrive.setVelocity(0,0,0);
+        targetsSkyStone.deactivate();
 
         // Disable Tracking when we are done;
-        targetsSkyStone.deactivate();
-        robot.stop();
+//        stop();
+
+
     }
+
+
 }
 
