@@ -42,7 +42,7 @@ import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.team16488.library.subsystems.Subsystem;
-import com.team16488.skystone.Robot;
+
 
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
@@ -146,6 +146,7 @@ public class redVision extends LinearOpMode {
     private boolean backedUp = false;
     private boolean otherSide = false;
     private boolean parked = false;
+    private boolean isStopped = false;
     // Class Members
     private OpenGLMatrix lastLocation = null;
     private VuforiaLocalizer vuforia = null;
@@ -157,7 +158,7 @@ public class redVision extends LinearOpMode {
     private double angleFromPhone;
 
     private ElapsedTime runtime = new ElapsedTime();
-    private MecanumDrive mecanumDrive;
+    private MecanumDriveAuto mecanumDrive;
 
     public enum AutonomousStates
     {
@@ -180,7 +181,8 @@ public class redVision extends LinearOpMode {
     }
     public redVision.AutonomousStates Aligning()
     {
-        while(true)
+
+        while(true && opModeIsActive())
         {
             if(targetVisible)
             {
@@ -193,6 +195,10 @@ public class redVision extends LinearOpMode {
                 }
                 if (angleFromPhone < 89) {
                     mecanumDrive.setVelocity(0, 0.4, 0);
+                }
+                if (isStopRequested()) {
+                    isStopped = true;
+                    break;
                 }
             }
             else
@@ -225,7 +231,7 @@ public class redVision extends LinearOpMode {
     }
     public redVision.AutonomousStates Parking()
     {
-        while(true){
+        while(true && opModeIsActive()){
             mecanumDrive.setVelocity(0, -0.2, 0);
             if(sensorColor.red()>500) break;
         }
@@ -243,7 +249,7 @@ public class redVision extends LinearOpMode {
          * We can pass Vuforia the handle to a camera preview resource (on the RC phone);
          * If no camera monitor is desired, use the parameter-less constructor instead (commented out below).
          */
-        Robot robot = new Robot(this, telemetry);
+
         webcamName = hardwareMap.get(WebcamName.class, "Webcam 1");
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters(cameraMonitorViewId);
@@ -431,7 +437,7 @@ public class redVision extends LinearOpMode {
         /**  Let all the trackable listeners know where the phone is.  */
 //        for (VuforiaTrackable trackable : allTrackables) {
         ((VuforiaTrackableDefaultListener) stoneTarget.getListener()).setPhoneInformation(robotFromCamera, parameters.cameraDirection);
-        mecanumDrive = new MecanumDrive(hardwareMap);
+        mecanumDrive = new MecanumDriveAuto(hardwareMap);
 
         // WARNING:
         // In this sample, we do not wait for PLAY to be pressed.  Target Tracking is started immediately when INIT is pressed.
@@ -523,11 +529,13 @@ public class redVision extends LinearOpMode {
                 telemetry.addData("Green", sensorColor.green());
                 telemetry.addData("Blue ", sensorColor.blue());
                 telemetry.addData("Hue", hsvValues[0]);
+                telemetry.addData("Stop?", isStopRequested());
 
                 // change the background color to match the color detected by the RGB sensor.
                 // pass a reference to the hue, saturation, and value array as an argument
                 // to the HSVToColor method.
                 relativeLayout.post(new Runnable() {
+                    @Override
                     public void run() {
                         relativeLayout.setBackgroundColor(Color.HSVToColor(0xff, values));
                     }
@@ -568,91 +576,11 @@ public class redVision extends LinearOpMode {
 
 
         }
-        
         mecanumDrive.setVelocity(0,0,0);
-        // Disable Tracking when we are done;
         targetsSkyStone.deactivate();
 
-    }
-
-
-
-    /**
-     * This Class is what controls the Drive Train
-     * in this case the drive train is a mecanum drive.
-     *
-     * @author Parham Baghbanbashi: parhambagh@gmail.com
-     * @author Ernest Wong
-     * <p>github: https://github.com/StrRamsRobotics/SkyStone/tree/Parham-Baghbanbashi</p>
-     */
-    class MecanumDrive{
-        /**
-         * The Front Left Motor
-         */
-        private DcMotor FrontLeftMotor;
-        /**
-         * The Front Right Motor
-         */
-        private DcMotor FrontRightMotor;
-        /**
-         * The Rear Right Motor
-         */
-        private DcMotor RearRightMotor;
-        /**
-         * The Rear Left Motor
-         */
-        private DcMotor RearLeftMotor;
-
-        /**
-         * Sets the power/speed of the Front Right Motor
-         */
-        private double FrontRightpower;
-        /**
-         * Sets the power/speed of the Front Left Motor
-         */
-        private double FrontLeftpower;
-        /**
-         * Sets the power/speed of the Rear Right Motor
-         */
-        private double RearRightpower;
-        /** Sets the power/speed of the Rear Left Motor*/
-        private double RearLeftpower;
-
-        /**
-         * This is the Constructor of the Mecanum Drive class
-         * <p>
-         *     This constructor allows the robot to find not only the class
-         *     but also the motors and necessary hardware components
-         * </p>
-         *
-         * @param map This is the hardware map of the actual OpMode for the Mecanum Drive
-         */
-        public MecanumDrive(HardwareMap map) {
-            FrontLeftMotor = map.dcMotor.get("FL");
-            FrontRightMotor = map.dcMotor.get("FR");
-            RearRightMotor = map.dcMotor.get("BR");
-            RearLeftMotor = map.dcMotor.get("BL");
-            FrontLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-            RearLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-
-        }
-
-
-        public void setVelocity(double leftstickx, double leftsticky, double rightstickx) {
-            double r = Math.hypot(leftstickx, leftsticky);
-            double robotAngle = Math.atan2(leftsticky, leftstickx) - Math.PI / 4;
-
-            final double v1 = r * Math.cos(robotAngle) + rightstickx;
-            final double v2 = r * Math.sin(robotAngle) - rightstickx;
-            final double v3 = r * Math.sin(robotAngle) + rightstickx;
-            final double v4 = r * Math.cos(robotAngle) - rightstickx;
-
-            this.FrontLeftMotor.setPower(v1);
-            this.FrontRightMotor.setPower(v2);
-            this.RearLeftMotor.setPower(v3);
-            this.RearRightMotor.setPower(v4);
-
-        }
+        // Disable Tracking when we are done;
+//        stop();
 
 
     }

@@ -63,11 +63,15 @@ public class SubsystemControl {
 
     public void dpad() {
         if(chassisControl.dpad_up){
+            robot.lIftStageOne.setPower(0);
+            robot.intake.setOn(false);
+            robot.liftStageFourBar.On = false;
+            robot.alternateIntake.ON = false;
+            robot.intakeRaise.On = false;
+            robot.claw.setOpen(false);
             robot.stop();
         }
-        if(chassisControl.dpad_down){
-            robot.start();
-        }
+
     }
 
 
@@ -76,8 +80,22 @@ public class SubsystemControl {
             double slowmode = 0.5;
             robot.drive2.setVelocity(-subsystemDriver.left_stick_x * slowmode, -subsystemDriver.left_stick_y * slowmode, -subsystemDriver.right_stick_x * slowmode);
         }
-        robot.lIftStageOne.setPower(subsystemDriver.right_stick_y);
 
+        if (robot.lIftStageOne.LiftLeft.getCurrentPosition() > 3210) {
+            if (subsystemDriver.right_stick_y < 0) {
+                robot.lIftStageOne.setPower(0);
+            } else {
+                robot.lIftStageOne.setPower(-subsystemDriver.right_stick_y);
+            }
+        }else if(robot.lIftStageOne.LiftLeft.getCurrentPosition() <= 0 ){
+            if (subsystemDriver.right_stick_y > 0) {
+                robot.lIftStageOne.setPower(0);
+            }else{
+                robot.lIftStageOne.setPower(-subsystemDriver.right_stick_y);
+            }
+        } else{
+            robot.lIftStageOne.setPower(-subsystemDriver.right_stick_y);
+        }
 
     }
 
@@ -96,10 +114,10 @@ public class SubsystemControl {
 
     public void rightTriggers() {
         if (subsystemDriver.right_bumper) {
-            clawOpen = true;
+            clawOpen = false;
         }
         if (subsystemDriver.right_trigger != 0) {
-            clawOpen = false;
+            clawOpen = true;
         }
         if (clawOpen) {
             robot.claw.setOpen(true);
@@ -131,6 +149,7 @@ public class SubsystemControl {
         telemetry.addData("Gamepad2 right bumper", subsystemDriver.right_bumper);
         telemetry.addData("Gamepad 2 left bumper", subsystemDriver.left_bumper);
         telemetry.addData("Ticks", robot.lIftStageOne.LiftLeft.getCurrentPosition());
+        telemetry.addData("Lift Velocity", robot.lIftStageOne.LiftLeft.getVelocity());
 
 
     }

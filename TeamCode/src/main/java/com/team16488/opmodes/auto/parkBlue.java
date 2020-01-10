@@ -90,7 +90,7 @@ public class parkBlue extends LinearOpMode {
     @Override
     public void runOpMode() {
         boolean parked = false;
-        Robot robot = new Robot(this, telemetry);
+        MecanumDriveAuto driveAuto = new MecanumDriveAuto(hardwareMap);
         // get a reference to the color sensor.
         sensorColor = hardwareMap.get(ColorSensor.class, "colour");
 
@@ -114,7 +114,7 @@ public class parkBlue extends LinearOpMode {
 
         // wait for the start button to be pressed.
         waitForStart();
-        robot.start();
+
         // loop and read the RGB and distance data.
         // Note we use opModeIsActive() as our loop condition because it is an interruptible method.
         while (opModeIsActive()) {
@@ -146,11 +146,11 @@ public class parkBlue extends LinearOpMode {
 
             telemetry.update();
             if (!parked) {
-                robot.drive2.setVelocity(0, 0.5, 0);
+                driveAuto.setVelocity(0, 0.2, 0);
 
             }
             if (sensorColor.blue() > 500) {
-                robot.drive2.setVelocity(0, 0, 0);
+                driveAuto.setVelocity(0, 0, 0);
                 parked = true;
 
             }
@@ -162,7 +162,7 @@ public class parkBlue extends LinearOpMode {
                 relativeLayout.setBackgroundColor(Color.WHITE);
             }
         });
-        robot.stop();
+
     }
 
 }
