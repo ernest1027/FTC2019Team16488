@@ -34,7 +34,7 @@ public class  AlternateIntake extends Subsystem {
             if (down) {
                 pos = 1.0;
             }else {
-                pos = 0;
+                pos = 0.75;
             }
             if (lock) {
                 state = true;

@@ -3,6 +3,7 @@ package com.team16488.opmodes.auto;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
 
 public class MecanumDriveAuto {
     /**
@@ -36,7 +37,15 @@ public class MecanumDriveAuto {
     private double RearRightpower;
     /** Sets the power/speed of the Rear Left Motor*/
     private double RearLeftpower;
-
+    /**
+     * Puller servos
+     */
+    public Servo Left, Right;
+    public Servo alternateIntakeRaise, alternateIntakeClose;
+    /**
+     * Sets if the puller is down
+     */
+    private double pos;
     /**
      * This is the Constructor of the Mecanum Drive class
      * <p>
@@ -53,6 +62,11 @@ public class MecanumDriveAuto {
         RearLeftMotor = map.dcMotor.get("BL");
         FrontLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         RearLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+        Left = map.servo.get("LP");
+        Right = map.servo.get("RP");
+        alternateIntakeRaise = map.servo.get("alternate intake raise");
+        alternateIntakeClose = map.servo.get("alternate intake close");
+
 
     }
 
@@ -72,5 +86,43 @@ public class MecanumDriveAuto {
         this.RearRightMotor.setPower(v4);
 
     }
+
+    public void setPuller(boolean down)
+    {
+        if (!down) {
+            Right.setPosition(0.85);
+            Left.setPosition(0.5);
+
+        }
+        if (down) {
+            Left.setPosition(1.0);
+            Right.setPosition(0);
+
+        }
+    }
+    public void setAlternateIntake(boolean ON, boolean lock, boolean down) {
+        if (ON) {
+            if (down) {
+                pos = 1.0;
+            }else {
+                pos = 0;
+            }
+            if (lock) {
+
+                alternateIntakeClose.setPosition(1.0);
+            }
+            if (lock) {
+
+                alternateIntakeClose.setPosition(0);
+            }
+            alternateIntakeRaise.setPosition(pos);
+        } else {
+            down = true;
+
+        }
+
+
+    }
+
 
 }

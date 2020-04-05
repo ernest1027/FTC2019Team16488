@@ -153,43 +153,51 @@ public class ChassisControl {
             robot.alternateIntake.ON = true;
         }
 
-        if(!pressedB){
-            if(chassisControl.b){
+
+
+        if(!pressedRT) {
+            if (chassisControl.right_trigger > 0)
+            {
+                On = !On;
+                pressedRT = true;
+            }
+
+
+        }
+        if(chassisControl.b == false)
+        {
+            pressedB = false;
+        }
+        if(!pressedB)
+        {
+            if(chassisControl.b== true)
+            {
                 arm = !arm;
                 pressedB = true;
-                for(int i = 0; i<26000; i++){
-                    telemetry.addData("delay", i);
-                    pressedB = true;
-                }
             }
         }
-        if(chassisControl.b){
-            pressedB = false;
-            for(int i = 0; i < 26000 ; i++){
-                telemetry.addData("delay", i);
-                pressedB = false;
-            }
+        if(chassisControl.a==false)
+        {
+            pressedA = false;
         }
         robot.alternateIntake.setDown(arm);
-
-        if(!pressedA){
-            lock = !lock;
-            for(int i = 0; i < 26000; i++){
-                telemetry.addData("delay", i);
+        if(chassisControl.a == false)
+        {
+            pressedA = false;
+        }
+        if(!pressedA)
+        {
+            if(chassisControl.a== true)
+            {
+                lock = !lock;
                 pressedA = true;
             }
-            pressedA = true;
-
         }
-        if(chassisControl.a){
+        if(chassisControl.a==false)
+        {
             pressedA = false;
-            for(int i = 0; i<26000; i++){
-                telemetry.addData("delay", i);
-                pressedA = false;
-            }
         }
         robot.alternateIntake.setLock(lock);
-
         if(chassisControl.x){
             robot.puller.setDown(true);
         }

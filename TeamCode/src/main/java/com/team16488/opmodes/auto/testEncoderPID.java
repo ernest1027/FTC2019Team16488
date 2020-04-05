@@ -91,7 +91,7 @@ public class testEncoderPID extends LinearOpMode {
     private DcMotorEx RearLeftMotor;
     private DcMotorEx RearRightMotor;
 
-    public static final double NEW_P = 2.5;
+    public static final double NEW_P = 1.0;
     public static final double NEW_I = 0;
     public static final double NEW_D = 0;
     @Override
@@ -163,7 +163,15 @@ public class testEncoderPID extends LinearOpMode {
                              double timeoutS) {
         int newLeftTarget;
         int newRightTarget;
+        FrontLeftMotor.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+        FrontRightMotor.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+        RearLeftMotor.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+        RearRightMotor.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
 
+        FrontLeftMotor.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        FrontRightMotor.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        RearLeftMotor.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        RearRightMotor.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
         // Ensure that the opmode is still active
         if (opModeIsActive()) {
 
@@ -225,9 +233,18 @@ public class testEncoderPID extends LinearOpMode {
                                     double timeoutS) {
         int newLeftTarget;
         int newRightTarget;
+        FrontLeftMotor.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+        FrontRightMotor.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+        RearLeftMotor.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+        RearRightMotor.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
 
+        FrontLeftMotor.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        FrontRightMotor.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        RearLeftMotor.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        RearRightMotor.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
         // Ensure that the opmode is still active
         if (opModeIsActive()) {
+
 
             // Determine new target position, and pass to motor controller
             newLeftTarget = FrontLeftMotor.getCurrentPosition() + (int)(Inches * COUNTS_PER_INCH);

@@ -29,10 +29,10 @@ public class MecanumDrive2 extends Subsystem {
     }
 
     public void setVelocity(double leftstickx, double leftsticky, double rightstickx) {
-        powers[0] = leftsticky + rightstickx + leftstickx;
+        powers[0] = leftsticky - rightstickx + leftstickx;
         powers[1] = leftsticky + rightstickx - leftstickx;
         powers[2] = leftsticky - rightstickx - leftstickx;
-        powers[3] = leftsticky - rightstickx + leftstickx;
+        powers[3] = leftsticky + rightstickx + leftstickx;
     }
 
     private void setMotors(double FL, double FR, double BL, double BR) {

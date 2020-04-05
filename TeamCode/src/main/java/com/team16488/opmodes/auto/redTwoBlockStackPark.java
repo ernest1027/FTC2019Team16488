@@ -94,9 +94,9 @@ import static org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocaliz
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="sixstone", group="Pushbot")
+@Autonomous(name="redTwoBlockStackPark", group="Pushbot")
 
-public class SIXSTONEAUTO extends LinearOpMode {
+public class redTwoBlockStackPark extends LinearOpMode {
 
     /* Declare OpMode members. */
     private static final VuforiaLocalizer.CameraDirection CAMERA_CHOICE = BACK;
@@ -177,10 +177,10 @@ public class SIXSTONEAUTO extends LinearOpMode {
 
 
 
-        sensorColor = hardwareMap.get(ColorSensor.class, "left colour");
+        sensorColor = hardwareMap.get(ColorSensor.class, "right colour");
 
         // get a reference to the distance sensor that shares the same name.
-        sensorDistance = hardwareMap.get(DistanceSensor.class, "left colour");
+        sensorDistance = hardwareMap.get(DistanceSensor.class, "right colour");
 
         // hsvValues is an array that will hold the hue, saturation, and value information.
         float[] hsvValues = {0F, 0F, 0F};
@@ -209,8 +209,8 @@ public class SIXSTONEAUTO extends LinearOpMode {
         Right = hardwareMap.servo.get("RP");
         leftIntake = hardwareMap.crservo.get("LeftYeet");
         rightIntake = hardwareMap.crservo.get("RightYeet");
-        alternateIntakeRaise = hardwareMap.servo.get("left alternate intake raise");
-        alternateIntakeClose = hardwareMap.servo.get("left alternate intake close");
+        alternateIntakeRaise = hardwareMap.servo.get("right alternate intake raise");
+        alternateIntakeClose = hardwareMap.servo.get("right alternate intake close");
         FrontLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         RearLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         // Send telemetry message to signify robot waiting;
@@ -239,17 +239,86 @@ public class SIXSTONEAUTO extends LinearOpMode {
                 FrontLeftMotor.getCurrentPosition(),
                 FrontRightMotor.getCurrentPosition());
         telemetry.update();
+        // Step through each leg of the path,
+        // Note: Reverse movement is obtained by setting a negative distance (not speed)
+   /*  encoderDrive(DRIVE_SPEED,  48,  48, 5.0);  // S1: Forward 47 Inches with 5 Sec timeout
+        sleep(500);
+        encoderMecanumDrive(TURN_SPEED,   true, 60, 4.0);  // S2: Turn Right 12 Inches with 4 Sec timeout
+        sleep(1000);
+        encoderDrive(DRIVE_SPEED, -24, -24, 4.0);  // S3: Reverse 24 Inches with 4 Sec timeout
+        sleep(500);
+        encoderDrive(DRIVE_SPEED, -24, 24, 4.0);  // S3: Reverse 24 Inches with 4 Sec timeout
+        sleep(500);
+        encoderDrive(DRIVE_SPEED, 24, -24, 4.0);  // S3: Reverse 24 Inches with 4 Sec timeout
 
-
-        leftIntake.setPower(0.8);
-        rightIntake.setPower(0.8);
-        sleep(200);
-        leftIntake.setPower(0);
-        rightIntake.setPower(0);
+        setPuller(true);
+        sleep(1000);     // pause for servos to move
+        setPuller(false);
+        sleep(1000);
+        setPuller(true);
+        sleep(1000);
+        */
+        /*setIntake(true, true, true);
+        telemetry.addData("gay", pos);
+        telemetry.update();
+        sleep(1000);
+        setIntake(true, true, false);
+        telemetry.addData("gay", pos);
+        telemetry.update();
+        sleep(1000);
+        setIntake(true, false, false);
+        telemetry.addData("gay", pos);
+        telemetry.update();
+        sleep(1000);
+        setIntake(false, true, true);
+        telemetry.addData(   "gay", pos);
+        telemetry.update();
+        sleep(1000);
+        setPos(1);
+        telemetry.addData("gay", pos);
+        telemetry.update();
+        sleep(1000);
         setPos(0.75);
+        telemetry.addData("gay", pos);
+        telemetry.update();
+        sleep(1000);
+        setPos(0.5);
+        telemetry.addData("gay", pos);
+        telemetry.update();
+        sleep(1000);
+        setPos(0.25);
+        telemetry.addData("gay", pos);
+        telemetry.update();
+        sleep(1000);
+        setPos(0);
+        telemetry.addData("gay", pos);
+        telemetry.update();
+        sleep(1000);
+        setPos(-0.25);
+        telemetry.addData("gay", pos);
+        telemetry.update();
+        sleep(1000);
+        setPos(-0.5);
+        telemetry.addData("gay", pos);
+        telemetry.update();
+        sleep(1000);
+        setPos(-0.75);
+        telemetry.addData("gay", pos);
+        telemetry.update();
+        sleep(1000);
+        setPos(-1);
+        telemetry.addData("gay", pos);
+        telemetry.update();
+        sleep(1000);
+
+
+*/
+        setPos(0.25);
         encoderMecanumDrive(0.3, false, 37, 5);
-        cycle(45);
-        encoderDrive(0.6, 5,5,5);
+
+        stack(90);
+        encoderDrive(0.6, 40,40,5);
+        encoderMecanumDrive(0.3, false, 13, 5);
         runtime.reset();
         while(true)
         {
@@ -268,10 +337,10 @@ public class SIXSTONEAUTO extends LinearOpMode {
             telemetry.addData("Blue ", sensorColor.blue());
             telemetry.addData("Hue", hsvValues[0]);
             telemetry.update();
-            FrontLeftMotor.setPower(-0.2);
-            FrontRightMotor.setPower(0.2);
-            RearLeftMotor.setPower(0.2);
-            RearRightMotor.setPower(-0.2);
+            FrontLeftMotor.setPower(0.2);
+            FrontRightMotor.setPower(-0.2);
+            RearLeftMotor.setPower(-0.2);
+            RearRightMotor.setPower(0.2);
             if(sensorDistance.getDistance(DistanceUnit.CM)<30)
             {
                 break;
@@ -383,15 +452,6 @@ public class SIXSTONEAUTO extends LinearOpMode {
             */
 
         }
-
-        FrontLeftMotor.setPower(0);
-        FrontRightMotor.setPower(0);
-        RearLeftMotor.setPower(0);
-        RearRightMotor.setPower(0);
-        encoderDrive(0.3, -3, -3, 2);
-        cycle(50);
-        encoderDrive(0.6, 5,5,5);
-        runtime.reset();
         while(true)
         {
 
@@ -409,11 +469,11 @@ public class SIXSTONEAUTO extends LinearOpMode {
             telemetry.addData("Blue ", sensorColor.blue());
             telemetry.addData("Hue", hsvValues[0]);
             telemetry.update();
-            FrontLeftMotor.setPower(-0.2);
+            FrontLeftMotor.setPower(0.2);
             FrontRightMotor.setPower(0.2);
             RearLeftMotor.setPower(0.2);
-            RearRightMotor.setPower(-0.2);
-            if(sensorDistance.getDistance(DistanceUnit.CM)<30)
+            RearRightMotor.setPower(0.2);
+            if(sensorDistance.getDistance(DistanceUnit.CM)<100 && hsvValues[0]>110)
             {
                 break;
             }
@@ -524,295 +584,12 @@ public class SIXSTONEAUTO extends LinearOpMode {
             */
 
         }
-
         FrontLeftMotor.setPower(0);
         FrontRightMotor.setPower(0);
         RearLeftMotor.setPower(0);
         RearRightMotor.setPower(0);
         encoderDrive(0.3, -3, -3, 2);
-        cycle(55);
-        encoderDrive(0.6, 5,5,5);
-        runtime.reset();
-        while(true)
-        {
-
-            Color.RGBToHSV((int) (sensorColor.red() * SCALE_FACTOR),
-                    (int) (sensorColor.green() * SCALE_FACTOR),
-                    (int) (sensorColor.blue() * SCALE_FACTOR),
-                    hsvValues);
-
-            // send the info back to driver station using telemetry function.
-            telemetry.addData("Distance (cm)",
-                    String.format(Locale.US, "%.02f", sensorDistance.getDistance(DistanceUnit.CM)));
-            telemetry.addData("Alpha", sensorColor.alpha());
-            telemetry.addData("Red  ", sensorColor.red());
-            telemetry.addData("Green", sensorColor.green());
-            telemetry.addData("Blue ", sensorColor.blue());
-            telemetry.addData("Hue", hsvValues[0]);
-            telemetry.update();
-            FrontLeftMotor.setPower(-0.2);
-            FrontRightMotor.setPower(0.2);
-            RearLeftMotor.setPower(0.2);
-            RearRightMotor.setPower(-0.2);
-            if(sensorDistance.getDistance(DistanceUnit.CM)<30)
-            {
-                break;
-            }
-           /* if(runtime.seconds()>5)
-            {
-                break;
-            }
-            */
-            /*
-            if (((VuforiaTrackableDefaultListener) stoneTarget.getListener()).isVisible()) {
-                telemetry.addData("Visible Target", stoneTarget.getName());
-                targetVisible = true;
-
-                // getUpdatedRobotLocation() will return null if no new information is available since
-                // the last time that call was made, or if the trackable is not currently visible.
-                OpenGLMatrix robotLocationTransform = ((VuforiaTrackableDefaultListener) stoneTarget.getListener()).getUpdatedRobotLocation();
-                if (robotLocationTransform != null) {
-                    lastLocation = robotLocationTransform;
-                }
-            }
-//                break;
-//            }
-
-            // Provide feedback as to where the robot is located (if we know).
-            if (targetVisible) {
-                // express position (translation) of robot in inches.
-                VectorF translation = lastLocation.getTranslation();
-                double delta_x = translation.get(0);
-                double delta_y = translation.get(1);
-                // not very useful; phone should not move
-                double delta_z = translation.get(2);
-
-                telemetry.addData("Pos X", delta_x / mmPerInch);
-                telemetry.addData("Pos Y", delta_y / mmPerInch);
-//                telemetry.addData("Pos Z", delta_z / mmPerInch);
-//                telemetry.addData("Pos (in)", "{X, Y, Z} = %.1f, %.1f, %.1f",
-//                        translation.get(0) / mmPerInch, translation.get(1) / mmPerInch, translation.get(2) / mmPerInch);
-
-                // get the rotation of the robot
-                Orientation rotation = Orientation.getOrientation(lastLocation, EXTRINSIC, XYZ, DEGREES);
-                angleFromPhone = rotation.thirdAngle;
-                // output the 'Z' angle rotation, or heading of the robot
-                // this angle goes from a line parallel to the x axis and the current camera rotation
-                telemetry.addData("Rot (Heading)", angleFromPhone);
-//                telemetry.addData("Rot X", rotation.firstAngle);
-//                telemetry.addData("Rot Y", rotation.secondAngle);
-
-                // compute distance to target
-                double targetRange = (Math.hypot(delta_x, delta_y)) / mmPerInch;
-
-                // compute angle from line parallel to x axis to the block
-                // From left to block negative; right to block positive
-                double xToBlock1 = Math.toDegrees(Math.atan(delta_y / delta_x));
-//                double xToBlock2 = Math.toDegrees(Math.asin(delta_y/targetRange));
-
-                // compute relative angle
-                double relativeAngle = xToBlock1 - angleFromPhone;
-//                telemetry.addData("ToBlock Angle1", xToBlock1);
-                telemetry.addData("Relative Angle", relativeAngle);
-                telemetry.addData("Total distance", targetRange);
-//                telemetry.addData("To Block Test 2", xToBlock2);
-                Color.RGBToHSV((int) (sensorColor.red() * SCALE_FACTOR),
-                        (int) (sensorColor.green() * SCALE_FACTOR),
-                        (int) (sensorColor.blue() * SCALE_FACTOR),
-                        hsvValues);
-
-                // send the info back to driver station using telemetry function.
-                telemetry.addData("Distance (cm)",
-                        String.format(Locale.US, "%.02f", sensorDistance.getDistance(DistanceUnit.CM)));
-                telemetry.addData("Alpha", sensorColor.alpha());
-                telemetry.addData("Red  ", sensorColor.red());
-                telemetry.addData("Green", sensorColor.green());
-                telemetry.addData("Blue ", sensorColor.blue());
-                telemetry.addData("Hue", hsvValues[0]);
-                telemetry.addData("Stop?", isStopRequested());
-
-                // change the background color to match the color detected by the RGB sensor.
-                // pass a reference to the hue, saturation, and value array as an argument
-                // to the HSVToColor method.
-                relativeLayout.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        relativeLayout.setBackgroundColor(Color.HSVToColor(0xff, values));
-                    }
-                });
-
-                telemetry.update();
-                if(relativeAngle>118)
-                {
-
-                }
-                else if(relativeAngle<111)
-                {
-
-                }
-                else
-                {
-                    break;
-                }
-
-
-            } else {
-                telemetry.addData("Visible Target", "none");
-
-
-
-            }
-            */
-
-        }
-
-        FrontLeftMotor.setPower(0);
-        FrontRightMotor.setPower(0);
-        RearLeftMotor.setPower(0);
-        RearRightMotor.setPower(0);
-        encoderDrive(0.3, -3, -3, 2);
-        cycle(60);
-        encoderDrive(0.6, 5,5,5);
-        runtime.reset();
-        while(true)
-        {
-
-            Color.RGBToHSV((int) (sensorColor.red() * SCALE_FACTOR),
-                    (int) (sensorColor.green() * SCALE_FACTOR),
-                    (int) (sensorColor.blue() * SCALE_FACTOR),
-                    hsvValues);
-
-            // send the info back to driver station using telemetry function.
-            telemetry.addData("Distance (cm)",
-                    String.format(Locale.US, "%.02f", sensorDistance.getDistance(DistanceUnit.CM)));
-            telemetry.addData("Alpha", sensorColor.alpha());
-            telemetry.addData("Red  ", sensorColor.red());
-            telemetry.addData("Green", sensorColor.green());
-            telemetry.addData("Blue ", sensorColor.blue());
-            telemetry.addData("Hue", hsvValues[0]);
-            telemetry.update();
-            FrontLeftMotor.setPower(-0.2);
-            FrontRightMotor.setPower(0.2);
-            RearLeftMotor.setPower(0.2);
-            RearRightMotor.setPower(-0.2);
-            if(sensorDistance.getDistance(DistanceUnit.CM)<30)
-            {
-                break;
-            }
-           /* if(runtime.seconds()>5)
-            {
-                break;
-            }
-            */
-            /*
-            if (((VuforiaTrackableDefaultListener) stoneTarget.getListener()).isVisible()) {
-                telemetry.addData("Visible Target", stoneTarget.getName());
-                targetVisible = true;
-
-                // getUpdatedRobotLocation() will return null if no new information is available since
-                // the last time that call was made, or if the trackable is not currently visible.
-                OpenGLMatrix robotLocationTransform = ((VuforiaTrackableDefaultListener) stoneTarget.getListener()).getUpdatedRobotLocation();
-                if (robotLocationTransform != null) {
-                    lastLocation = robotLocationTransform;
-                }
-            }
-//                break;
-//            }
-
-            // Provide feedback as to where the robot is located (if we know).
-            if (targetVisible) {
-                // express position (translation) of robot in inches.
-                VectorF translation = lastLocation.getTranslation();
-                double delta_x = translation.get(0);
-                double delta_y = translation.get(1);
-                // not very useful; phone should not move
-                double delta_z = translation.get(2);
-
-                telemetry.addData("Pos X", delta_x / mmPerInch);
-                telemetry.addData("Pos Y", delta_y / mmPerInch);
-//                telemetry.addData("Pos Z", delta_z / mmPerInch);
-//                telemetry.addData("Pos (in)", "{X, Y, Z} = %.1f, %.1f, %.1f",
-//                        translation.get(0) / mmPerInch, translation.get(1) / mmPerInch, translation.get(2) / mmPerInch);
-
-                // get the rotation of the robot
-                Orientation rotation = Orientation.getOrientation(lastLocation, EXTRINSIC, XYZ, DEGREES);
-                angleFromPhone = rotation.thirdAngle;
-                // output the 'Z' angle rotation, or heading of the robot
-                // this angle goes from a line parallel to the x axis and the current camera rotation
-                telemetry.addData("Rot (Heading)", angleFromPhone);
-//                telemetry.addData("Rot X", rotation.firstAngle);
-//                telemetry.addData("Rot Y", rotation.secondAngle);
-
-                // compute distance to target
-                double targetRange = (Math.hypot(delta_x, delta_y)) / mmPerInch;
-
-                // compute angle from line parallel to x axis to the block
-                // From left to block negative; right to block positive
-                double xToBlock1 = Math.toDegrees(Math.atan(delta_y / delta_x));
-//                double xToBlock2 = Math.toDegrees(Math.asin(delta_y/targetRange));
-
-                // compute relative angle
-                double relativeAngle = xToBlock1 - angleFromPhone;
-//                telemetry.addData("ToBlock Angle1", xToBlock1);
-                telemetry.addData("Relative Angle", relativeAngle);
-                telemetry.addData("Total distance", targetRange);
-//                telemetry.addData("To Block Test 2", xToBlock2);
-                Color.RGBToHSV((int) (sensorColor.red() * SCALE_FACTOR),
-                        (int) (sensorColor.green() * SCALE_FACTOR),
-                        (int) (sensorColor.blue() * SCALE_FACTOR),
-                        hsvValues);
-
-                // send the info back to driver station using telemetry function.
-                telemetry.addData("Distance (cm)",
-                        String.format(Locale.US, "%.02f", sensorDistance.getDistance(DistanceUnit.CM)));
-                telemetry.addData("Alpha", sensorColor.alpha());
-                telemetry.addData("Red  ", sensorColor.red());
-                telemetry.addData("Green", sensorColor.green());
-                telemetry.addData("Blue ", sensorColor.blue());
-                telemetry.addData("Hue", hsvValues[0]);
-                telemetry.addData("Stop?", isStopRequested());
-
-                // change the background color to match the color detected by the RGB sensor.
-                // pass a reference to the hue, saturation, and value array as an argument
-                // to the HSVToColor method.
-                relativeLayout.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        relativeLayout.setBackgroundColor(Color.HSVToColor(0xff, values));
-                    }
-                });
-
-                telemetry.update();
-                if(relativeAngle>118)
-                {
-
-                }
-                else if(relativeAngle<111)
-                {
-
-                }
-                else
-                {
-                    break;
-                }
-
-
-            } else {
-                telemetry.addData("Visible Target", "none");
-
-
-
-            }
-            */
-
-        }
-
-        FrontLeftMotor.setPower(0);
-        FrontRightMotor.setPower(0);
-        RearLeftMotor.setPower(0);
-        RearRightMotor.setPower(0);
-        encoderDrive(0.3, -3, -3, 2);
-        cycle2(65);
+        stack2(100);
 
 
 
@@ -926,7 +703,7 @@ public class SIXSTONEAUTO extends LinearOpMode {
             newLeftTarget = FrontLeftMotor.getCurrentPosition() + (int)(Inches * COUNTS_PER_INCH);
             newRightTarget = FrontRightMotor.getCurrentPosition() + (int)(Inches * COUNTS_PER_INCH);
 
-            if(direction)
+            if(!direction)
             {
                 newRightTarget = newRightTarget*(-1);
             }
@@ -1000,9 +777,9 @@ public class SIXSTONEAUTO extends LinearOpMode {
     public void setIntake(boolean ON, boolean down, boolean lock) {
         if (ON) {
             if (down) {
-                pos = 1.0;
+                pos = 0.5;
             } else {
-                pos = 0.75;
+                pos = 0.25;
             }
             if (lock) {
 
@@ -1010,7 +787,7 @@ public class SIXSTONEAUTO extends LinearOpMode {
             }
             if (!lock) {
 
-                alternateIntakeClose.setPosition(0);
+                alternateIntakeClose.setPosition(1);
             }
             alternateIntakeRaise.setPosition(pos);
         } else {
@@ -1025,40 +802,53 @@ public class SIXSTONEAUTO extends LinearOpMode {
         alternateIntakeRaise.setPosition(pos);
     }
 
-
-    public void cycle(double dist)
-    {
-        setPos(0.75);
+    public void stack(double dist){
+        setPos(0.25);
         encoderMecanumDrive(0.1, false, 4, 5);
         setIntake(true, true, false);
-        sleep(700);
+        sleep(750);
         setIntake(true,true,true);
-        sleep(800);
+        sleep(1000);
         setIntake(true,false,true);
         encoderMecanumDrive(0.6, true, 16, 5);
         encoderDrive(0.6, -dist, -dist, 10);
+        encoderMecanumDrive(0.6, false, 43, 5);
+        setPos(0.25);
         setIntake(true, false, false);
         sleep(200);
-        encoderDrive(0.6, dist, dist, 10);
-        encoderMecanumDrive(0.6, false, 16, 5);
+        encoderMecanumDrive(0.6, true, 12, 5);
+        setIntake(true, false, false);
+        setPos(0);
+        encoderDrive(0.6  , -10,-10,10);
+        encoderMecanumDrive(0.5, true, 5, 5);
+        encoderDrive(0.6  , 65,65,10);
+
 
     }
-
-    public void cycle2(double dist)
+    public void stack2(double dist)
     {
-        setPos(0.75);
+        setPos(0.25);
         encoderMecanumDrive(0.1, false, 4, 5);
         setIntake(true, true, false);
-        sleep(700);
+        sleep(750);
         setIntake(true,true,true);
-        sleep(800);
+        sleep(1000);
         setIntake(true,false,true);
-        encoderMecanumDrive(0.6, true, 16, 5);
+        encoderMecanumDrive(0.6, true, 35, 5);
         encoderDrive(0.6, -dist, -dist, 10);
+        encoderMecanumDrive(0.6, false, 35, 5);
+        setPos(0.3);
         setIntake(true, false, false);
         sleep(200);
-        encoderDrive(0.6, 10, 10, 10);
-        encoderMecanumDrive(0.6, false, 16, 5);
-
+        encoderMecanumDrive(0.6, true, 6, 5);
+        encoderDrive(0.6, 26, -26, 5);
+        //encoderDrive(0.5, -40, -40, 5);
+        encoderDrive(0.3, 12, 12, 5);
+        setPuller(true);
+        sleep(500);
+        encoderDrive(1, -40, -40, 5);
+        setPuller(false);
+        sleep(500);
+        encoderMecanumDrive(1, true, 70, 5);
     }
 }
